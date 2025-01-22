@@ -5,6 +5,7 @@ require_once("./base/header.php");
 
 <div class="content-page">
     <div class="content">
+
         <!-- Start Content-->
         <div class="container-fluid">
 
@@ -19,7 +20,7 @@ require_once("./base/header.php");
                                 <li class="breadcrumb-item active">Basic Tables</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">My Requests</h4>
+                        <h4 class="page-title">Pending Requests</h4>
                     </div>
                 </div>
             </div>
@@ -30,14 +31,13 @@ require_once("./base/header.php");
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive-sm">
-                                <table class="table table-bordered border-light table-centered mb-0">
+                                <table class="table table-bordered table-centered mb-0">
                                     <thead>
                                         <tr>
-                                            <th>To</th>
-                                            <th>Subject</th>
+                                            <th>Name</th>
                                             <th>Application No.</th>
-                                            <th>Date Initiated</th>
-                                            <th class="text-center">Status</th>
+                                            <th>Date Generated</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,11 +47,11 @@ require_once("./base/header.php");
                                                     class="me-2 rounded-circle" />
                                                 Risa D. Pearson
                                             </td>
-                                            <td>Abc..</td>
                                             <td>AC336 508 2157</td>
                                             <td>July 24, 1950</td>
                                             <td class="text-center">
-                                            <span class="fw-bold badge bg-warning-subtle text-warning"> <i class="ri-time-line text-warning"></i>Pending</span>
+                                                <a href="" class="btn btn-primary btn-sm">Approve</a>
+                                                <a href="" class="btn btn-danger btn-sm">Reject</a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -60,24 +60,11 @@ require_once("./base/header.php");
                                                     class="me-2 rounded-circle" />
                                                 Risa D. Pearson
                                             </td>
-                                            <td>Abc..</td>
-                                            <td>AC336 508 2157</td>
-                                            <td>July 24, 1950</td>
-                                                <td class="text-center">
-                                                <span class="fw-bold badge bg-danger-subtle text-danger"><i class="ri-delete-bin-2-line text-danger"></i>Rejected</span>
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table-user">
-                                                <img src="./images/avatar.jpg" alt="table-user"
-                                                    class="me-2 rounded-circle" />
-                                                Risa D. Pearson
-                                            </td>
-                                            <td>Abc..</td>
                                             <td>AC336 508 2157</td>
                                             <td>July 24, 1950</td>
                                             <td class="text-center">
-                                            <span class="fw-bold badge bg-warning-subtle text-warning"> <i class="ri-time-line text-warning"></i>Pending</span>
+                                                <a href="" class="btn btn-primary btn-sm">Approve</a>
+                                                <a href="" class="btn btn-danger btn-sm">Reject</a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -86,11 +73,24 @@ require_once("./base/header.php");
                                                     class="me-2 rounded-circle" />
                                                 Risa D. Pearson
                                             </td>
-                                            <td>Abc..</td>
                                             <td>AC336 508 2157</td>
                                             <td>July 24, 1950</td>
                                             <td class="text-center">
-                                            <span class="fw-bold badge bg-primary-subtle text-primary"> <i class="ri-check-line text-success"></i>Approved</span>
+                                                <a href="" class="btn btn-primary btn-sm">Approve</a>
+                                                <a href="" class="btn btn-danger btn-sm">Reject</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-user">
+                                                <img src="./images/avatar.jpg" alt="table-user"
+                                                    class="me-2 rounded-circle" />
+                                                Risa D. Pearson
+                                            </td>
+                                            <td>AC336 508 2157</td>
+                                            <td>July 24, 1950</td>
+                                            <td class="text-center">
+                                                <a href="" class="btn btn-primary btn-sm">Approve</a>
+                                                <a href="" class="btn btn-danger btn-sm">Reject</a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -107,13 +107,6 @@ require_once("./base/header.php");
     </div> <!-- content -->
 </div>
 
-
-
-
-
-
-
-
 <?php
-require_once("./base/footer.php");
-?>
+    require_once("./base/footer.php");
+    ?>

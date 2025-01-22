@@ -1,3 +1,7 @@
+<?php
+require_once("./database/db_connection.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -463,10 +467,10 @@
                 <!--- Sidemenu -->
                 <ul class="side-nav">
 
-                    <li class="side-nav-title">Request here</li>
+                    <li class="side-nav-title">Modules</li>
 
                     <li class="side-nav-item">
-                        <a href="./my-requests.php" class="side-nav-link">
+                        <a href="./my_requests.php" class="side-nav-link">
                             <i class="ri-dashboard-3-line"></i>
                             <span class="badge bg-success float-end">4</span>
                             <span> My Requests </span>
@@ -474,9 +478,17 @@
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="./request-form.php" class="side-nav-link">
+                        <a href="./student_profile.php" class="side-nav-link">
+                            <i class="ri-user-line"></i> <!-- Icon for Student Profile -->
+                            <span> My Profile </span>
+                        </a>
+                    </li>
+
+
+                    <li class="side-nav-item">
+                        <a href="./student_application_form.php" class="side-nav-link">
                             <i class="ri-survey-line"></i>
-                            <span> Initiate Form </span>
+                            <span> Initiate Application </span>
                         </a>
                     </li>
                 </ul>

@@ -1,6 +1,6 @@
 <?php
-require_once("./base/header.php")
-    ?>
+require_once("./base/header.php");
+?>
 <div class="content-page">
     <div class="content">
 
@@ -18,7 +18,7 @@ require_once("./base/header.php")
                                 <li class="breadcrumb-item active">Form Validation</li>
                             </ol>
                         </div>
-                        <h4 class="page-title text-uppercase">Project Application Form</h4>
+                        <h4 class="page-title text-uppercase">Student Application Form</h4>
                     </div>
                 </div>
             </div>
@@ -28,15 +28,27 @@ require_once("./base/header.php")
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form class="needs-validation" novalidate>
+
+                            <form class="needs-validation" novalidate method="POST" action="process.php">
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="validationCustom01">To</label>
-                                            <input type="text" class="form-control" id="validationCustom01"
-                                                placeholder="First name" value="Mark" required>
+                                            <select class="form-select" name="student_concern_person_id"">
+                                                <option value=" ---">---</option>
+                                                <?php
+                                                 $select_query = "SELECT * FROM `concern_person`";
+                                                 $execute = mysqli_query($connection, $select_query);
+                                                 while($fetch = mysqli_fetch_array($execute)){
+                                                ?>
+                                                <option value="<?php echo $fetch['concern_person_id']?>">
+                                                    <?php echo $fetch['concern_person_designation']?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
                                             <div class="valid-feedback">
-                                                Looks good!
+                                                Select the concern person
                                             </div>
                                         </div>
                                     </div>
@@ -44,10 +56,10 @@ require_once("./base/header.php")
                                     <div class="col-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="validationCustom02">Date</label>
-                                            <input type="text" class="form-control" id="validationCustom02"
-                                                placeholder="Last name" value="Otto" required>
+                                            <input type="date" class="form-control" name="student_application_date"
+                                                id="validationCustom02" required>
                                             <div class="valid-feedback">
-                                                Looks good!
+                                                Select Date please
                                             </div>
                                         </div>
                                     </div>
@@ -55,16 +67,29 @@ require_once("./base/header.php")
 
                                 <div class="mb-3">
                                     <label class="form-label" for="validationCustom03">Subject</label>
-                                    <input type="text" class="form-control" id="validationCustom03"
-                                        placeholder="Subject" required>
+                                    <select class="form-select" name="student_application_subject_id">
+                                        <option value="---">---</option>
+                                        <?php
+                                                 $select_query = "SELECT * FROM `all_subjects`";
+                                                 $execute = mysqli_query($connection, $select_query);
+                                                 while($fetch = mysqli_fetch_array($execute)){
+                                                ?>
+                                        <option value="<?php echo $fetch['subject_id']?>">
+                                            <?php echo $fetch['subject_title']?></option>
+                                        <?php
+                                                }
+                                                ?>
+                                    </select>
                                     <div class="invalid-feedback">
                                         Please provide a subject.
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="validationCustom05">Message</label>
-                                    <textarea class="form-control" id="validationCustom05" placeholder="Zip"
-                                        required></textarea>
+                                    <textarea class="form-control" name="student_application_message"
+                                        id="validationCustom05" placeholder="Message" required
+                                        style="height: 100px; resize: none;"></textarea>
+
                                     <div class="invalid-feedback">
                                         Provide some message.
                                     </div>
@@ -78,9 +103,9 @@ require_once("./base/header.php")
                                         <div class="mb-3">
                                             <label class="form-label" for="validationCustom01">Student ID</label>
                                             <input type="text" class="form-control" id="validationCustom01"
-                                                placeholder="First name" value="Mark" required>
+                                                placeholder="ex: Student156" name="student_id" required>
                                             <div class="valid-feedback">
-                                                Looks good!
+                                                Insert Your Student ID
                                             </div>
                                         </div>
                                     </div>
@@ -89,9 +114,9 @@ require_once("./base/header.php")
                                         <div class="mb-3">
                                             <label class="form-label" for="validationCustom02">Student Name</label>
                                             <input type="text" class="form-control" id="validationCustom02"
-                                                placeholder="Last name" value="Otto" required>
+                                                name="student_name" required>
                                             <div class="valid-feedback">
-                                                Looks good!
+                                                Insert Your Name
                                             </div>
                                         </div>
                                     </div>
@@ -102,9 +127,9 @@ require_once("./base/header.php")
                                         <div class="mb-3">
                                             <label class="form-label" for="validationCustom01">Batch Code</label>
                                             <input type="text" class="form-control" id="validationCustom01"
-                                                placeholder="First name" value="Mark" required>
+                                                placeholder="ex: PR2-202408G" name="student_batch_code" required>
                                             <div class="valid-feedback">
-                                                Looks good!
+                                                Insert Your Batch Code
                                             </div>
                                         </div>
                                     </div>
@@ -112,10 +137,23 @@ require_once("./base/header.php")
                                     <div class="col-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="validationCustom02">Current Semester</label>
-                                            <input type="text" class="form-control" id="validationCustom02"
-                                                placeholder="Last name" value="Otto" required>
+                                            <select class="form-select" name="student_current_semester_id">
+                                                <option value="---">---</option>
+
+                                                <?php
+                                                 $select_query = "SELECT * FROM `all_semesters`";
+                                                 $execute = mysqli_query($connection, $select_query);
+                                                 while($fetch = mysqli_fetch_array($execute)){
+                                                ?>
+                                                <option value="<?php echo $fetch['semester_id']?>">
+                                                    <?php echo $fetch['semester_name']?></option>
+                                                <?php
+                                                }
+                                                ?>
+
+                                            </select>
                                             <div class="valid-feedback">
-                                                Looks good!
+                                                Select Your Current Semester
                                             </div>
                                         </div>
                                     </div>
@@ -124,11 +162,11 @@ require_once("./base/header.php")
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom01">Book Name</label>
-                                            <input type="text" class="form-control" id="validationCustom01"
-                                                placeholder="First name" value="Mark" required>
+                                            <label class="form-label" for="validationCustom02">Email Address</label>
+                                            <input type="text" class="form-control" id="validationCustom02"
+                                                name="student_email" required>
                                             <div class="valid-feedback">
-                                                Looks good!
+                                                Insert Your Email
                                             </div>
                                         </div>
                                     </div>
@@ -137,25 +175,15 @@ require_once("./base/header.php")
                                         <div class="mb-3">
                                             <label class="form-label" for="validationCustom02">Cell Ph.</label>
                                             <input type="text" class="form-control" id="validationCustom02"
-                                                placeholder="Last name" value="Otto" required>
+                                                name="student_number" required>
                                             <div class="valid-feedback">
-                                                Looks good!
+                                                Insert Your Number
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="invalidCheck" required>
-                                        <label class="form-check-label form-label" for="invalidCheck">Agree to
-                                            terms
-                                            and conditions</label>
-                                        <div class="invalid-feedback">
-                                            You must agree before submitting.
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" type="submit">Submit form</button>
+
+                                <input type="submit" class="btn btn-success" name="student_application" value="Submit Application" />
                             </form>
 
                         </div> <!-- end card-body-->
@@ -168,6 +196,6 @@ require_once("./base/header.php")
 
     </div> <!-- content -->
 </div>
-    <?php
+<?php
     require_once("./base/footer.php");
     ?>

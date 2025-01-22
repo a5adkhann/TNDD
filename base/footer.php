@@ -243,6 +243,9 @@
     <!-- App js -->
     <script src="./js/app.min.js"></script>
 
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/894005d3c1.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
