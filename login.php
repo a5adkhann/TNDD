@@ -39,7 +39,7 @@
 <body>
 
     <div class="login-form container bg-light p-5 my-5 rounded shadow">
-        <h3 class="text-center mb-4">Login</h3>
+        <h3 class="text-center mb-4">TND Support System | Login</h3>
         <form action="#" method="POST">
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
@@ -65,7 +65,7 @@
             </div>
 
             <div class="text-center mt-3">
-                <small>Don't have an account? <a href="#">Register</a></small>
+                <small>Don't have an account? <a href="./register.php">Register</a></small>
             </div>
         </form>
     </div>

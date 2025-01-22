@@ -478,7 +478,7 @@ require_once("./database/db_connection.php");
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="./student_profile.php" class="side-nav-link">
+                        <a href="./profile.php" class="side-nav-link">
                             <i class="ri-user-line"></i> <!-- Icon for Student Profile -->
                             <span> My Profile </span>
                         </a>
@@ -489,6 +489,13 @@ require_once("./database/db_connection.php");
                         <a href="./student_application_form.php" class="side-nav-link">
                             <i class="ri-survey-line"></i>
                             <span> Initiate Application </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="./pending_requests.php" class="side-nav-link">
+                            <i class="ri-survey-line"></i>
+                            <span> Pending Requests </span>
                         </a>
                     </li>
                 </ul>

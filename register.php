@@ -1,3 +1,6 @@
+<?php
+require_once("./database/db_connection.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,24 +48,57 @@
 <body>
 
     <div class="register-form container bg-light p-5 my-5 rounded shadow">
-        <h3 class="text-center mb-4">Register</h3>
+        <h3 class="text-center mb-4">TND Support System | Register</h3>
         <form action="#" method="POST">
-            <div class="mb-3">
-                <label for="email" class="form-label">Name</label>
-                <input type="email" class="form-control" id="email" name="email" required
-                    placeholder="Enter your email">
-            </div>
+            <div class="row">
+                <div class="col-6">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Name</label>
+                    <input type="email" class="form-control" id="email" name="email" required
+                        placeholder="Enter your email">
+                </div>
+                </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" required
-                    placeholder="Enter your email">
+                <div class="col-6">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" required
+                        placeholder="Enter your email">
+                </div>
+                </div>
             </div>
-
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required
                     placeholder="Enter your password">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Batch Code</label>
+                <input type="password" class="form-control" id="password" name="password" required
+                    placeholder="Enter your password">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Current Semester</label>
+                <select class="form-select" name="student_current_semester_id">
+                    <option value="---">---</option>
+                    <?php
+                                                 $select_query = "SELECT * FROM `all_semesters`";
+                                                 $execute = mysqli_query($connection, $select_query);
+                                                 while($fetch = mysqli_fetch_array($execute)){
+                                                ?>
+                                                <option value="<?php echo $fetch['semester_id']?>">
+                                                    <?php echo $fetch['semester_name']?></option>
+                                                <?php
+                                                }
+                                                ?>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" name="" id="">
             </div>
 
             <div class="mb-3 form-check">
@@ -79,7 +115,7 @@
             </div>
 
             <div class="text-center mt-3">
-                <small>Already registered? <a href="#">Log In</a></small>
+                <small>Already registered? <a href="./login.php">Log In</a></small>
             </div>
         </form>
     </div>
