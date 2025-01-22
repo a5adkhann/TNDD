@@ -5,7 +5,6 @@ require_once("./base/header.php");
 
 <div class="content-page">
     <div class="content">
-
         <!-- Start Content-->
         <div class="container-fluid">
 
@@ -31,36 +30,28 @@ require_once("./base/header.php");
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive-sm">
-                                <table class="table table-bordered border-primary table-centered mb-0">
+                                <table class="table table-bordered border-light table-centered mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>To</th>
+                                            <th>Subject</th>
                                             <th>Application No.</th>
-                                            <th>Date Generated</th>
-                                            <th class="text-center">Action</th>
+                                            <th>Date Initiated</th>
+                                            <th class="text-center">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                        <tr>
                                             <td class="table-user">
                                                 <img src="./images/avatar.jpg" alt="table-user"
                                                     class="me-2 rounded-circle" />
                                                 Risa D. Pearson
                                             </td>
+                                            <td>Abc..</td>
                                             <td>AC336 508 2157</td>
                                             <td>July 24, 1950</td>
                                             <td class="text-center">
-                                                <a href="javascript: void(0);" class="text-reset fs-16 px-1"> <i
-                                                        class="ri-delete-bin-2-line text-danger"></i></a>
-
-                                                <a href="javascript:void(0);" class="text-reset fs-16 px-1">
-                                                    <i class="ri-edit-2-line text-info"></i>
-                                                </a>
-
-                                                <a href="javascript:void(0);" class="text-reset fs-16 px-1">
-                                                    <i class="ri-eye-line text-primary"></i>
-                                                </a>
-
+                                            <span class="fw-bold badge bg-warning-subtle text-warning"> <i class="ri-time-line text-warning"></i>Pending</span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -69,20 +60,24 @@ require_once("./base/header.php");
                                                     class="me-2 rounded-circle" />
                                                 Risa D. Pearson
                                             </td>
+                                            <td>Abc..</td>
+                                            <td>AC336 508 2157</td>
+                                            <td>July 24, 1950</td>
+                                                <td class="text-center">
+                                                <span class="fw-bold badge bg-danger-subtle text-danger"><i class="ri-delete-bin-2-line text-danger"></i>Rejected</span>
+                                                </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-user">
+                                                <img src="./images/avatar.jpg" alt="table-user"
+                                                    class="me-2 rounded-circle" />
+                                                Risa D. Pearson
+                                            </td>
+                                            <td>Abc..</td>
                                             <td>AC336 508 2157</td>
                                             <td>July 24, 1950</td>
                                             <td class="text-center">
-                                                <a href="javascript: void(0);" class="text-reset fs-16 px-1"> <i
-                                                        class="ri-delete-bin-2-line text-danger"></i></a>
-
-                                                <a href="javascript:void(0);" class="text-reset fs-16 px-1">
-                                                    <i class="ri-edit-2-line text-info"></i>
-                                                </a>
-
-                                                <a href="javascript:void(0);" class="text-reset fs-16 px-1">
-                                                    <i class="ri-eye-line text-primary"></i>
-                                                </a>
-
+                                            <span class="fw-bold badge bg-warning-subtle text-warning"> <i class="ri-time-line text-warning"></i>Pending</span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -91,42 +86,11 @@ require_once("./base/header.php");
                                                     class="me-2 rounded-circle" />
                                                 Risa D. Pearson
                                             </td>
+                                            <td>Abc..</td>
                                             <td>AC336 508 2157</td>
                                             <td>July 24, 1950</td>
                                             <td class="text-center">
-                                                <a href="javascript: void(0);" class="text-reset fs-16 px-1"> <i
-                                                        class="ri-delete-bin-2-line text-danger"></i></a>
-
-                                                <a href="javascript:void(0);" class="text-reset fs-16 px-1">
-                                                    <i class="ri-edit-2-line text-info"></i>
-                                                </a>
-
-                                                <a href="javascript:void(0);" class="text-reset fs-16 px-1">
-                                                    <i class="ri-eye-line text-primary"></i>
-                                                </a>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table-user">
-                                                <img src="./images/avatar.jpg" alt="table-user"
-                                                    class="me-2 rounded-circle" />
-                                                Risa D. Pearson
-                                            </td>
-                                            <td>AC336 508 2157</td>
-                                            <td>July 24, 1950</td>
-                                            <td class="text-center">
-                                                <a href="javascript: void(0);" class="text-reset fs-16 px-1"> <i
-                                                        class="ri-delete-bin-2-line text-danger"></i></a>
-
-                                                <a href="javascript:void(0);" class="text-reset fs-16 px-1">
-                                                    <i class="ri-edit-2-line text-info"></i>
-                                                </a>
-
-                                                <a href="javascript:void(0);" class="text-reset fs-16 px-1">
-                                                    <i class="ri-eye-line text-primary"></i>
-                                                </a>
-
+                                            <span class="fw-bold badge bg-primary-subtle text-primary"> <i class="ri-check-line text-success"></i>Approved</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -141,7 +105,15 @@ require_once("./base/header.php");
         </div> <!-- container -->
 
     </div> <!-- content -->
+</div>
 
-    <?php
-    require_once("./base/footer.php");
-    ?>
+
+
+
+
+
+
+
+<?php
+require_once("./base/footer.php");
+?>
