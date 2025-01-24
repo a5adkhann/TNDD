@@ -30,10 +30,6 @@ require_once("./base/header.php");
     </div> <!-- content -->
 </div>
 
-
-
-
-
 <?php
 require_once("./base/footer.php");
 ?>

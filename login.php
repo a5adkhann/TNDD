@@ -9,7 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         body {
-            background-color: #CDEAF3;
+            background-color: #333;
             font-family: "Poppins", serif;
         }
         .login-form {
@@ -17,8 +17,9 @@
             margin: 0 auto;
             padding: 20px;
             border-radius: 8px;
-            background-color: #fff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: transparent;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            color: #FFF;
         }
         .login-form button {
             width: 100%;
@@ -38,9 +39,9 @@
 
 <body>
 
-    <div class="login-form container bg-light p-5 my-5 rounded shadow">
+    <div class="login-form container card p-5 my-5 rounded shadow">
         <h3 class="text-center mb-4">TND Support System | Login</h3>
-        <form action="#" method="POST">
+        <form action="process.php" method="POST">
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
@@ -57,11 +58,7 @@
             </div>
 
             <div class="d-grid gap-2">
-                <button type="submit" class="btn">Log In</button>
-            </div>
-
-            <div class="text-center mt-3">
-                <small>Forgot your password? <a href="#">Reset it here</a></small>
+                <button type="submit" class="btn" name="login">Log In</button>
             </div>
 
             <div class="text-center mt-3">

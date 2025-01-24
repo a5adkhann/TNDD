@@ -35,7 +35,7 @@ require_once("./base/header.php");
                                         <tr>
                                             <th>To</th>
                                             <th>Subject</th>
-                                            <th>Application No.</th>
+                                            <th>Application Token No.</th>
                                             <th>Date Initiated</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Action</th>
@@ -46,6 +46,7 @@ require_once("./base/header.php");
                                     <?php
                                     $select_query = "SELECT 
                                     student_applications.student_application_id, 
+                                    student_applications.student_application_tokenid,
                                     student_applications.student_application_date, 
                                     student_applications.student_application_status, 
                                     concern_person.concern_person_designation AS concern_person, 
@@ -59,7 +60,7 @@ require_once("./base/header.php");
                                 INNER JOIN 
                                     all_subjects 
                                 ON 
-                                    student_applications.student_application_subject_id = all_subjects.subject_id";
+                                    student_applications.student_application_subject_id = all_subjects.subject_id WHERE `student_user_id` = $_SESSION[student_user_id]";
                 
                                     $execute = mysqli_query($connection, $select_query);
                                     while($fetch = mysqli_fetch_array($execute)){
@@ -71,14 +72,14 @@ require_once("./base/header.php");
                                                 <?php echo $fetch['concern_person']?>
                                             </td>
                                             <td><?php echo $fetch['subject_title']?></td>
-                                            <td><?php echo $fetch['student_application_id']?></td>
+                                            <td>TND<?php echo $fetch['student_application_tokenid']?></td>
                                             <td><?php echo $fetch['student_application_date']?></td>
                                             <td class="text-center">
                                                 <span class="fw-bold badge bg-warning-subtle text-warning"> <i
                                                         class="ri-time-line text-warning"></i><?php echo $fetch['student_application_status']?></span>
                                             </td>
                                             <td class="text-center">
-                                                <a href="javascript: void(0);" class="text-reset fs-16 px-1"> <i
+                                                <a id="successClick" href="javascript: void(0);" class="text-reset fs-16 px-1"> <i
                                                         class="ri-delete-bin-2-line text-danger"></i></a>
 
                                                 <a href="javascript:void(0);" class="text-reset fs-16 px-1">
@@ -110,10 +111,12 @@ require_once("./base/header.php");
     </div> <!-- content -->
 </div>
 
-
-
-
-
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+$('#successClick').click(function () {
+      iziToast.success({timeout: 5000, icon: 'fa fa-chrome', title: 'OK', message: 'iziToast.sucess() with custom icon!'});
+    }); // ! .click
+</script>
 
 
 

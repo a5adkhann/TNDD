@@ -246,6 +246,10 @@
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/894005d3c1.js" crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"></script>
+
 </body>
 
 </html>

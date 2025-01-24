@@ -29,6 +29,10 @@ require_once("./database/db_connection.php");
 
     <!-- Icons css -->
     <link href="./css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
 </head>
 
 <body>
@@ -389,10 +393,10 @@ require_once("./database/db_connection.php");
                         <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
                             <span class="account-user-avatar">
-                                <img src="./images/avatar.jpg" alt="user-image" width="32" class="rounded-circle">
+                                <img src="./<?php echo $_SESSION['student_user_image']?>" alt="user-image" width="32" class="rounded-circle">
                             </span>
                             <span class="d-lg-block d-none">
-                                <h5 class="my-0 fw-normal">Thomson <i
+                                <h5 class="my-0 fw-normal"><?php echo $_SESSION['student_user_name']?> <i
                                         class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
                             </span>
                         </a>
@@ -403,7 +407,7 @@ require_once("./database/db_connection.php");
                             </div>
 
                             <!-- item-->
-                            <a href="pages-profile.html" class="dropdown-item">
+                            <a href="./profile.php" class="dropdown-item">
                                 <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
                                 <span>My Account</span>
                             </a>
@@ -427,7 +431,7 @@ require_once("./database/db_connection.php");
                             </a>
 
                             <!-- item-->
-                            <a href="auth-logout-2.html" class="dropdown-item">
+                            <a href="./logout.php" class="dropdown-item">
                                 <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                                 <span>Logout</span>
                             </a>
@@ -469,21 +473,22 @@ require_once("./database/db_connection.php");
 
                     <li class="side-nav-title">Modules</li>
 
+                    <?php
+                        if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == "student"){
+                    ?>
+
                     <li class="side-nav-item">
                         <a href="./my_requests.php" class="side-nav-link">
                             <i class="ri-dashboard-3-line"></i>
-                            <span class="badge bg-success float-end">4</span>
+                            <?php
+                            $select_query = "SELECT * FROM `student_applications` WHERE `student_user_id` = $_SESSION[student_user_id]";
+                            $execute = mysqli_query($connection, $select_query);
+                            $count_records = mysqli_num_rows($execute);
+                            ?>
+                            <span class="badge bg-success float-end"><?php echo $count_records?></span>
                             <span> My Requests </span>
                         </a>
                     </li>
-
-                    <li class="side-nav-item">
-                        <a href="./profile.php" class="side-nav-link">
-                            <i class="ri-user-line"></i> <!-- Icon for Student Profile -->
-                            <span> My Profile </span>
-                        </a>
-                    </li>
-
 
                     <li class="side-nav-item">
                         <a href="./student_application_form.php" class="side-nav-link">
@@ -491,11 +496,32 @@ require_once("./database/db_connection.php");
                             <span> Initiate Application </span>
                         </a>
                     </li>
-
+                    <?php
+                      } else{
+                    ?>
+                    
                     <li class="side-nav-item">
                         <a href="./pending_requests.php" class="side-nav-link">
                             <i class="ri-survey-line"></i>
                             <span> Pending Requests </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="./process_requests.php" class="side-nav-link">
+                            <i class="ri-survey-line"></i>
+                            <span> Process Requests </span>
+                        </a>
+                    </li>
+
+                    <?php
+                    }
+                    ?>
+
+                    <li class="side-nav-item">
+                        <a href="./profile.php" class="side-nav-link">
+                            <i class="ri-user-line"></i> <!-- Icon for Student Profile -->
+                            <span> My Profile </span>
                         </a>
                     </li>
                 </ul>
