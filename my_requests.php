@@ -75,8 +75,28 @@ require_once("./base/header.php");
                                             <td>TND<?php echo $fetch['student_application_tokenid']?></td>
                                             <td><?php echo $fetch['student_application_date']?></td>
                                             <td class="text-center">
-                                                <span class="fw-bold badge bg-warning-subtle text-warning"> <i
+                                            <?php
+                                            if($fetch['student_application_status'] == "Pending"){
+                                            ?>    
+                                            
+                                            <span class="fw-bold badge bg-warning-subtle text-warning"> <i
                                                         class="ri-time-line text-warning"></i><?php echo $fetch['student_application_status']?></span>
+                                                        <?php
+                                                        }
+                                                        else if($fetch['student_application_status'] == "Process"){
+                                                        ?>
+                                                        <span class="fw-bold badge bg-info-subtle text-info"> <i
+                                                        class="ri-time-line text-info"></i><?php echo $fetch['student_application_status']?></span>
+                                                        <?php
+                                                        }
+                                                        else if($fetch['student_application_status'] == "Solved"){
+                                                        ?>
+                                                        <span class="fw-bold badge  bg-success-subtle text-success"> <i
+                                                        class="ri-time-line text-success"></i><?php echo $fetch['student_application_status']?></span>
+                                                        <?php
+                                                        }
+                                                        ?>
+
                                             </td>
                                             <td class="text-center">
                                                 <a id="successClick" href="javascript: void(0);" class="text-reset fs-16 px-1"> <i

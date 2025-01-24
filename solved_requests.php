@@ -6,22 +6,34 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "administrator"){
        location.assign('index.php');
     </script>";
 }
-if (isset($_GET['update'])) {
-    $updateId = intval($_GET['update']); // Sanitize input to prevent SQL injection
+
+if (isset($_GET['markSolve'])) {
+    $updateId = intval($_GET['markSolve']); // Sanitize input to prevent SQL injection
 
     // Update query
-    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Process' WHERE `student_application_id` = ?";
+    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Solved' WHERE `student_application_id` = ?";
     $stmt = $connection->prepare($update_query); 
     $stmt->bind_param('i', $updateId); 
 
     if ($stmt->execute()){
         echo "<script>
-        location.assign('pending_requests.php');
+        location.assign('process_requests.php');
         </script>";
     } 
     $stmt->close();
 }
 
+if (isset($_GET['clearAll'])) {
+    $delete_query = "DELETE FROM `student_applications` WHERE `student_application_status` = 'Solved'";
+    $stmt = $connection->prepare($delete_query); 
+
+    if ($stmt->execute()){
+        echo "<script>
+        location.assign('solved_requests.php');
+        </script>";
+    } 
+    $stmt->close();
+}
 ?>
 <div class="content-page">
     <div class="content">
@@ -40,7 +52,7 @@ if (isset($_GET['update'])) {
                                 <li class="breadcrumb-item active">Basic Tables</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Pending Requests</h4>
+                        <h4 class="page-title">Process Requests</h4>
                     </div>
                 </div>
             </div>
@@ -51,6 +63,9 @@ if (isset($_GET['update'])) {
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive-sm">
+                                <div class="clear-all-btn-div mb-3 flex justify-end">
+                                    <a class="bg-red-600 px-2 py-1 text-white rounded" href="?clearAll">Clear All</a>
+                                </div>
                                 <table class="table table-bordered table-centered mb-0">
                                     <thead>
                                         <tr>
@@ -59,14 +74,12 @@ if (isset($_GET['update'])) {
                                             <th>Application Token ID</th>
                                             <th>Application Message</th>
                                             <th>Date Generated</th>
-                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <?php
                                         $indexNo = 1;
-                                        $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Pending'";
+                                        $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Solved'";
                                         $execute = mysqli_query($connection, $select_query);
                                         while($fetch = mysqli_fetch_array($execute)){
                                     ?>
@@ -84,10 +97,6 @@ if (isset($_GET['update'])) {
                                                 ?>
                                             </td>
                                             <td><?php echo $fetch['student_application_date']?></td>
-                                            <td class="text-center space-x-1">
-                                                <a href="?update=<?php echo $fetch['student_application_id']?>" class="bg-green-500 px-2 py-1 text-white rounded">Approve</a>
-                                                <a href="?remove=<?php echo $fetch['student_application_id']?>" class="bg-red-500 px-2 py-1 text-white rounded">Reject</a>
-                                            </td>
                                         </tr>
 
                                         <?php   

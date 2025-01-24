@@ -1,5 +1,5 @@
 <?php
-require_once("./database/db_connection.php");
+require_once("./db/db_connection.php");
 
 function generateTokenID() {
     return 'TND' . strtoupper(bin2hex(random_bytes(4))); // 8 characters long random token

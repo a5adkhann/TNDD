@@ -10,6 +10,21 @@ if(!isset($_SESSION['student_user_email'])){
 ?>
 
 
+<style>
+    .main-carousel {
+    height: 50vh; /* Removed quotes */
+    width: 100%;
+}
+.main-carousel .carousel-cell {
+    height: 50vh; /* Removed quotes */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+
+
+</style>
 <div class="content-page">
     <div class="content">
 
@@ -437,6 +452,17 @@ if(!isset($_SESSION['student_user_email'])){
                             </ol>
                         </div>
                         <h4 class="page-title">Welcome to TND Support System</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+                        <div class="carousel-cell" style="background-image: url('./images/slider1.jpg')"></div>
+                        <div class="carousel-cell" style="background-image: url('./images/slider2.jpg')"></div>
+                        <div class="carousel-cell" style="background-image: url('./images/slider3.jpg')"></div>
+                        
                     </div>
                 </div>
             </div>

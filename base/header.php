@@ -1,5 +1,5 @@
 <?php
-require_once("./database/db_connection.php");
+require_once("./db/db_connection.php");
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +33,9 @@ require_once("./database/db_connection.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
 </head>
 
 <body>
@@ -110,35 +113,38 @@ require_once("./database/db_connection.php");
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="false" aria-expanded="false">
-                            <img src="./images/us.jpg" alt="user-image" class="me-0 me-sm-1" height="12">
-                            <span class="align-middle d-none d-lg-inline-block">English</span> <i
-                                class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i>
+                            <img src="./images/us.jpg" alt="user-image" class="me-0 me-sm-1 h-3 w-auto">
+                            <span class="align-middle d-none d-lg-inline-block">English</span>
+                            <i class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i>
                         </a>
+
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
 
                             <!-- item-->
+                            <!-- German -->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="./images/germany.jpg" alt="user-image" class="me-1" height="12">
+                                <img src="./images/germany.jpg" alt="user-image" class="me-1 h-3 w-auto">
                                 <span class="align-middle">German</span>
                             </a>
 
-                            <!-- item-->
+                            <!-- Italian -->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="./images/italy.jpg" alt="user-image" class="me-1" height="12">
+                                <img src="./images/italy.jpg" alt="user-image" class="me-1 h-3 w-auto">
                                 <span class="align-middle">Italian</span>
                             </a>
 
-                            <!-- item-->
+                            <!-- Spanish -->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="./images/spain.jpg" alt="user-image" class="me-1" height="12">
+                                <img src="./images/spain.jpg" alt="user-image" class="me-1 h-3 w-auto">
                                 <span class="align-middle">Spanish</span>
                             </a>
 
-                            <!-- item-->
+                            <!-- Russian -->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12">
+                                <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1 h-3 w-auto">
                                 <span class="align-middle">Russian</span>
                             </a>
+
 
                         </div>
                     </li>
@@ -393,7 +399,8 @@ require_once("./database/db_connection.php");
                         <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
                             <span class="account-user-avatar">
-                                <img src="./<?php echo $_SESSION['student_user_image']?>" alt="user-image" width="32" class="rounded-circle">
+                                <img src="./<?php echo $_SESSION['student_user_image']?>" alt="user-image" width="32"
+                                    class="rounded-circle">
                             </span>
                             <span class="d-lg-block d-none">
                                 <h5 class="my-0 fw-normal"><?php echo $_SESSION['student_user_name']?> <i
@@ -444,7 +451,7 @@ require_once("./database/db_connection.php");
 
 
         <!-- ========== Left Sidebar Start ========== -->
-        <div class="leftside-menu">
+        <div class="leftside-menu pt-10">
 
             <!-- Brand Logo Light -->
             <a href="index.php" class="logo logo-light">
@@ -499,7 +506,7 @@ require_once("./database/db_connection.php");
                     <?php
                       } else{
                     ?>
-                    
+
                     <li class="side-nav-item">
                         <a href="./pending_requests.php" class="side-nav-link">
                             <i class="ri-survey-line"></i>
@@ -511,6 +518,13 @@ require_once("./database/db_connection.php");
                         <a href="./process_requests.php" class="side-nav-link">
                             <i class="ri-survey-line"></i>
                             <span> Process Requests </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="./solved_requests.php" class="side-nav-link">
+                            <i class="ri-survey-line"></i>
+                            <span> Solved Requests </span>
                         </a>
                     </li>
 

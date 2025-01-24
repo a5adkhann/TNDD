@@ -250,6 +250,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"></script>
 
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </body>
 
 </html>

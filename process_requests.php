@@ -6,22 +6,22 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "administrator"){
        location.assign('index.php');
     </script>";
 }
-if (isset($_GET['update'])) {
-    $updateId = intval($_GET['update']); // Sanitize input to prevent SQL injection
+
+if (isset($_GET['markSolve'])) {
+    $updateId = intval($_GET['markSolve']); // Sanitize input to prevent SQL injection
 
     // Update query
-    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Process' WHERE `student_application_id` = ?";
+    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Solved' WHERE `student_application_id` = ?";
     $stmt = $connection->prepare($update_query); 
     $stmt->bind_param('i', $updateId); 
 
     if ($stmt->execute()){
         echo "<script>
-        location.assign('pending_requests.php');
+        location.assign('process_requests.php');
         </script>";
     } 
     $stmt->close();
 }
-
 ?>
 <div class="content-page">
     <div class="content">
@@ -40,7 +40,7 @@ if (isset($_GET['update'])) {
                                 <li class="breadcrumb-item active">Basic Tables</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Pending Requests</h4>
+                        <h4 class="page-title">Process Requests</h4>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@ if (isset($_GET['update'])) {
 
                                         <?php
                                         $indexNo = 1;
-                                        $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Pending'";
+                                        $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Process'";
                                         $execute = mysqli_query($connection, $select_query);
                                         while($fetch = mysqli_fetch_array($execute)){
                                     ?>
@@ -84,9 +84,8 @@ if (isset($_GET['update'])) {
                                                 ?>
                                             </td>
                                             <td><?php echo $fetch['student_application_date']?></td>
-                                            <td class="text-center space-x-1">
-                                                <a href="?update=<?php echo $fetch['student_application_id']?>" class="bg-green-500 px-2 py-1 text-white rounded">Approve</a>
-                                                <a href="?remove=<?php echo $fetch['student_application_id']?>" class="bg-red-500 px-2 py-1 text-white rounded">Reject</a>
+                                            <td class="text-center">
+                                                <a href="?markSolve=<?php echo $fetch['student_application_id']?>" class="bg-green-500 px-2 py-1 text-white rounded">Mark as Solved</a>
                                             </td>
                                         </tr>
 
