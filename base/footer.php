@@ -253,6 +253,22 @@
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <script>
+    window.onload = function() {
+        // Show loader and hide content for 1 second
+        document.body.classList.add('loading');
+        
+        setTimeout(function() {
+            // Hide loader after 1 second
+            document.querySelector('.loader').classList.add('hidden');
+            
+            // Show content after loader disappears
+            document.body.classList.remove('loading');
+        }, 1000); // Hide loader after 1 second
+    };
+</script>
+
 </body>
 
 </html>

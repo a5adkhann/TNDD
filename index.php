@@ -58,8 +58,16 @@ if(!isset($_SESSION['student_user_email'])){
                             <div class="float-end">
                                 <i class="ri-eye-line widget-icon"></i>
                             </div>
-                            <h6 class="text-uppercase mt-0" title="Customers">Daily Visits</h6>
-                            <h2 class="my-2">8,652</h2>
+                            <h6 class="text-uppercase mt-0" title="Customers">Pending Requests</h6>
+                            <h2 class="my-2">
+                            <?php
+                                $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Pending'";
+                                $execute = mysqli_query($connection, $select_query);
+                                $fetch = mysqli_num_rows($execute);
+                                echo $fetch;
+                            ?>
+                            </h2>
+
                             <p class="mb-0">
                                 <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
                                 <span class="text-nowrap">Since last month</span>
@@ -74,8 +82,15 @@ if(!isset($_SESSION['student_user_email'])){
                             <div class="float-end">
                                 <i class="ri-wallet-2-line widget-icon"></i>
                             </div>
-                            <h6 class="text-uppercase mt-0" title="Customers">Revenue</h6>
-                            <h2 class="my-2">$9,254.62</h2>
+                            <h6 class="text-uppercase mt-0" title="Customers">Process Requests</h6>
+                            <h2 class="my-2">
+                            <?php
+                                $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Process'";
+                                $execute = mysqli_query($connection, $select_query);
+                                $fetch = mysqli_num_rows($execute);
+                                echo $fetch;
+                            ?>
+                            </h2>
                             <p class="mb-0">
                                 <span class="badge bg-white bg-opacity-10 me-1">18.25%</span>
                                 <span class="text-nowrap">Since last month</span>
@@ -90,8 +105,15 @@ if(!isset($_SESSION['student_user_email'])){
                             <div class="float-end">
                                 <i class="ri-shopping-basket-line widget-icon"></i>
                             </div>
-                            <h6 class="text-uppercase mt-0" title="Customers">Orders</h6>
-                            <h2 class="my-2">753</h2>
+                            <h6 class="text-uppercase mt-0" title="Customers">Solved Requests</h6>
+                            <h2 class="my-2">
+                            <?php
+                                $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Process'";
+                                $execute = mysqli_query($connection, $select_query);
+                                $fetch = mysqli_num_rows($execute);
+                                echo $fetch;
+                            ?>
+                            </h2>
                             <p class="mb-0">
                                 <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
                                 <span class="text-nowrap">Since last month</span>
@@ -104,12 +126,19 @@ if(!isset($_SESSION['student_user_email'])){
                     <div class="card widget-flat text-bg-primary">
                         <div class="card-body">
                             <div class="float-end">
-                                <i class="ri-group-2-line widget-icon"></i>
+                                <i class="ri-shopping-basket-line widget-icon"></i>
                             </div>
-                            <h6 class="text-uppercase mt-0" title="Customers">Users</h6>
-                            <h2 class="my-2">63,154</h2>
+                            <h6 class="text-uppercase mt-0" title="Customers">Total</h6>
+                            <h2 class="my-2">
+                            <?php
+                                $select_query = "SELECT * FROM `student_applications`";
+                                $execute = mysqli_query($connection, $select_query);
+                                $fetch = mysqli_num_rows($execute);
+                                echo $fetch;
+                            ?>
+                            </h2>
                             <p class="mb-0">
-                                <span class="badge bg-white bg-opacity-10 me-1">8.21%</span>
+                                <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
                                 <span class="text-nowrap">Since last month</span>
                             </p>
                         </div>
@@ -340,92 +369,36 @@ if(!isset($_SESSION['student_user_email'])){
                                 <h5 class="header-title mb-0">Projects</h5>
                             </div>
 
-                            <div id="yearly-sales-collapse" class="collapse show">
-
                                 <div class="table-responsive">
                                     <table class="table table-nowrap table-hover mb-0">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Project Name</th>
-                                                <th>Start Date</th>
-                                                <th>Due Date</th>
+                                                <th>TND Projects</th>
                                                 <th>Status</th>
-                                                <th>Assign</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Velonic Admin v1</td>
-                                                <td>01/01/2015</td>
-                                                <td>26/04/2015</td>
-                                                <td><span class="badge bg-info-subtle text-info">Released</span>
-                                                </td>
-                                                <td>Techzaa Studio</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Velonic Frontend v1</td>
-                                                <td>01/01/2015</td>
-                                                <td>26/04/2015</td>
-                                                <td><span class="badge bg-info-subtle text-info">Released</span>
-                                                </td>
-                                                <td>Techzaa Studio</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Velonic Admin v1.1</td>
-                                                <td>01/05/2015</td>
-                                                <td>10/05/2015</td>
-                                                <td><span class="badge bg-pink-subtle text-pink">Pending</span>
-                                                </td>
-                                                <td>Techzaa Studio</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Velonic Frontend v1.1</td>
-                                                <td>01/01/2015</td>
-                                                <td>31/05/2015</td>
-                                                <td><span class="badge bg-purple-subtle text-purple">Work in
-                                                        Progress</span></td>
-                                                <td>Techzaa Studio</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Velonic Admin v1.3</td>
-                                                <td>01/01/2015</td>
-                                                <td>31/05/2015</td>
-                                                <td><span class="badge bg-warning-subtle text-warning">Coming
-                                                        soon</span></td>
-                                                <td>Techzaa Studio</td>
-                                            </tr>
+                                        <?php
+    $indexNo = 1;
+    $select_query = "SELECT * FROM `tnd_projects`";
+    $execute = mysqli_query($connection, $select_query);
+    while($fetch = mysqli_fetch_array($execute)){
+?>
+        <tr>
+            <td><?php echo $indexNo++?></td>
+            <td><?php echo $fetch['tnd_project_title']?></td>
+            <td><span class="badge bg-info-subtle text-info">Released</span></td>
+        </tr>
+<?php
+    }
+?>
 
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Velonic Admin v1.3</td>
-                                                <td>01/01/2015</td>
-                                                <td>31/05/2015</td>
-                                                <td><span class="badge bg-primary-subtle text-primary">Coming
-                                                        soon</span></td>
-                                                <td>Techzaa Studio</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>7</td>
-                                                <td>Velonic Admin v1.3</td>
-                                                <td>01/01/2015</td>
-                                                <td>31/05/2015</td>
-                                                <td><span class="badge bg-danger-subtle text-danger">Cool</span>
-                                                </td>
-                                                <td>Techzaa Studio</td>
-                                            </tr>
 
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                        </div>
                     </div> <!-- end card-->
                 </div> <!-- end col-->
             </div>

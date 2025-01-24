@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2025 at 04:51 PM
+-- Generation Time: Jan 24, 2025 at 11:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -104,16 +104,9 @@ CREATE TABLE `student_applications` (
   `student_concern_person_id` int(11) NOT NULL,
   `student_application_subject_id` int(11) NOT NULL,
   `student_user_id` int(11) NOT NULL,
-  `student_application_tokenid` varchar(256) NOT NULL
+  `student_application_tokenid` varchar(256) NOT NULL,
+  `student_application_solutionmessage` varchar(3000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `student_applications`
---
-
-INSERT INTO `student_applications` (`student_application_id`, `student_application_date`, `student_application_message`, `student_id`, `student_name`, `student_batch_code`, `student_email`, `student_number`, `student_application_status`, `student_current_semester_id`, `student_concern_person_id`, `student_application_subject_id`, `student_user_id`, `student_application_tokenid`) VALUES
-(2, '2025-01-10', 'uiyyjildklk', '0', 'hdsjklsklj', '679002', 'asadklm30@gmail.com', '7690902092', 'Process', 2, 1, 2, 1, 'TNDF1D4AF97'),
-(3, '2025-01-21', '\r\nfreestar  \r\nWhat is Lorem Ipsum?\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\nWhy do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use', '7828920002', 'ssj,smnsjs', '6278298292', 'asadklm30@gmail.com', '63w7902', 'Process', 2, 1, 2, 1, 'TND1293448B');
 
 -- --------------------------------------------------------
 
@@ -140,6 +133,27 @@ INSERT INTO `student_users` (`student_user_id`, `student_user_name`, `student_us
 (1, 'Asad Khan', 'asadklm30@gmail.com', '111', '1111', 5, 'uploads/asad.jpg', 'student'),
 (2, 'Malik Abdullah', 'malikabdullah@gmail.com', '111', '-------', 4, 'uploads/react-ui.jfif', 'student'),
 (3, 'Umair Warsi', 'umairwarsi@gmail.com', '111', '--------', 1, 'uploads/shirtResolve.png', 'administrator');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tnd_projects`
+--
+
+CREATE TABLE `tnd_projects` (
+  `tnd_project_id` int(11) NOT NULL,
+  `tnd_project_title` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tnd_projects`
+--
+
+INSERT INTO `tnd_projects` (`tnd_project_id`, `tnd_project_title`) VALUES
+(1, 'Fitness Tracker'),
+(2, 'Hotel Management System'),
+(3, 'Courier Management System'),
+(4, 'Covid Vacination System');
 
 --
 -- Indexes for dumped tables
@@ -181,6 +195,12 @@ ALTER TABLE `student_users`
   ADD KEY `student_user_current_semester` (`student_user_current_semester_id`);
 
 --
+-- Indexes for table `tnd_projects`
+--
+ALTER TABLE `tnd_projects`
+  ADD PRIMARY KEY (`tnd_project_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -206,13 +226,19 @@ ALTER TABLE `concern_person`
 -- AUTO_INCREMENT for table `student_applications`
 --
 ALTER TABLE `student_applications`
-  MODIFY `student_application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `student_application_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student_users`
 --
 ALTER TABLE `student_users`
   MODIFY `student_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tnd_projects`
+--
+ALTER TABLE `tnd_projects`
+  MODIFY `tnd_project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

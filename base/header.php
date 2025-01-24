@@ -36,9 +36,124 @@ require_once("./db/db_connection.php");
 
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            font-family: "Poppins", serif;
+        }
+        .pagination {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: #2D333C;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #2F3742;
+    margin: 0 4px;
+    border-radius: 4px;
+}
+
+.pagination a.active {
+    background-color: #2D333C;
+    color: white;
+}
+
+/* Initially hide page content */
+body.loading .content {
+    visibility: hidden;
+}
+
+/* Loader styling */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    visibility: visible;
+    opacity: 1;
+    background-color: #fff; /* Default white background */
+    transition: visibility 0s 0.2s, opacity 0.2s linear;
+}
+
+.loader.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Three dots styling */
+.loader .dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.loader .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #007bff; /* Change this to the desired dot color */
+    animation: bounce 1s forwards; /* 1-second animation */
+}
+
+/* Individual dot animation delay */
+.loader .dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loader .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loader .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Bouncing animation for dots */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* Dark theme loader background */
+body.dark-theme .loader {
+    background-color: #333333; 
+}
+
+/* Light theme loader background */
+body.light-theme .loader {
+    background-color: #ffffff; 
+}
+
+
+    </style>
+
 </head>
 
 <body>
+
+<body class="loading">
+    <!-- Loader -->
+    <div class="loader">
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
     <!-- Begin page -->
     <div class="wrapper">
 

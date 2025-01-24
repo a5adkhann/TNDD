@@ -9,7 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         body {
-            background-color: #333;
+            background-color: #1A2942;
             font-family: "Poppins", serif;
         }
         .login-form {
@@ -17,9 +17,9 @@
             margin: 0 auto;
             padding: 20px;
             border-radius: 8px;
-            background-color: transparent;
+            background-color: white;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-            color: #FFF;
+            color: black;
         }
         .login-form button {
             width: 100%;
