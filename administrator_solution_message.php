@@ -2,51 +2,40 @@
 require_once("./base/header.php");
 
 if (isset($_GET['markSolve'])) {
-    // Validate and sanitize the markSolve parameter
-    $updateId = isset($_GET['markSolve']) ? intval($_GET['markSolve']) : 0;
+    $updateId = intval($_GET['markSolve']); // Ensure it’s an integer
 
     if ($updateId > 0) {
-        // Prepared statement to safely update the status
-        $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Solved' WHERE `student_application_id` = ?";
-        $stmt = $connection->prepare($update_query);
-        $stmt->bind_param('i', $updateId);
+        // Update query
+        $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Solved' WHERE `student_application_id` = $updateId";
 
-        if ($stmt->execute()) {
+        if (mysqli_query($connection, $update_query)) {
             echo "<script>
             location.assign('process_requests.php');
             </script>";
         } else {
-            // Handle failure to execute the query
-            echo "Error updating record: " . $stmt->error;
+            echo "Error updating record: " . mysqli_error($connection);
         }
-        $stmt->close();
     }
 }
 
 if (isset($_POST['savemessage'])) {
-    // Validate and sanitize the message ID and the solution message
-    $messageId = isset($_GET['messageId']) ? intval($_GET['messageId']) : 0;
-    $administrator_solution_message = isset($_POST['administrator_solution_message']) ? trim($_POST['administrator_solution_message']) : '';
+    $messageId = intval($_GET['messageId']);
+    $administrator_solution_message = trim($_POST['administrator_solution_message']);
 
     if ($messageId > 0 && !empty($administrator_solution_message)) {
-        // Prepared statement for the update
-        $update_query = "UPDATE `student_applications` SET `student_application_solutionmessage` = ? WHERE `student_application_id` = ?";
-        $stmt = $connection->prepare($update_query);
-        $stmt->bind_param('si', $administrator_solution_message, $messageId);
+        $update_query = "UPDATE `student_applications` SET `student_application_solutionmessage` = '$administrator_solution_message' WHERE `student_application_id` = $messageId";
 
-        if ($stmt->execute()) {
-            // Optionally handle success or redirect here
+        if (mysqli_query($connection, $update_query)) {
             echo "Message updated successfully!";
         } else {
-            // Handle failure to execute the query
-            echo "Error updating solution message: " . $stmt->error;
+            echo "Error updating solution message: " . mysqli_error($connection);
         }
-        $stmt->close();
     } else {
-        // Error handling for invalid input
         echo "Please provide both a valid message ID and a solution message.";
     }
 }
+?>
+
 
 ?>
 
@@ -56,14 +45,26 @@ if (isset($_POST['savemessage'])) {
         <div class="container-fluid">
 
             <form method="POST" class="py-10">
-                <textarea class="form-control" name="administrator_solution_message" id="validationCustom05"
-                    placeholder="Leave a message(Optional)" required
-                    style="height: 100px; resize: none;"><?php echo htmlspecialchars($fetch['student_application_message'] ?? '', ENT_QUOTES); ?></textarea>
-                <input class="bg-blue-500 text-white px-2 py-1 rounded mt-2" type="submit" value="Save Message" name="savemessage">
+
+            <?php
+$select_query = "SELECT `student_application_solutionmessage` FROM `student_applications` WHERE `student_application_id` = " . intval($_GET['messageId']);
+$execute = mysqli_query($connection, $select_query);
+$fetch = mysqli_fetch_array($execute);
+?>
+<textarea class="form-control" name="administrator_solution_message" id="validationCustom05"
+    placeholder="Leave a message (Optional)" required style="height: 100px; resize: none;"><?php 
+    echo !empty($fetch['student_application_solutionmessage']) 
+        ? htmlspecialchars($fetch['student_application_solutionmessage'], ENT_QUOTES) 
+        : ''; 
+?></textarea>
+
+</textarea>
+<input class="bg-blue-500 shadow-lg text-white px-2 py-1 rounded mt-2" type="submit" value="Save Message" name="savemessage">
+
             </form>
 
             <a href="?markSolve=<?php echo urlencode($_GET['messageId']) ?>"
-                class="bg-green-500 px-4 py-2 text-white rounded text-center sm:px-6 sm:py-3 md:px-8 md:py-4">
+                class="bg-green-500 shadow-lg px-4 py-2 text-white rounded text-center sm:px-6 sm:py-3 md:px-8 md:py-4">
                 Mark as Solved
             </a>
 

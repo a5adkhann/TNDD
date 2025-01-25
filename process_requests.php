@@ -49,22 +49,21 @@ $execute = mysqli_query($connection, $select_query);
                                 <table class="table table-bordered table-centered mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Index</th>
-                                            <th>Name</th>
+                                            <th>#</th>
+                                            <th>Std Name</th>
                                             <th>Application Token ID</th>
                                             <th>Application Message</th>
                                             <th>Date Generated</th>
-                                            <th>Check Form</th>
+                                            <th>Review</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-        $indexNo = 1 + $offset; // Start index based on the offset
-        while($fetch = mysqli_fetch_array($execute)){
-        ?>
+                                        while($fetch = mysqli_fetch_array($execute)){
+                                        ?>
                                         <tr>
-                                            <td><?php echo $indexNo++?></td>
+                                            <td><?php echo $fetch['student_application_id']?></td>
                                             <td class="table-user">
                                                 <?php echo $fetch['student_name']?>
                                             </td>
@@ -78,14 +77,12 @@ $execute = mysqli_query($connection, $select_query);
                                             </td>
                                             <td><?php echo $fetch['student_application_date']?></td>
                                             <td class="text-center">
-                                            <form method="POST" action="view_application.php">
-                    <input type="hidden" name="viewapplication" value="<?php echo $fetch['student_application_id'];?>">
-
-                    <button><i class="ri-eye-line text-yellow-500"></i></button>
-                </form>
+                                                <a href="view_application.php?viewapplication=<?php echo $fetch['student_application_id']?>">
+                                                    <i class="ri-eye-line text-yellow-500 shadow-lg"></i>
+                                                </a>
                                             </td>
                                             <td class="text-center">
-                                                <a href="./administrator_solution_message.php?messageId=<?php echo $fetch['student_application_id']?>">Leave a Message</a>
+                                                <a href="./administrator_solution_message.php?messageId=<?php echo $fetch['student_application_id']?>">Add Remarks</a>
                                             </td>
                                         </tr>
                                         <?php

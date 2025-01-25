@@ -10,39 +10,36 @@ if (isset($_GET['update'])) {
     $updateId = intval($_GET['update']); // Sanitize input to prevent SQL injection
 
     // Update query
-    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Process' WHERE `student_application_id` = ?";
-    $stmt = $connection->prepare($update_query); 
-    $stmt->bind_param('i', $updateId); 
+    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Process' WHERE `student_application_id` = $updateId";
 
-    if ($stmt->execute()) {
+    if (mysqli_query($connection, $update_query)) {
         echo "<script>
-        // Remove the 'delete' query parameter from the URL
         const url = new URL(window.location.href);
         url.searchParams.delete('update');
         history.replaceState(null, '', url);
         </script>";
+    } else {
+        echo "Error: " . mysqli_error($connection);
     }
-    $stmt->close();
 }
 
 
-if (isset($_GET['remove'])) {
-    $deleteId = $_GET['remove'];
-    $delete_query = "DELETE FROM `student_applications` WHERE `student_application_id` = ?";
-    $stmt = $connection->prepare($delete_query);
 
-    $stmt->bind_param('i', $deleteId);
-
-    if ($stmt->execute()) {
+if (isset($_GET['reject'])) {
+    $rejectId = intval($_GET['reject']); // Sanitize input to prevent SQL injection
+    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Rejected' WHERE `student_application_id` = $rejectId";
+    
+    if (mysqli_query($connection, $update_query)) {
         echo "<script>
-        // Remove the 'delete' query parameter from the URL
         const url = new URL(window.location.href);
-        url.searchParams.delete('remove');
+        url.searchParams.delete('reject');
         history.replaceState(null, '', url);
         </script>";
+    } else {
+        echo "Error updating record: " . mysqli_error($connection);
     }
-    $stmt->close();
 }
+
 
 
 ?>
@@ -88,12 +85,12 @@ $execute = mysqli_query($connection, $select_query);
 <table class="table table-bordered table-centered mb-0">
     <thead>
         <tr>
-            <th>Index</th>
-            <th>Name</th>
+            <th>#</th>
+            <th>Std Name</th>
             <th>Application Token ID</th>
             <th>Application Message</th>
             <th>Date Generated</th>
-            <th>Check Form</th>
+            <th>Review</th>
             <th class="text-center">Action</th>
         </tr>
     </thead>
@@ -103,7 +100,7 @@ $execute = mysqli_query($connection, $select_query);
         while($fetch = mysqli_fetch_array($execute)){
         ?>
         <tr>
-            <td><?php echo $indexNo++?></td>
+            <td><?php echo $fetch['student_application_id']?></td>
             <td class="table-user">
                 <?php echo $fetch['student_name']?>
             </td>
@@ -117,17 +114,13 @@ $execute = mysqli_query($connection, $select_query);
             </td>
             <td><?php echo $fetch['student_application_date']?></td>
             <td class="text-center">
-                
-                <form method="POST" action="view_application.php">
-                    <input type="hidden" name="viewapplication" value="<?php echo $fetch['student_application_id'];?>">
-
-                    <button><i class="ri-eye-line text-yellow-500"></i></button>
-                </form>
-                
+                <a href="./view_application.php?viewapplication=<?php echo $fetch['student_application_id']?>" class="text-reset p-1 rounded fs-16 px-1">
+                    <i class="ri-eye-line text-yellow-500 shadow-xl"></i>
+                </a>
             </td>
             <td class="space-x-1 flex gap-1 justify-center">
-                <a href="?update=<?php echo $fetch['student_application_id']?>" class="bg-green-500 p-1 text-white rounded">Approve</a>
-                <a href="?remove=<?php echo $fetch['student_application_id']?>" class="bg-red-500 p-1 text-white rounded">Reject</a>
+                <a href="?update=<?php echo $fetch['student_application_id']?>" class="shadow-lg bg-green-500 p-1 text-white rounded">Approve</a>
+                <a href="?reject=<?php echo $fetch['student_application_id']?>" class="shadow-lg bg-red-500 p-1 text-white rounded">Reject</a>
             </td>
         </tr>
         <?php

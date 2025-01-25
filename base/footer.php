@@ -265,7 +265,7 @@
             
             // Show content after loader disappears
             document.body.classList.remove('loading');
-        }, 1000); // Hide loader after 1 second
+        }, 1000); 
     };
 </script>
 

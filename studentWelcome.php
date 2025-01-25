@@ -1,5 +1,5 @@
 <?php
-require_once("./base/header.php");
+require_once("./base/mainTemplateSample.php");
 ?>
 
 <div class="content-page">

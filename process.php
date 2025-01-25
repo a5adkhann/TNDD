@@ -2,30 +2,24 @@
 require_once("./db/db_connection.php");
 
 function generateTokenID() {
-    return 'TND' . strtoupper(bin2hex(random_bytes(4))); // 8 characters long random token
+    return 'TND' . strtoupper(bin2hex(random_bytes(4)));
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_application'])) {
-    // Sanitize and escape user input
-    $student_concern_person_id = mysqli_real_escape_string($connection, $_POST['student_concern_person_id']);
-    $student_application_date = mysqli_real_escape_string($connection, $_POST['student_application_date']);
-    $student_application_subject_id = mysqli_real_escape_string($connection, $_POST['student_application_subject_id']);
-    $student_application_message = mysqli_real_escape_string($connection, $_POST['student_application_message']);
-    $student_id = mysqli_real_escape_string($connection, $_POST['student_id']);
-    $student_name = mysqli_real_escape_string($connection, $_POST['student_name']);
-    $student_batch_code = mysqli_real_escape_string($connection, $_POST['student_batch_code']);
-    $student_current_semester_id = mysqli_real_escape_string($connection, $_POST['student_current_semester_id']);
-    $student_email = mysqli_real_escape_string($connection, $_POST['student_email']);
-    $student_number = mysqli_real_escape_string($connection, $_POST['student_number']);
-    $student_user_id = mysqli_real_escape_string($connection, $_SESSION['student_user_id']);
+    $student_concern_person_id = $_POST['student_concern_person_id'];
+    $student_application_date = $_POST['student_application_date'];
+    $student_application_subject_id = $_POST['student_application_subject_id'];
+    $student_application_message = $_POST['student_application_message'];
+    $student_id = $_POST['student_id'];
+    $student_name = $_POST['student_name'];
+    $student_batch_code = $_POST['student_batch_code'];
+    $student_current_semester_id = $_POST['student_current_semester_id'];
+    $student_email = $_POST['student_email'];
+    $student_number = $_POST['student_number'];
+    $student_user_id = $_SESSION['student_user_id'];
 
-    // Generate a new token ID for each submission
     $token_id = generateTokenID();
 
-    // Escape the generated token ID
-    $token_id = mysqli_real_escape_string($connection, $token_id);
-
-    // Insert query
     $insert_query = "INSERT INTO student_applications (
                         student_concern_person_id, 
                         student_application_date, 
@@ -54,20 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_application']
                         '$token_id'
                     )";
 
-    // Execute the query
     if (mysqli_query($connection, $insert_query)) {
-        // Unset the session variable to avoid token reuse
         unset($_SESSION['token_id']);
-
-        // Redirect to the token display page
         header("Location: student_application_token.php");
-        exit; // Ensure no further code execution
+        exit;
     } else {
-        // Handle query execution error
         echo "Error: " . mysqli_error($connection);
     }
 
-    // Close the connection
     mysqli_close($connection);
 } else {
     echo "Invalid request method.";
@@ -97,11 +85,5 @@ if(isset($_POST['login'])){
         location.assign('login.php');
         </script>";
     }
-    
-    
 }
-
-
 ?>
-
-

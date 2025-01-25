@@ -3,21 +3,19 @@ require_once("./base/header.php");
 
 if (isset($_GET['delete'])) {
     $deleteId = $_GET['delete'];
-    $delete_query = "DELETE FROM `student_applications` WHERE `student_application_id` = ?";
-    $stmt = $connection->prepare($delete_query);
+    $delete_query = "DELETE FROM `student_applications` WHERE `student_application_id` = $deleteId";
 
-    $stmt->bind_param('i', $deleteId);
-
-    if ($stmt->execute()) {
+    if (mysqli_query($connection, $delete_query)) {
         echo "<script>
-        // Remove the 'delete' query parameter from the URL
         const url = new URL(window.location.href);
         url.searchParams.delete('delete');
         history.replaceState(null, '', url);
         </script>";
+    } else {
+        echo "Error: " . mysqli_error($connection);
     }
-    $stmt->close();
 }
+
 
 ?>
 
@@ -83,7 +81,7 @@ $execute = mysqli_query($connection, $select_query);
 <table class="table table-bordered border-light table-centered mb-0">
     <thead>
         <tr>
-            <th>Index</th>
+            <th>#</th>
             <th>To</th>
             <th>Subject</th>
             <th>Message</th>
@@ -95,11 +93,10 @@ $execute = mysqli_query($connection, $select_query);
     </thead>
     <tbody>
         <?php
-        $indexNo = 1 + $offset; // Start index based on the offset
         while($fetch = mysqli_fetch_array($execute)){
         ?>
         <tr>
-            <td><?php echo $indexNo++?></td>
+            <td><?php echo $fetch['student_application_id']++?></td>
             <td class="table-user">
                 <img src="./images/avatar.jpg" alt="table-user" class="me-2 rounded-circle" />
                 <?php echo $fetch['concern_person']?>
@@ -134,20 +131,30 @@ $execute = mysqli_query($connection, $select_query);
                         <i class="ri-time-line text-success"></i><?php echo $fetch['student_application_status']?>
                     </span>
                 <?php
-                }
+                } else if($fetch['student_application_status'] == "Rejected"){
                 ?>
+                <span class="fw-bold badge bg-danger-subtle text-danger">
+                        <i class="ri-time-line text-danger"></i><?php echo $fetch['student_application_status']?>
+                    </span>
+                    <?php
+                }
+                    ?>
             </td>
-            <td class="text-center flex gap-3 justify-center items-center">
-                <a href="?delete=<?php echo $fetch['student_application_id']?>" class="text-sm fs-22 px-1">
+            <td class="text-center">
+                <a href="?delete=<?php echo $fetch['student_application_id']?>" class="text-sm fs-18 px-1">
                     <i class="ri-delete-bin-2-line text-red-500"></i>
                 </a>
-                <a href="./student_application_form.php?update=<?php echo $fetch['student_application_id']?>" class="text-reset fs-22 px-1" title="Edit">
+                <?php
+                if($fetch['student_application_status'] !== "Solved" AND $fetch['student_application_status'] !== "Process" AND $fetch['student_application_status'] !== "Rejected"){
+                ?>
+                <a href="./student_application_form.php?update=<?php echo $fetch['student_application_id']?>" class="text-reset fs-18 px-1" title="Edit">
                     <i class="fas text-sm fa-pen text-blue-500"></i>
                 </a>
-                <form method="POST" action="view_application.php">
-                    <input type="hidden" name="viewapplication" value="<?php echo $fetch['student_application_id'];?>">
+                <?php
+                }
+                ?>
 
-                    <button><i class="ri-eye-line fs-22 text-yellow-500"></i></button>
+                    <a href="view_application.php?viewapplication=<?php echo $fetch['student_application_id']?>"><i class="ri-eye-line fs-18 text-yellow-500"></i></a>
                 </form>
             </td>
         </tr>

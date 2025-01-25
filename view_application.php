@@ -74,8 +74,8 @@ if (isset($_GET['remove'])) {
                     <div class="card shadow-sm border-light">
                         <div class="card-body">
                             <?php
-                            if (isset($_POST['viewapplication'])) {
-                                $updateId = $_POST['viewapplication'];
+                            if (isset($_GET['viewapplication'])) {
+                                $updateId = $_GET['viewapplication'];
                                 $select_query = "SELECT * FROM `student_applications` INNER JOIN `concern_person` INNER JOIN `all_subjects` WHERE `student_application_id` = ?";
                                 $stmt = $connection->prepare($select_query);
                                 $stmt->bind_param("i", $updateId);
@@ -150,8 +150,8 @@ if (isset($_GET['remove'])) {
 
                             <?php 
 // Sanitize and validate the 'viewapplication' parameter
-                        if (isset($_POST['viewapplication'])) {
-                            $updateId = intval($_POST['viewapplication']); // Ensure it's an integer
+                        if (isset($_GET['viewapplication'])) {
+                            $updateId = intval($_GET['viewapplication']); // Ensure it's an integer
 
                             // Prepare and execute the query securely
                             $select_query = "SELECT `student_application_status`, `student_application_solutionmessage` 
@@ -193,7 +193,7 @@ if (isset($_GET['remove'])) {
 
 
                             <?php
-$updateId = $_POST['viewapplication'];
+$updateId = $_GET['viewapplication'];
 $select_query = "SELECT `student_application_status`, `student_application_id` FROM `student_applications` WHERE `student_application_id` = '$updateId'";
 $execute = mysqli_query($connection, $select_query);
 $fetch = mysqli_fetch_array($execute);

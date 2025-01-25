@@ -4,7 +4,6 @@ require_once("./base/header.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_student_application'])) {
 
     $updateId = $_GET['update'];
-    // Sanitize and escape user input
     $student_concern_person_id = mysqli_real_escape_string($connection, $_POST['student_concern_person_id']);
     $student_application_date = mysqli_real_escape_string($connection, $_POST['student_application_date']);
     $student_application_subject_id = mysqli_real_escape_string($connection, $_POST['student_application_subject_id']);
@@ -18,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_student_applic
     $student_user_id = mysqli_real_escape_string($connection, $_SESSION['student_user_id']);
 
 
-    // Update query
     $update_query = "UPDATE student_applications SET 
     student_concern_person_id = '$student_concern_person_id', 
     student_application_date = '$student_application_date', 
@@ -39,9 +37,8 @@ WHERE student_application_id = '$updateId'";
         echo "<script>
             location.assign('my_requests.php');
         </script>";
-        exit; // Ensure no further code execution
+        exit; 
     } else {
-        // Handle query execution error
         echo "Error: " . mysqli_error($connection);
     }
 
@@ -77,24 +74,24 @@ WHERE student_application_id = '$updateId'";
                         <div class="card-body">
 
                         <?php
-if (isset($_GET['update'])) {
-    $updateId = $_GET['update'];
-    $select_query = "SELECT * FROM `student_applications` WHERE `student_application_id` = ?";
-    $stmt = $connection->prepare($select_query);
-    $stmt->bind_param("i", $updateId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $fetch = $result->fetch_assoc();
-}
-?>
+                        if (isset($_GET['update'])) {
+                            $updateId = $_GET['update'];
+                            $select_query = "SELECT * FROM `student_applications` WHERE `student_application_id` = ?";
+                            $stmt = $connection->prepare($select_query);
+                            $stmt->bind_param("i", $updateId);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $fetch = $result->fetch_assoc();
+                        }
+                        ?>
 
-<?php
-if (isset($_GET['update'])) {
-?>
-    <form class="needs-validation" novalidate method="POST">
-<?php
-} else {
-?>
+                        <?php
+                        if (isset($_GET['update'])) {
+                        ?>
+                            <form class="needs-validation" novalidate method="POST">
+                        <?php
+                        } else {
+                        ?>
     <form class="needs-validation" novalidate method="POST" action="process.php">
 <?php
 }
