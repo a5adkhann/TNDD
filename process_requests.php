@@ -78,10 +78,11 @@ $execute = mysqli_query($connection, $select_query);
                                             </td>
                                             <td><?php echo $fetch['student_application_date']?></td>
                                             <td class="text-center">
-                                                <a href="./view_application.php?viewapplication=<?php echo $fetch['student_application_id']?>"
-                                                    class="text-reset p-1 rounded bg-[#2D333C] fs-16 px-1">
-                                                    <i class="ri-eye-line text-yellow"></i>
-                                                </a>
+                                            <form method="POST" action="view_application.php">
+                    <input type="hidden" name="viewapplication" value="<?php echo $fetch['student_application_id'];?>">
+
+                    <button><i class="ri-eye-line text-yellow-500"></i></button>
+                </form>
                                             </td>
                                             <td class="text-center">
                                                 <a href="./administrator_solution_message.php?messageId=<?php echo $fetch['student_application_id']?>">Leave a Message</a>

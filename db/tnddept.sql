@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2025 at 11:26 PM
+-- Generation Time: Jan 25, 2025 at 04:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -107,6 +107,17 @@ CREATE TABLE `student_applications` (
   `student_application_tokenid` varchar(256) NOT NULL,
   `student_application_solutionmessage` varchar(3000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_applications`
+--
+
+INSERT INTO `student_applications` (`student_application_id`, `student_application_date`, `student_application_message`, `student_id`, `student_name`, `student_batch_code`, `student_email`, `student_number`, `student_application_status`, `student_current_semester_id`, `student_concern_person_id`, `student_application_subject_id`, `student_user_id`, `student_application_tokenid`, `student_application_solutionmessage`) VALUES
+(5, '2025-01-17', 'mfdjnjksn', '782736356', 'behedbh', 'q762763', 'asad@gmail.com', '17233445646', 'Pending', 2, 1, 2, 1, 'TND5D6F8675', NULL),
+(11, '2025-01-17', 'mfdjnjksn', '782736356', 'behedbh', 'q762763', 'asad@gmail.com', '17233445646', 'Pending', 2, 1, 2, 1, 'TND229C6768', NULL),
+(12, '2025-01-17', 'mfdjnjksn', '782736356', 'behedbh', 'q762763', 'asad@gmail.com', '17233445646', 'Pending', 2, 1, 2, 1, 'TND12805A01', NULL),
+(13, '2025-01-08', 'bhzdjnsdbndfjnekj', '6263793494', 'wsbvdjhdj', '6736757598509', 'asad@gmail.com', '17233445646', 'Pending', 2, 1, 2, 1, 'TNDE151DCC4', NULL),
+(14, '2025-01-08', 'bhzdjnsdbndfjnekj', '6263793494', 'wsbvdjhdj', '6736757598509', 'asad@gmail.com', '17233445646', 'Pending', 2, 1, 2, 1, 'TNDC087230A', NULL);
 
 -- --------------------------------------------------------
 
@@ -226,7 +237,7 @@ ALTER TABLE `concern_person`
 -- AUTO_INCREMENT for table `student_applications`
 --
 ALTER TABLE `student_applications`
-  MODIFY `student_application_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `student_users`

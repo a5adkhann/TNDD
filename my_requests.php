@@ -137,16 +137,18 @@ $execute = mysqli_query($connection, $select_query);
                 }
                 ?>
             </td>
-            <td class="text-center space-x-1">
-                <a href="?delete=<?php echo $fetch['student_application_id']?>" class="text-sm rounded bg-[#2D333C] fs-16 px-1">
+            <td class="text-center flex gap-3 justify-center items-center">
+                <a href="?delete=<?php echo $fetch['student_application_id']?>" class="text-sm fs-22 px-1">
                     <i class="ri-delete-bin-2-line text-red-500"></i>
                 </a>
-                <a href="./student_application_form.php?update=<?php echo $fetch['student_application_id']?>" class="text-reset rounded bg-[#2D333C] fs-16 px-1" title="Edit">
+                <a href="./student_application_form.php?update=<?php echo $fetch['student_application_id']?>" class="text-reset fs-22 px-1" title="Edit">
                     <i class="fas text-sm fa-pen text-blue-500"></i>
                 </a>
-                <a href="./view_application.php?viewapplication=<?php echo $fetch['student_application_id']?>" class="text-sm text-reset rounded bg-[#2D333C] fs-16 px-1">
-                    <i class="ri-eye-line text-yellow-500"></i>
-                </a>
+                <form method="POST" action="view_application.php">
+                    <input type="hidden" name="viewapplication" value="<?php echo $fetch['student_application_id'];?>">
+
+                    <button><i class="ri-eye-line fs-22 text-yellow-500"></i></button>
+                </form>
             </td>
         </tr>
         <?php

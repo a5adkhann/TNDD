@@ -117,9 +117,13 @@ $execute = mysqli_query($connection, $select_query);
             </td>
             <td><?php echo $fetch['student_application_date']?></td>
             <td class="text-center">
-                <a href="./view_application.php?viewapplication=<?php echo $fetch['student_application_id']?>" class="text-reset p-1 rounded fs-16 px-1">
-                    <i class="ri-eye-line text-yellow-500"></i>
-                </a>
+                
+                <form method="POST" action="view_application.php">
+                    <input type="hidden" name="viewapplication" value="<?php echo $fetch['student_application_id'];?>">
+
+                    <button><i class="ri-eye-line text-yellow-500"></i></button>
+                </form>
+                
             </td>
             <td class="space-x-1 flex gap-1 justify-center">
                 <a href="?update=<?php echo $fetch['student_application_id']?>" class="bg-green-500 p-1 text-white rounded">Approve</a>

@@ -246,17 +246,17 @@ if (isset($_GET['update'])) {
         </div>
     </div>
 
-    <?php
-if (isset($_GET['update'])) {
-?>
-    <input type="submit" class="btn btn-success" name="update_student_application" value="Make Changes" />
-<?php
-} else {
-?>
-    <input type="submit" class="btn btn-success" name="student_application" value="Submit Application" />
-<?php
-}
-?>
+            <?php
+        if (isset($_GET['update'])) {
+        ?>
+            <input type="submit" class="btn btn-success" name="update_student_application" value="Make Changes" />
+        <?php
+        } else {
+        ?>
+            <input type="submit" class="btn btn-success" name="student_application" value="Submit Application" />
+        <?php
+        }
+        ?>
 
 
 
