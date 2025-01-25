@@ -391,27 +391,9 @@ require_once("./db/db_connection.php");
                                 </a>
 
                                 <!-- item-->
-                                <a href="pages-profile.html" class="dropdown-item">
-                                    <i class="ri-settings-4-line fs-18 align-middle me-1"></i>
-                                    <span>Settings</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="pages-faq.html" class="dropdown-item">
-                                    <i class="ri-customer-service-2-line fs-18 align-middle me-1"></i>
-                                    <span>Support</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="auth-lock-screen.html" class="dropdown-item">
-                                    <i class="ri-lock-password-line fs-18 align-middle me-1"></i>
-                                    <span>Lock Screen</span>
-                                </a>
-
-                                <!-- item-->
                                 <a href="./logout.php" class="dropdown-item">
-                                    <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
-                                    <span>Logout</span>
+                                    <i class="text-red-500 ri-logout-box-line fs-18 align-middle me-1"></i>
+                                    <span class="text-red-500">Logout</span>
                                 </a>
                             </div>
                         </li>

@@ -44,8 +44,6 @@ WHERE student_application_id = '$updateId'";
 
     // Close the connection
     mysqli_close($connection);
-} else {
-    echo "Invalid request method.";
 }
 
 ?>
@@ -113,9 +111,6 @@ WHERE student_application_id = '$updateId'";
                     }
                     ?>
                 </select>
-                <div class="valid-feedback">
-                    Select the concern person
-                </div>
             </div>
         </div>
 
@@ -124,9 +119,6 @@ WHERE student_application_id = '$updateId'";
                 <label class="form-label" for="validationCustom02">Date</label>
                 <input type="date" class="form-control" name="student_application_date"
                        id="validationCustom02" value="<?php echo $fetch['student_application_date'] ?? ''; ?>" required>
-                <div class="valid-feedback">
-                    Select Date please
-                </div>
             </div>
         </div>
     </div>
@@ -144,9 +136,6 @@ WHERE student_application_id = '$updateId'";
             }
             ?>
         </select>
-        <div class="invalid-feedback">
-            Please provide a subject.
-        </div>
     </div>
 
     <div class="mb-3">
@@ -154,9 +143,6 @@ WHERE student_application_id = '$updateId'";
         <textarea class="form-control" name="student_application_message"
                   id="validationCustom05" placeholder="Message" required
                   style="height: 100px; resize: none;"><?php echo $fetch['student_application_message'] ?? ''; ?></textarea>
-        <div class="invalid-feedback">
-            Provide some message.
-        </div>
     </div>
 
     <hr>
@@ -168,9 +154,6 @@ WHERE student_application_id = '$updateId'";
                 <label class="form-label" for="validationCustom01">Student ID</label>
                 <input type="text" class="form-control" id="validationCustom01"
                        placeholder="ex: Student156" name="student_id" value="<?php echo $fetch['student_id'] ?? ''; ?>" required>
-                <div class="valid-feedback">
-                    Insert Your Student ID
-                </div>
             </div>
         </div>
 
@@ -179,9 +162,6 @@ WHERE student_application_id = '$updateId'";
                 <label class="form-label" for="validationCustom02">Student Name</label>
                 <input type="text" class="form-control" id="validationCustom02"
                        name="student_name" value="<?php echo $fetch['student_name'] ?? ''; ?>" required>
-                <div class="valid-feedback">
-                    Insert Your Name
-                </div>
             </div>
         </div>
     </div>
@@ -192,9 +172,6 @@ WHERE student_application_id = '$updateId'";
                 <label class="form-label" for="validationCustom01">Batch Code</label>
                 <input type="text" class="form-control" id="validationCustom01"
                        placeholder="ex: PR2-202408G" name="student_batch_code" value="<?php echo $fetch['student_batch_code'] ?? ''; ?>" required>
-                <div class="valid-feedback">
-                    Insert Your Batch Code
-                </div>
             </div>
         </div>
 
@@ -212,9 +189,6 @@ WHERE student_application_id = '$updateId'";
                     }
                     ?>
                 </select>
-                <div class="valid-feedback">
-                    Select Your Current Semester
-                </div>
             </div>
         </div>
     </div>
@@ -225,9 +199,6 @@ WHERE student_application_id = '$updateId'";
                 <label class="form-label" for="validationCustom02">Email Address</label>
                 <input type="text" class="form-control" id="validationCustom02"
                        name="student_email" value="<?php echo $fetch['student_email'] ?? ''; ?>" required>
-                <div class="valid-feedback">
-                    Insert Your Email
-                </div>
             </div>
         </div>
 
@@ -236,9 +207,6 @@ WHERE student_application_id = '$updateId'";
                 <label class="form-label" for="validationCustom02">Cell Ph.</label>
                 <input type="text" class="form-control" id="validationCustom02"
                        name="student_number" value="<?php echo $fetch['student_number'] ?? ''; ?>" required>
-                <div class="valid-feedback">
-                    Insert Your Number
-                </div>
             </div>
         </div>
     </div>
@@ -254,9 +222,6 @@ WHERE student_application_id = '$updateId'";
         <?php
         }
         ?>
-
-
-
 </form>
 
 
