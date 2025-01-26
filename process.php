@@ -78,7 +78,7 @@ if(isset($_POST['login'])){
         $_SESSION['student_user_batchcode'] = $display['student_user_batchcode'];
         $_SESSION['student_user_image'] = $display['student_user_image'];
         $_SESSION['user_role'] = $display['user_role'];
-        header("location: index.php");
+        header("location: home.php");
     }
     else {
         echo "<script>alert('Invalid Credentials');

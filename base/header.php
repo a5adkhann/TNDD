@@ -39,6 +39,8 @@ require_once("./db/db_connection.php");
 
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap" rel="stylesheet">
+
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -174,20 +176,25 @@ require_once("./db/db_connection.php");
                         <!-- Topbar Brand Logo -->
                         <div class="logo-topbar">
                             <!-- Logo light -->
-                            <a href="index.php" class="logo-light">
-                                <span class="logo-lg">
-                                    <img src="./images/logo.png" alt="logo">
-                                </span>
+                            <a href="home.php" class="logo-light">
+                            <span class="logo-lg hidden md:flex items-center justify-center">
+                    <span class="text-lg font-bold flex items-center justify-center tracking-wide text-[#EAF1F3] md:text-xl lg:text-2xl xl:text-3xl" style="font-family: 'Lexend Giga', serif;">
+                        <img class="invert w-6 md:w-4 lg:w-4 xl:w-6" src="./images/logo1.png" alt=""> 
+                        <span class="ml-2">TND</span>
+                    </span>
+                </span>
                                 <span class="logo-sm">
                                     <img src="./images/logo-sm.png" alt="small logo">
                                 </span>
                             </a>
 
                             <!-- Logo Dark -->
-                            <a href="index.php" class="logo-dark">
-                                <span class="logo-lg">
-                                    <img src="assets/images/logo-dark.png" alt="dark logo">
-                                </span>
+                            <a href="home.php" class="logo-dark">
+                            <span class="logo-lg hidden md:block">
+                                <h1 class="font-bold tracking-wide text-blue-600 md:text-4xl lg:text-5xl" style="font-family: 'Lexend Giga', serif;">
+                                    TND Dept.
+                                </h1>
+                            </span>
                                 <span class="logo-sm">
                                     <img src="./images/logo-sm.png" alt="small logo">
                                 </span>
@@ -410,20 +417,29 @@ require_once("./db/db_connection.php");
             <div class="leftside-menu pt-10">
 
                 <!-- Brand Logo Light -->
-                <a href="index.php" class="logo logo-light">
-                    <span class="logo-lg">
-                        <img src="./images/logo.png" alt="logo">
+                <a href="home.php" class="logo logo-light">
+                <span class="logo-lg hidden md:flex items-center justify-center">
+                    <span class="text-lg font-bold flex items-center justify-center tracking-wide text-[#EAF1F3] md:text-xl lg:text-2xl xl:text-3xl" style="font-family: 'Lexend Giga', serif;">
+                        <img class="invert w-6 md:w-4 lg:w-4 xl:w-6" src="./images/logo1.png" alt=""> 
+                        <span class="ml-2">TND</span>
                     </span>
+                </span>
+
+                </span>
+
                     <span class="logo-sm">
                         <img src="./images/logo-sm.png" alt="small logo">
                     </span>
                 </a>
 
                 <!-- Brand Logo Dark -->
-                <a href="index.php" class="logo logo-dark">
-                    <span class="logo-lg">
-                        <img src="./images/logo-dark.png" alt="dark logo">
+                <a href="home.php" class="logo logo-dark">
+                <span class="logo-lg hidden md:flex items-center justify-center">
+                    <span class="text-lg font-bold flex items-center justify-center tracking-wide text-[#EAF1F3] md:text-xl lg:text-2xl xl:text-3xl" style="font-family: 'Lexend Giga', serif;">
+                        <img class="invert w-6 md:w-4 lg:w-4 xl:w-6" src="./images/logo1.png" alt=""> 
+                        <span class="ml-2">TND</span>
                     </span>
+                </span>
                     <span class="logo-sm">
                         <img src="./images/logo-sm.png" alt="small logo">
                     </span>
@@ -441,7 +457,7 @@ require_once("./db/db_connection.php");
                     ?>
 
                             <li class="side-nav-item">
-                            <a href="./index.php" class="side-nav-link">
+                            <a href="./home.php" class="side-nav-link">
                                 <i class="ri-dashboard-3-line"></i>
                                 <span> Home </span>
                             </a>
@@ -471,7 +487,7 @@ require_once("./db/db_connection.php");
 
 
                         <li class="side-nav-item">
-                            <a href="./index.php" class="side-nav-link">
+                            <a href="./home.php" class="side-nav-link">
                                 <i class="ri-survey-line"></i>
                                 <span> Dashboard </span>
                             </a>

@@ -10,7 +10,7 @@ if (!isset($_SESSION['student_user_email'])) {
 
 if (!isset($_GET['viewapplication'])) {
     echo "<script>
-        location.assign('index.php');
+        location.assign('home.php');
     </script>";
     exit();
 }

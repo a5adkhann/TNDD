@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2025 at 02:48 PM
+-- Generation Time: Jan 26, 2025 at 10:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -143,18 +143,17 @@ INSERT INTO `student_users` (`student_user_id`, `student_user_name`, `student_us
 
 CREATE TABLE `tnd_projects` (
   `tnd_project_id` int(11) NOT NULL,
-  `tnd_project_title` varchar(256) NOT NULL
+  `tnd_project_name` varchar(256) NOT NULL,
+  `tnd_project_semester_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tnd_projects`
 --
 
-INSERT INTO `tnd_projects` (`tnd_project_id`, `tnd_project_title`) VALUES
-(1, 'Fitness Tracker'),
-(2, 'Hotel Management System'),
-(3, 'Courier Management System'),
-(4, 'Covid Vacination System');
+INSERT INTO `tnd_projects` (`tnd_project_id`, `tnd_project_name`, `tnd_project_semester_id`) VALUES
+(1, 'Fitness Tracker', 5),
+(2, 'Hotel Management System', 5);
 
 --
 -- Indexes for dumped tables
@@ -199,7 +198,8 @@ ALTER TABLE `student_users`
 -- Indexes for table `tnd_projects`
 --
 ALTER TABLE `tnd_projects`
-  ADD PRIMARY KEY (`tnd_project_id`);
+  ADD PRIMARY KEY (`tnd_project_id`),
+  ADD KEY `tnd_project_semester_id` (`tnd_project_semester_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -239,7 +239,7 @@ ALTER TABLE `student_users`
 -- AUTO_INCREMENT for table `tnd_projects`
 --
 ALTER TABLE `tnd_projects`
-  MODIFY `tnd_project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `tnd_project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -259,6 +259,12 @@ ALTER TABLE `student_applications`
 --
 ALTER TABLE `student_users`
   ADD CONSTRAINT `student_user_current_semester` FOREIGN KEY (`student_user_current_semester_id`) REFERENCES `all_semesters` (`semester_id`);
+
+--
+-- Constraints for table `tnd_projects`
+--
+ALTER TABLE `tnd_projects`
+  ADD CONSTRAINT `tnd_project_semester_id` FOREIGN KEY (`tnd_project_semester_id`) REFERENCES `all_semesters` (`semester_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

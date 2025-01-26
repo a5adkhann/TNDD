@@ -3,7 +3,7 @@ require_once("./base/header.php");
 
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "administrator"){
     echo "<script>
-       location.assign('index.php');
+       location.assign('home.php');
     </script>";
 }
 
