@@ -1,6 +1,18 @@
 <?php
 require_once("./base/header.php");
 
+if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "administrator"){
+    echo "<script>
+       location.assign('index.php');
+    </script>";
+}
+
+if(!isset($_SESSION['student_user_email'])){
+    echo "<script>
+        location.assign('login.php');
+    </script>";
+}
+
 if (isset($_GET['markSolve'])) {
     $updateId = intval($_GET['markSolve']); // Ensure it’s an integer
 
@@ -44,24 +56,27 @@ if (isset($_POST['savemessage'])) {
         <!-- Start Content-->
         <div class="container-fluid">
 
-            <form method="POST" class="py-10">
+        <form method="POST" class="py-10">
+    <?php
+    // Get the existing solution message from the database (if any)
+    $messageId = isset($_GET['messageId']) ? intval($_GET['messageId']) : 0;
+    $fetchMessage = ''; // Default value for the message
+    
+    if ($messageId > 0) {
+        $select_query = "SELECT `student_application_solutionmessage` FROM `student_applications` WHERE `student_application_id` = $messageId";
+        $execute = mysqli_query($connection, $select_query);
+        $fetch = mysqli_fetch_array($execute);
+        $fetchMessage = !empty($fetch['student_application_solutionmessage']) ? htmlspecialchars($fetch['student_application_solutionmessage'], ENT_QUOTES) : '';
+    }
+    ?>
+    
+    <!-- Textarea for Solution Message -->
+    <textarea class="form-control" name="administrator_solution_message" id="validationCustom05" placeholder="Leave a message (Optional)" required style="height: 100px; resize: none;"><?php echo $fetchMessage; ?></textarea>
 
-            <?php
-$select_query = "SELECT `student_application_solutionmessage` FROM `student_applications` WHERE `student_application_id` = " . intval($_GET['messageId']);
-$execute = mysqli_query($connection, $select_query);
-$fetch = mysqli_fetch_array($execute);
-?>
-<textarea class="form-control" name="administrator_solution_message" id="validationCustom05"
-    placeholder="Leave a message (Optional)" required style="height: 100px; resize: none;"><?php 
-    echo !empty($fetch['student_application_solutionmessage']) 
-        ? htmlspecialchars($fetch['student_application_solutionmessage'], ENT_QUOTES) 
-        : ''; 
-?></textarea>
+    <!-- Submit Button -->
+    <input class="bg-blue-500 shadow-lg text-white px-2 py-1 rounded mt-2" type="submit" value="Save Message" name="savemessage">
+</form>
 
-</textarea>
-<input class="bg-blue-500 shadow-lg text-white px-2 py-1 rounded mt-2" type="submit" value="Save Message" name="savemessage">
-
-            </form>
 
             <a href="?markSolve=<?php echo urlencode($_GET['messageId']) ?>"
                 class="bg-green-500 shadow-lg px-4 py-2 text-white rounded text-center sm:px-6 sm:py-3 md:px-8 md:py-4">

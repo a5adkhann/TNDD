@@ -1,6 +1,17 @@
 <?php
 require_once("./base/header.php");
 
+if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "student"){
+    echo "<script>
+       location.assign('index.php');
+    </script>";
+}
+
+if(!isset($_SESSION['student_user_email'])){
+    echo "<script>
+        location.assign('login.php');
+    </script>";
+}
 
 ?>
 

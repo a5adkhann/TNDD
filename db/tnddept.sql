@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2025 at 11:50 PM
+-- Generation Time: Jan 26, 2025 at 02:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -108,13 +108,6 @@ CREATE TABLE `student_applications` (
   `student_application_solutionmessage` varchar(3000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `student_applications`
---
-
-INSERT INTO `student_applications` (`student_application_id`, `student_application_date`, `student_application_message`, `student_id`, `student_name`, `student_batch_code`, `student_email`, `student_number`, `student_application_status`, `student_current_semester_id`, `student_concern_person_id`, `student_application_subject_id`, `student_user_id`, `student_application_tokenid`, `student_application_solutionmessage`) VALUES
-(1, '0081-08-08', 'adsfa', '6627', 'asad', '6737', 'asad@gmail.com', 'w88w8w8', 'Pending', 1, 1, 2, 1, 'TND0A8ED9AB', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -139,7 +132,8 @@ CREATE TABLE `student_users` (
 INSERT INTO `student_users` (`student_user_id`, `student_user_name`, `student_user_email`, `student_user_password`, `student_user_batchcode`, `student_user_current_semester_id`, `student_user_image`, `user_role`) VALUES
 (1, 'Asad Khan', 'asadklm30@gmail.com', '111', '1111', 5, 'uploads/asad.jpg', 'student'),
 (2, 'Malik Abdullah', 'malikabdullah@gmail.com', '111', '-------', 4, 'uploads/react-ui.jfif', 'student'),
-(3, 'Umair Warsi', 'umairwarsi@gmail.com', '111', '--------', 1, 'uploads/shirtResolve.png', 'administrator');
+(3, 'Umair Warsi', 'umairwarsi@gmail.com', '111', '--------', 1, 'uploads/shirtResolve.png', 'administrator'),
+(4, 'Kamran', 'kamran@gmail.com', '111', 'PR2-202408E', 2, 'uploads/flagResolve.png', 'student');
 
 -- --------------------------------------------------------
 
@@ -233,13 +227,13 @@ ALTER TABLE `concern_person`
 -- AUTO_INCREMENT for table `student_applications`
 --
 ALTER TABLE `student_applications`
-  MODIFY `student_application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `student_application_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student_users`
 --
 ALTER TABLE `student_users`
-  MODIFY `student_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `student_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tnd_projects`

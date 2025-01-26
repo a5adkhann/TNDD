@@ -7,6 +7,12 @@ if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "administrator"){
     </script>";
 }
 
+if(!isset($_SESSION['student_user_email'])){
+    echo "<script>
+        location.assign('login.php');
+    </script>";
+}
+
 if (isset($_GET['markSolve'])) {
     $updateId = intval($_GET['markSolve']); // Sanitize input to prevent SQL injection
 

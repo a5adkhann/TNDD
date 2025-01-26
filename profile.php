@@ -1,5 +1,11 @@
 <?php
 require_once("./base/header.php");
+
+if(!isset($_SESSION['student_user_email'])){
+    echo "<script>
+       location.assign('login.php');
+    </script>";
+}
 ?>
 
 <div class="content-page">

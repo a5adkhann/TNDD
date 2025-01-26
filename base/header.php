@@ -30,6 +30,9 @@ require_once("./db/db_connection.php");
     <!-- Icons css -->
     <link href="./css/icons.min.css" rel="stylesheet" type="text/css" />
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
@@ -99,10 +102,10 @@ require_once("./db/db_connection.php");
     }
 
     .loader .dot {
-        width: 12px;
-        height: 12px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
-        background-color: #007bff;
+        background-color: #333333;
         /* Change this to the desired dot color */
         animation: bounce 1s forwards;
         /* 1-second animation */
@@ -437,6 +440,12 @@ require_once("./db/db_connection.php");
                         if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == "student"){
                     ?>
 
+                            <li class="side-nav-item">
+                            <a href="./index.php" class="side-nav-link">
+                                <i class="ri-dashboard-3-line"></i>
+                                <span> Home </span>
+                            </a>
+                        </li>
                         <li class="side-nav-item">
                             <a href="./my_requests.php" class="side-nav-link">
                                 <i class="ri-dashboard-3-line"></i>
@@ -478,6 +487,9 @@ require_once("./db/db_connection.php");
                             $count_records = mysqli_num_rows($execute);
 
                             if($count_records == 0){
+                                echo "";
+                            }
+                            else if($count_records < 10){
                             ?>
                                 <span class="badge bg-green-500 float-end"><?php echo $count_records?></span>
                                 <?php
@@ -506,6 +518,9 @@ require_once("./db/db_connection.php");
                             $count_records = mysqli_num_rows($execute);
 
                             if($count_records == 0){
+                                echo "";
+                            }
+                            else if($count_records < 10){
                             ?>
                                 <span class="badge bg-green-500 float-end"><?php echo $count_records?></span>
                                 <?php

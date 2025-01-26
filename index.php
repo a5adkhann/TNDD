@@ -6,185 +6,156 @@ if(!isset($_SESSION['student_user_email'])){
        location.assign('login.php');
     </script>";
 }
-
 ?>
 
-
 <style>
-    .main-carousel {
-    height: 50vh; /* Removed quotes */
+.main-carousel {
+    height: 50vh;
+    /* Removed quotes */
     width: 100%;
 }
+
 .main-carousel .carousel-cell {
-    height: 50vh; /* Removed quotes */
+    height: 50vh;
+    /* Removed quotes */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;
 }
 
-    .apex-charts {
-        height: 300px !important; /* Ensure that height is applied */
-    }
-
-
-
+.apex-charts {
+    height: 300px !important;
+    /* Ensure that height is applied */
+}
 </style>
+
 <div class="content-page">
     <div class="content">
-
         <?php
-                        if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == "administrator"){
-                    ?>
+        if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == "administrator"){
+        ?>
         <!-- Start Content-->
         <div class="container-fluid">
 
-            <div class="row py-3">
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="card widget-flat text-bg-pink">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <i class="ri-eye-line widget-icon"></i>
-                            </div>
-                            <h6 class="text-uppercase mt-0" title="Customers">Pending Requests</h6>
-                            <h2 class="my-2">
-                            <?php
-                                $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Pending'";
-                                $execute = mysqli_query($connection, $select_query);
-                                $fetch = mysqli_num_rows($execute);
-                                echo $fetch;
-                            ?>
-                            </h2>
+        <div class="row py-3">
+    <?php
+    // Fetch the total number of requests
+    $select_total_query = "SELECT COUNT(*) AS total FROM `student_applications`";
+    $total_result = mysqli_query($connection, $select_total_query);
+    $total_row = mysqli_fetch_assoc($total_result);
+    $total_requests = $total_row['total'];
 
-                            <p class="mb-0">
-                                <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
-                                <span class="text-nowrap">Since last month</span>
-                            </p>
-                        </div>
-                    </div>
-                </div> <!-- end col-->
+    // Helper function to calculate percentage
+    function calculate_percentage($count, $total) {
+        return $total > 0 ? round(($count / $total) * 100, 2) : 0;
+    }
+    ?>
 
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="card widget-flat text-bg-purple">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <i class="ri-wallet-2-line widget-icon"></i>
-                            </div>
-                            <h6 class="text-uppercase mt-0" title="Customers">Process Requests</h6>
-                            <h2 class="my-2">
-                            <?php
-                                $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Process'";
-                                $execute = mysqli_query($connection, $select_query);
-                                $fetch = mysqli_num_rows($execute);
-                                echo $fetch;
-                            ?>
-                            </h2>
-                            <p class="mb-0">
-                                <span class="badge bg-white bg-opacity-10 me-1">18.25%</span>
-                                <span class="text-nowrap">Since last month</span>
-                            </p>
-                        </div>
-                    </div>
-                </div> <!-- end col-->
-
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="card widget-flat text-bg-info">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <i class="ri-shopping-basket-line widget-icon"></i>
-                            </div>
-                            <h6 class="text-uppercase mt-0" title="Customers">Solved Requests</h6>
-                            <h2 class="my-2">
-                            <?php
-                                $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Solved'";
-                                $execute = mysqli_query($connection, $select_query);
-                                $fetch = mysqli_num_rows($execute);
-                                echo $fetch;
-                            ?>
-                            </h2>
-                            <p class="mb-0">
-                                <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
-                                <span class="text-nowrap">Since last month</span>
-                            </p>
-                        </div>
-                    </div>
-                </div> <!-- end col-->
-
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="card widget-flat text-bg-primary">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <i class="ri-shopping-basket-line widget-icon"></i>
-                            </div>
-                            <h6 class="text-uppercase mt-0" title="Customers">Total</h6>
-                            <h2 class="my-2">
-                            <?php
-                                $select_query = "SELECT * FROM `student_applications`";
-                                $execute = mysqli_query($connection, $select_query);
-                                $fetch = mysqli_num_rows($execute);
-                                echo $fetch;
-                            ?>
-                            </h2>
-                            <p class="mb-0">
-                                <span class="badge bg-white bg-opacity-25 me-1">-5.75%</span>
-                                <span class="text-nowrap">Since last month</span>
-                            </p>
-                        </div>
-                    </div>
-                </div> <!-- end col-->
+    <!-- Pending Requests -->
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card widget-flat text-bg-pink">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="ri-eye-line widget-icon"></i>
+                </div>
+                <h6 class="text-uppercase mt-0" title="Customers">Pending Requests</h6>
+                <h2 class="my-2">
+                    <?php
+                    $pending_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Pending'";
+                    $pending_result = mysqli_query($connection, $pending_query);
+                    $pending_row = mysqli_fetch_assoc($pending_result);
+                    $pending_count = $pending_row['count'];
+                    echo $pending_count;
+                    ?>
+                </h2>
+                <p class="mb-0">
+                    <span class="badge bg-white bg-opacity-10 me-1">
+                        <?= calculate_percentage($pending_count, $total_requests); ?>%
+                    </span>
+                    <span class="text-nowrap">of total requests</span>
+                </p>
             </div>
+        </div>
+    </div>
+
+    <!-- Process Requests -->
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card widget-flat text-bg-purple">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="ri-wallet-2-line widget-icon"></i>
+                </div>
+                <h6 class="text-uppercase mt-0" title="Customers">Process Requests</h6>
+                <h2 class="my-2">
+                    <?php
+                    $process_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Process'";
+                    $process_result = mysqli_query($connection, $process_query);
+                    $process_row = mysqli_fetch_assoc($process_result);
+                    $process_count = $process_row['count'];
+                    echo $process_count;
+                    ?>
+                </h2>
+                <p class="mb-0">
+                    <span class="badge bg-white bg-opacity-10 me-1">
+                        <?= calculate_percentage($process_count, $total_requests); ?>%
+                    </span>
+                    <span class="text-nowrap">of total requests</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solved Requests -->
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card widget-flat text-bg-info">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="ri-shopping-basket-line widget-icon"></i>
+                </div>
+                <h6 class="text-uppercase mt-0" title="Customers">Solved Requests</h6>
+                <h2 class="my-2">
+                    <?php
+                    $solved_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Solved'";
+                    $solved_result = mysqli_query($connection, $solved_query);
+                    $solved_row = mysqli_fetch_assoc($solved_result);
+                    $solved_count = $solved_row['count'];
+                    echo $solved_count;
+                    ?>
+                </h2>
+                <p class="mb-0">
+                    <span class="badge bg-white bg-opacity-25 me-1">
+                        <?= calculate_percentage($solved_count, $total_requests); ?>%
+                    </span>
+                    <span class="text-nowrap">of total requests</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Requests -->
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card widget-flat text-bg-primary">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="ri-shopping-basket-line widget-icon"></i>
+                </div>
+                <h6 class="text-uppercase mt-0" title="Customers">Total Requests</h6>
+                <h2 class="my-2">
+                    <?= $total_requests; ?>
+                </h2>
+                <p class="mb-0">
+                    <span class="badge bg-white bg-opacity-25 me-1">100%</span>
+                    <span class="text-nowrap">of total requests</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-widgets">
-                                <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
-                                <a data-bs-toggle="collapse" href="#weeklysales-collapse" role="button"
-                                    aria-expanded="false" aria-controls="weeklysales-collapse"><i
-                                        class="ri-subtract-line"></i></a>
-                                <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
-                            </div>
-                            <h5 class="header-title mb-0">Weekly Solved Requests</h5>
-
-                            <div id="weeklysales-collapse" class="collapse pt-3 show">
-                                <div dir="ltr">
-                                    <div id="revenue-chart" class="apex-charts h-64 w-full" data-colors="#3bc0c3,#1a2942,#d1d7d973">
-                                    </div>
-                                </div>
-
-                                <div class="row text-center">
-                                    <div class="col">
-                                        <p class="text-muted mt-3">Current Week</p>
-                                        <h3 class=" mb-0">
-                                            <span>$506.54</span>
-                                        </h3>
-                                    </div>
-                                    <div class="col">
-                                        <p class="text-muted mt-3">Previous Week</p>
-                                        <h3 class=" mb-0">
-                                            <span>$305.25 </span>
-                                        </h3>
-                                    </div>
-                                    <div class="col">
-                                        <p class="text-muted mt-3">Conversation</p>
-                                        <h3 class=" mb-0">
-                                            <span>3.27%</span>
-                                        </h3>
-                                    </div>
-                                    <div class="col">
-                                        <p class="text-muted mt-3">Customers</p>
-                                        <h3 class=" mb-0">
-                                            <span>3k</span>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-widgets">
@@ -194,50 +165,85 @@ if(!isset($_SESSION['student_user_email'])){
                                         class="ri-subtract-line"></i></a>
                                 <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
                             </div>
-                            <h5 class="header-title mb-0">Yearly Solved Requests</h5>
+                            <h5 class="header-title mb-0">Monthly Solved Requests</h5>
 
-                            <div id="yearly-sales-collapse" class="collapse pt-3 show">
-                                <div dir="ltr">
-                                    <div id="yearly-sales-chart" class="apex-charts"
-                                        data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                </div>
-                                <div class="row text-center">
-                                    <div class="col">
-                                        <p class="text-muted mt-3 mb-2">Quarter 1</p>
-                                        <h4 class="mb-0">$56.2k</h4>
-                                    </div>
-                                    <div class="col">
-                                        <p class="text-muted mt-3 mb-2">Quarter 2</p>
-                                        <h4 class="mb-0">$42.5k</h4>
-                                    </div>
-                                    <div class="col">
-                                        <p class="text-muted mt-3 mb-2">All Time</p>
-                                        <h4 class="mb-0">$102.03k</h4>
-                                    </div>
-                                </div>
+                            <div style="width: 80%; margin: auto;">
+                                <canvas id="yearlySolvedRequestsChart"></canvas>
                             </div>
 
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
+                            <script>
+                            // Fetching PHP data dynamically and inserting it into JavaScript
+                            const pendingRequests = <?php
+                    $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Pending'";
+                    $execute = mysqli_query($connection, $select_query);
+                    $data = mysqli_fetch_assoc($execute);
+                    echo $data['count'];
+                    ?>;
 
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <h4 class="fs-22 fw-semibold">69.25%</h4>
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> US Dollar
-                                        Share</p>
-                                </div>
-                                <div class="flex-shrink-0">
-                                    <div id="us-share-chart" class="apex-charts" dir="ltr"></div>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
+                            const processRequests = <?php
+                    $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Process'";
+                    $execute = mysqli_query($connection, $select_query);
+                    $data = mysqli_fetch_assoc($execute);
+                    echo $data['count'];
+                    ?>;
 
+                            const solvedRequests = <?php
+                    $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Solved'";
+                    $execute = mysqli_query($connection, $select_query);
+                    $data = mysqli_fetch_assoc($execute);
+                    echo $data['count'];
+                    ?>;
+
+                            const totalRequests = <?php
+                    $select_query = "SELECT COUNT(*) AS count FROM `student_applications`";
+                    $execute = mysqli_query($connection, $select_query);
+                    $data = mysqli_fetch_assoc($execute);
+                    echo $data['count'];
+                    ?>;
+
+                            const yearlyData = {
+                                labels: ['Pending', 'Process', 'Solved', 'Total'],
+                                datasets: [{
+                                    label: 'Requests',
+                                    data: [pendingRequests, processRequests, solvedRequests, totalRequests],
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 2,
+                                    tension: 0.4, // Smoothness of the line
+                                    fill: true // Adds a background fill below the line
+                                }]
+                            };
+
+                            const yearlyConfig = {
+                                type: 'line',
+                                data: yearlyData,
+                                options: {
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            display: true,
+                                            position: 'top',
+                                        },
+                                    },
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                precision: 0 // Ensures whole numbers on the Y-axis
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+
+                            var yearlyCtx = document.getElementById('yearlySolvedRequestsChart').getContext('2d');
+                            var yearlyChart = new Chart(yearlyCtx, yearlyConfig);
+                            </script>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- end row -->
+
 
             <div class="row">
 
@@ -256,36 +262,38 @@ if(!isset($_SESSION['student_user_email'])){
                                 <h5 class="header-title mb-0">Projects</h5>
                             </div>
 
-                                <div class="table-responsive">
-                                    <table class="table table-nowrap table-hover mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>TND Projects</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                            <div class="table-responsive">
+                                <table class="table table-nowrap table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>TND Projects</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         <?php
                                         $indexNo = 1;
-                                        $select_query = "SELECT * FROM `tnd_projects` INNER JOIN `all_semesters` LIMIT 4";
+                                        $select_query = "SELECT * FROM tnd_projects INNER JOIN all_semesters LIMIT 4";
                                         $execute = mysqli_query($connection, $select_query);
                                         while($fetch = mysqli_fetch_array($execute)){
-?>
+                                        ?>
                                         <tr>
                                             <td><?php echo $indexNo++?></td>
                                             <td><?php echo $fetch['tnd_project_title']?></td>
-                                            <td><span class="badge bg-info-subtle text-info"><?php echo $fetch['semester_name']?></span></td>
+                                            <td><span
+                                                    class="badge bg-info-subtle text-info"><?php echo $fetch['semester_name']?></span>
+                                            </td>
                                         </tr>
-<?php
-    }
-?>
+                                        <?php
+                                            }
+                                        ?>
 
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
                     </div> <!-- end card-->
                 </div> <!-- end col-->
             </div>
@@ -322,7 +330,7 @@ if(!isset($_SESSION['student_user_email'])){
                         <div class="carousel-cell" style="background-image: url('./images/slider1.jpg')"></div>
                         <div class="carousel-cell" style="background-image: url('./images/slider2.jpg')"></div>
                         <div class="carousel-cell" style="background-image: url('./images/slider3.jpg')"></div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -352,8 +360,13 @@ if(!isset($_SESSION['student_user_email'])){
             localStorage.setItem('successMessageShown', 'true');
         }
     });
-
     </script>
     <?php
+require_once("./base/footer.php");
+?>
+</div>
+</div>
+
+<?php
 require_once("./base/footer.php");
 ?>

@@ -1,6 +1,18 @@
 <?php
 require_once("./base/header.php");
 
+if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "student"){
+    echo "
+      <script>location.assign('index.php');</script>
+    ";
+}
+
+if(!isset($_SESSION['student_user_email'])){
+    echo "<script>
+        location.assign('login.php');
+    </script>";
+}
+
 if (isset($_GET['delete'])) {
     $deleteId = $_GET['delete'];
     $delete_query = "DELETE FROM `student_applications` WHERE `student_application_id` = $deleteId";
@@ -44,17 +56,17 @@ if (isset($_GET['delete'])) {
                         <div class="card-body">
                             <div class="table-responsive-sm">
                             <?php
-// Number of records per page
-$records_per_page = 10;
+                    // Number of records per page
+                    $records_per_page = 10;
 
-// Get the current page from the URL, default to 1 if not set
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                    // Get the current page from the URL, default to 1 if not set
+                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-// Calculate the offset for the SQL query
-$offset = ($page - 1) * $records_per_page;
+                    // Calculate the offset for the SQL query
+                    $offset = ($page - 1) * $records_per_page;
 
-// Modify your query to limit the records based on the offset and records per page
-$select_query = "SELECT 
+                    // Modify your query to limit the records based on the offset and records per page
+                    $select_query = "SELECT 
                     student_applications.student_application_id, 
                     student_applications.student_application_tokenid,
                     student_applications.student_application_date, 
@@ -96,7 +108,7 @@ $execute = mysqli_query($connection, $select_query);
         while($fetch = mysqli_fetch_array($execute)){
         ?>
         <tr>
-            <td><?php echo $fetch['student_application_id']++?></td>
+            <td><?php echo $fetch['student_application_id']?></td>
             <td class="table-user">
                 <img src="./images/avatar.jpg" alt="table-user" class="me-2 rounded-circle" />
                 <?php echo $fetch['concern_person']?>
