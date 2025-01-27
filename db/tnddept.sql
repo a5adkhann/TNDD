@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2025 at 10:42 PM
+-- Generation Time: Jan 27, 2025 at 11:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -105,7 +105,8 @@ CREATE TABLE `student_applications` (
   `student_application_subject_id` int(11) NOT NULL,
   `student_user_id` int(11) NOT NULL,
   `student_application_tokenid` varchar(256) NOT NULL,
-  `student_application_solutionmessage` varchar(3000) DEFAULT NULL
+  `student_application_solutionmessage` varchar(3000) DEFAULT NULL,
+  `student_application_othersubject` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -130,10 +131,8 @@ CREATE TABLE `student_users` (
 --
 
 INSERT INTO `student_users` (`student_user_id`, `student_user_name`, `student_user_email`, `student_user_password`, `student_user_batchcode`, `student_user_current_semester_id`, `student_user_image`, `user_role`) VALUES
-(1, 'Asad Khan', 'asadklm30@gmail.com', '111', '1111', 5, 'uploads/asad.jpg', 'student'),
-(2, 'Malik Abdullah', 'malikabdullah@gmail.com', '111', '-------', 4, 'uploads/react-ui.jfif', 'student'),
-(3, 'Umair Warsi', 'umairwarsi@gmail.com', '111', '--------', 1, 'uploads/shirtResolve.png', 'administrator'),
-(4, 'Kamran', 'kamran@gmail.com', '111', 'PR2-202408E', 2, 'uploads/flagResolve.png', 'student');
+(3, 'Umair Warsi', 'umair@gmail.com', '111', '--------', 1, 'uploads/shirtResolve.png', 'administrator'),
+(6, 'Asad Khan', 'asadklm30@gmail.com', '111', 'PR2-202408E', 5, 'uploads/asad.jpg', 'student');
 
 -- --------------------------------------------------------
 
@@ -233,7 +232,7 @@ ALTER TABLE `student_applications`
 -- AUTO_INCREMENT for table `student_users`
 --
 ALTER TABLE `student_users`
-  MODIFY `student_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `student_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tnd_projects`
