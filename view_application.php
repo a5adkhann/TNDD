@@ -164,7 +164,7 @@ if (isset($_GET['viewapplication'])) {
                                 </div>
 
                                 <?php
-                                if($fetch['student_application_status'] == "Solved"){
+                                if($fetch['student_application_status'] == "Solved" || $fetch['student_application_status'] == "Process"){
                                 ?>
                                 <div class="row text-center">
                                     <div class="col-md-12 mb-3">

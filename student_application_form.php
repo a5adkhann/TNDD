@@ -136,18 +136,52 @@ WHERE student_application_id = '$updateId'";
     </div>
 
     <div class="mb-3">
-        <label class="form-label" for="validationCustom03">Subject</label>
-        <select class="form-select" name="student_application_subject_id">
-            <option value="---">---</option>
-            <?php
-            $select_query = "SELECT * FROM `all_subjects`";
-            $execute = mysqli_query($connection, $select_query);
-            while ($row = mysqli_fetch_array($execute)) {
-                $selected = ($row['subject_id'] == $fetch['student_application_subject_id']) ? 'selected' : '';
-                echo "<option value='{$row['subject_id']}' $selected>{$row['subject_title']}</option>";
-            }
-            ?>
-        </select>
+    <label class="form-label" for="validationCustom03">Subject</label>
+<!-- Dropdown -->
+<select name="student_application_subject_id" id="subjectDropdown" class="form-select" onchange="handleDropdownChange()">
+    <option value="" disabled selected>Select a subject</option>
+    <?php
+    $select_query = "SELECT * FROM `all_subjects`";
+    $execute = mysqli_query($connection, $select_query);
+    while ($row = mysqli_fetch_array($execute)) {
+        $selected = ($row['subject_id'] == $fetch['student_application_subject_id']) ? 'selected' : '';
+        echo "<option value='{$row['subject_id']}' $selected>{$row['subject_title']}</option>";
+    }
+    ?>
+</select>
+
+<!-- Hidden Input Field -->
+<div id="otherSubjectContainer" class="mt-3 hidden">
+    <label class="form-label" for="otherSubject">Please Specify</label>
+    <input 
+        type="text" 
+        name="student_application_othersubject" 
+        id="otherSubject" 
+        class="form-control" 
+        placeholder="Write your issue here">
+</div>
+
+<!-- JavaScript for Toggling Input Field -->
+<script>
+    function handleDropdownChange() {
+        const dropdown = document.getElementById('subjectDropdown');
+        const otherSubjectContainer = document.getElementById('otherSubjectContainer');
+        const otherSubjectInput = document.getElementById('otherSubject');
+
+        // Check if the selected option has the value corresponding to "Others"
+        const selectedOption = dropdown.options[dropdown.selectedIndex].text.toLowerCase();
+        if (selectedOption === 'others') {
+            otherSubjectContainer.classList.remove('hidden');
+            otherSubjectInput.required = true; // Make the field required
+        } else {
+            otherSubjectContainer.classList.add('hidden');
+            otherSubjectInput.required = false; // Remove required attribute
+            otherSubjectInput.value = ''; // Clear input field
+        }
+    }
+</script>
+
+
     </div>
 
     <div class="mb-3">

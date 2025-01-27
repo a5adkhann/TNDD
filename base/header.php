@@ -85,7 +85,7 @@ require_once("./db/db_connection.php");
         z-index: 9999;
         visibility: visible;
         opacity: 1;
-        background-color: #fff;
+        background-color: #EAF1F3;
         /* Default white background */
         transition: visibility 0s 0.2s, opacity 0.2s linear;
     }
@@ -107,7 +107,7 @@ require_once("./db/db_connection.php");
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        background-color: #333333;
+        background-color: #1A2942;
         /* Change this to the desired dot color */
         animation: bounce 1s forwards;
         /* 1-second animation */
@@ -458,7 +458,8 @@ require_once("./db/db_connection.php");
 
                             <li class="side-nav-item">
                             <a href="./home.php" class="side-nav-link">
-                                <i class="ri-dashboard-3-line"></i>
+                            <i class="ri-home-line"></i>
+
                                 <span> Home </span>
                             </a>
                         </li>
@@ -488,14 +489,16 @@ require_once("./db/db_connection.php");
 
                         <li class="side-nav-item">
                             <a href="./home.php" class="side-nav-link">
-                                <i class="ri-survey-line"></i>
+                            <i class="ri-dashboard-2-line"></i>
+
+
                                 <span> Dashboard </span>
                             </a>
                         </li>
 
                         <li class="side-nav-item">
                             <a href="./pending_requests.php" class="side-nav-link">
-                                <i class="ri-survey-line"></i>
+                            <i class="ri-time-line"></i>
 
                                 <?php
                             $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Pending'";
@@ -557,7 +560,7 @@ require_once("./db/db_connection.php");
 
                         <li class="side-nav-item">
                             <a href="./solved_requests.php" class="side-nav-link">
-                                <i class="ri-survey-line"></i>
+                            <i class="ri-check-line"></i>
                                 <span> Solved Requests </span>
                             </a>
                         </li>
