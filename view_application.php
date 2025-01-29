@@ -81,7 +81,7 @@ if (isset($_GET['remove'])) {
                 <div class="col-lg-12">
                     <div class="card shadow-sm border-light">
                         <div class="card-body">
-                        <?php
+                            <?php
 if (isset($_GET['viewapplication'])) {
     $updateId = $_GET['viewapplication'];
 
@@ -106,8 +106,6 @@ if (isset($_GET['viewapplication'])) {
     }
 }
 ?>
-
-
                             <div class="row mb-4">
                                 <div class="col-md-6">
                                     <h5><strong>To:</strong> <?php echo $fetch['concern_person_designation']; ?></h5>
@@ -120,6 +118,18 @@ if (isset($_GET['viewapplication'])) {
                             <div class="mb-4">
                                 <h5><strong>Subject:</strong> <?php echo $fetch['subject_title']; ?></h5>
                             </div>
+
+                            <?php
+                                if (!empty($fetch['student_application_othersubject'])) { 
+                            ?>
+                            <div class="mb-4">
+                                <h5><strong>Specified Issue:</strong>
+                                    <?php echo htmlspecialchars($fetch['student_application_othersubject']); ?></h5>
+                            </div>
+                            <?php 
+                                } 
+                            ?>
+
 
                             <div class="mb-4">
                                 <h5><strong>Message:</strong></h5>
@@ -139,46 +149,54 @@ if (isset($_GET['viewapplication'])) {
                                 </div>
                             </div>
 
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <h6><strong>Batch Code:</strong> <?php echo $fetch['student_batch_code']; ?></h6>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <h6><strong>Current Semester:</strong> <?php echo $fetch['student_current_semester_id']; ?></h6>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h6><strong>Batch Code:</strong> <?php echo $fetch['student_batch_code']; ?></h6>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <h6><strong>Email Address:</strong> <?php echo $fetch['student_email']; ?></h6>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <h6><strong>Cell Phone:</strong> <?php echo $fetch['student_number']; ?></h6>
-                                    </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6><strong>Current Semester:</strong>
+                                        <?php echo $fetch['student_current_semester_id']; ?></h6>
                                 </div>
+                            </div>
 
-                                <div class="row text-center">
-                                    <div class="col-md-12 mb-3">
-                                        <h6><strong>Token ID:</strong> <?php echo $fetch['student_application_tokenid']; ?></h6>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h6><strong>Email Address:</strong> <?php echo $fetch['student_email']; ?></h6>
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                    <h6><strong>Cell Phone:</strong> <?php echo $fetch['student_number']; ?></h6>
+                                </div>
+                            </div>
 
-                                <?php
+                            <div class="row text-center">
+                                <div class="col-md-12 mb-3">
+                                    <h6><strong>Token ID:</strong> <?php echo $fetch['student_application_tokenid']; ?>
+                                    </h6>
+                                </div>
+                            </div>
+
+                            <?php
                                 if($fetch['student_application_status'] == "Solved" || $fetch['student_application_status'] == "Process"){
                                 ?>
-                                <div class="row text-center">
-                                    <div class="col-md-12 mb-3">
-                                        <h6><strong>Status:</strong> <span class="fw-bold badge bg-success-subtle text-success">
-                        <i class="ri-time-line text-success"></i><?php echo $fetch['student_application_status']?>
-                    </span></h6>
-                                    </div>
+                            <div class="row text-center">
+                                <div class="col-md-12 mb-3">
+                                    <h6><strong>Status:</strong> <span
+                                            class="fw-bold badge bg-success-subtle text-success">
+                                            <i
+                                                class="ri-time-line text-success"></i><?php echo $fetch['student_application_status']?>
+                                        </span></h6>
                                 </div>
-                                <div class="row text-center">
-                                    <div class="col-md-12 mb-3">
-                                        <h6><strong>Remarks:</strong> <?php echo $fetch['student_application_solutionmessage']; ?></h6>
-                                    </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-md-12 mb-3">
+                                    <h6><strong>Remarks:</strong>
+                                        <?php 
+                                        if($fetch['student_application_solutionmessage'] !== NULL){ echo $fetch['student_application_solutionmessage']; } 
+                                        else { echo "No Remarks yet"; } 
+                                        ?></h6>
                                 </div>
-                                <?php
+                            </div>
+                            <?php
                                 }
                                 ?>
 
@@ -187,16 +205,16 @@ if (isset($_GET['viewapplication'])) {
                             if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "administrator") {
                                 if ($fetch['student_application_status'] == "Pending") {
                                     ?>
-                                    <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&update=<?php echo $fetch['student_application_id']; ?>"
-                                        class="bg-green-500 px-2 py-1 text-white rounded">Approve</a>
-                                    <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&remove=<?php echo $fetch['student_application_id']; ?>"
-                                        class="bg-red-500 px-2 py-1 text-white rounded">Reject</a>
-                                    <?php
+                            <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&update=<?php echo $fetch['student_application_id']; ?>"
+                                class="bg-green-500 px-2 py-1 text-white rounded">Approve</a>
+                            <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&remove=<?php echo $fetch['student_application_id']; ?>"
+                                class="bg-red-500 px-2 py-1 text-white rounded">Reject</a>
+                            <?php
                                 } elseif ($fetch['student_application_status'] == "Process") {
                                     ?>
-                                    <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&markSolve=<?php echo $fetch['student_application_id']; ?>"
-                                        class="bg-green-500 px-2 py-1 text-white rounded">Mark as Solved</a>
-                                    <?php
+                            <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&markSolve=<?php echo $fetch['student_application_id']; ?>"
+                                class="bg-green-500 px-2 py-1 text-white rounded">Mark as Solved</a>
+                            <?php
                                 }
                             }
                             ?>

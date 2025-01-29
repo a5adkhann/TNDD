@@ -36,7 +36,7 @@ $_SESSION['logout_success'] = true;
             background-color: #D3F2F4;
         }
         .logout-form button:hover {
-            background-color: #3BC0C3;
+            background-color: #1A2942;
             color: #FFF;
         }
         .logout-form .form-check-label {
@@ -64,10 +64,6 @@ $_SESSION['logout_success'] = true;
 
         <div class="d-grid gap-2 mt-4">
             <button type="button" class="btn" onclick="window.location.href='login.php'">Login Again</button>
-        </div>
-
-        <div class="text-center mt-3">
-            <small>If you have any issues, <a href="#">contact support</a></small>
         </div>
 
     </div>

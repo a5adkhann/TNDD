@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     .register-form button:hover {
-        background-color: #3BC0C3;
+        background-color: #1A2942;
         color: #FFF;
     }
 

@@ -28,7 +28,7 @@
             background-color: #D3F2F4;
         }
         .login-form button:hover {
-            background-color: #3BC0C3;
+            background-color: #1A2942;
             color: #FFF;
         }
         .login-form .form-check-label {

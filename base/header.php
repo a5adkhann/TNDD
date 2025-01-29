@@ -1,5 +1,7 @@
 <?php
+
 require_once("./db/db_connection.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -240,136 +242,6 @@ require_once("./db/db_connection.php");
                             </div>
                         </li>
 
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="./images/us.jpg" alt="user-image" class="me-0 me-sm-1 h-3 w-auto">
-                                <span class="align-middle d-none d-lg-inline-block">English</span>
-                                <i class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
-
-                                <!-- item-->
-                                <!-- German -->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="./images/germany.jpg" alt="user-image" class="me-1 h-3 w-auto">
-                                    <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- Italian -->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="./images/italy.jpg" alt="user-image" class="me-1 h-3 w-auto">
-                                    <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- Spanish -->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="./images/spain.jpg" alt="user-image" class="me-1 h-3 w-auto">
-                                    <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- Russian -->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1 h-3 w-auto">
-                                    <span class="align-middle">Russian</span>
-                                </a>
-
-
-                            </div>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="ri-notification-3-line fs-22"></i>
-                                <span class="noti-icon-badge badge text-bg-pink">3</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
-                                <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="m-0 fs-16 fw-semibold"> Notification</h6>
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="javascript: void(0);" class="text-dark text-decoration-underline">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div style="max-height: 300px;" data-simplebar>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary-subtle">
-                                            <i class="mdi mdi-comment-account-outline text-primary"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admin
-                                            <small class="noti-time">1 min ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-warning-subtle">
-                                            <i class="mdi mdi-account-plus text-warning"></i>
-                                        </div>
-                                        <p class="notify-details">New user registered.
-                                            <small class="noti-time">5 hours ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-danger-subtle">
-                                            <i class="mdi mdi-heart text-danger"></i>
-                                        </div>
-                                        <p class="notify-details">Carlos Crouch liked
-                                            <small class="noti-time">3 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-pink-subtle">
-                                            <i class="mdi mdi-comment-account-outline text-pink"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admi
-                                            <small class="noti-time">4 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-purple-subtle">
-                                            <i class="mdi mdi-account-plus text-purple"></i>
-                                        </div>
-                                        <p class="notify-details">New user registered.
-                                            <small class="noti-time">7 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-success-subtle">
-                                            <i class="mdi mdi-heart text-success"></i>
-                                        </div>
-                                        <p class="notify-details">Carlos Crouch liked <b>Admin</b>.
-                                            <small class="noti-time">Carlos Crouch liked</small>
-                                        </p>
-                                    </a>
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item text-center text-primary text-decoration-underline fw-bold notify-item border-top border-light py-2">
-                                    View All
-                                </a>
-
-                            </div>
-                        </li>
-
                         <li class="d-none d-sm-inline-block">
                             <div class="nav-link" id="light-dark-mode">
                                 <i class="ri-moon-line fs-22"></i>
@@ -490,8 +362,6 @@ require_once("./db/db_connection.php");
                         <li class="side-nav-item">
                             <a href="./home.php" class="side-nav-link">
                             <i class="ri-dashboard-2-line"></i>
-
-
                                 <span> Dashboard </span>
                             </a>
                         </li>

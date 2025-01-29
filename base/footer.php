@@ -253,20 +253,74 @@
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-    window.onload = function() {
-        // Show loader and hide content for 1 second
-        document.body.classList.add('loading');
+   window.onload = function() {
+    // Show loader and hide content for 1 second
+    document.body.classList.add('loading');
+    
+    setTimeout(function() {
+        // Hide loader after 1 second
+        document.querySelector('.loader').classList.add('hidden');
         
-        setTimeout(function() {
-            // Hide loader after 1 second
-            document.querySelector('.loader').classList.add('hidden');
+        // Show content after loader disappears
+        document.body.classList.remove('loading');
+    }, 1000); 
+};
+
+$(document).on('keyup','.search-input',function() {
+    var query = $(this).val();
+    console.log(query); // Log the input for debugging
+    
+    $.ajax({
+        type: 'GET',
+        url: 'your_php_script.php',  // Make sure to call the correct PHP script URL
+        data: { query: query },
+        dataType: 'json',
+        success: function(response) {
+            console.log(response); // Log the server response
             
-            // Show content after loader disappears
-            document.body.classList.remove('loading');
-        }, 1000); 
-    };
+            // Clear existing table rows
+            $("table tbody").empty();
+            
+            // Check if the response contains any data
+            if (response.length > 0) {
+                // Loop through the response and populate the table
+                response.forEach(function(row) {
+                    $("table tbody").append(`
+                        <tr>
+                            <td>${row.student_application_id}</td>
+                            <td>${row.student_name}</td>
+                            <td>${row.student_application_tokenid}</td>
+                            <td>${row.student_application_message.substring(0, 50)}...</td>
+                            <td>${row.student_application_date}</td>
+                            <td class="text-center">
+                                <a href="./view_application.php?viewapplication=${row.student_application_id}">
+                                    <i class="ri-eye-line text-yellow-500"></i>
+                                </a>
+                            </td>
+                            <td class="flex gap-1 justify-center">
+                                <a href="?update=${row.student_application_id}" class="bg-green-500 p-1 text-white rounded">Approve</a>
+                                <a href="?reject=${row.student_application_id}" class="bg-red-500 p-1 text-white rounded">Reject</a>
+                            </td>
+                        </tr>
+                    `);
+                });
+            } else {
+                // If no results found, optionally display a message
+                $("table tbody").append('<tr><td colspan="7" class="text-center">No results found</td></tr>');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            console.log(status);
+            console.log(error);
+            console.log("Error fetching data");
+        }
+    });
+});
+
 </script>
 
 </body>

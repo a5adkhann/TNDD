@@ -336,7 +336,7 @@ if(!isset($_SESSION['student_user_email'])){
                 <div class="col-12">
 
                     <!-- About Section -->
-                    <section class="px-6 sm:px-10 lg:px-20 py-10 fade-on-scroll">
+                    <section class="px-6 sm:px-10 lg:px-20 py-4 fade-on-scroll">
                         <div class="text-area">
                             <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1A2942] mb-4">Aptech TND
                                 Department</h1>

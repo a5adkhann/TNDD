@@ -72,6 +72,7 @@ if (isset($_GET['delete'])) {
                     student_applications.student_application_date, 
                     student_applications.student_application_status, 
                     student_applications.student_application_message, 
+                    student_applications.student_application_othersubject, 
                     concern_person.concern_person_designation AS concern_person, 
                     all_subjects.subject_title
                 FROM 
@@ -90,12 +91,14 @@ if (isset($_GET['delete'])) {
 $execute = mysqli_query($connection, $select_query);
 ?>
 
+
 <table class="table table-bordered border-light table-centered mb-0">
     <thead>
         <tr>
             <th>#</th>
             <th>To</th>
             <th>Subject</th>
+            <th>Specified Issue</th>
             <th>Message</th>
             <th>Application Token No.</th>
             <th>Date Initiated</th>
@@ -104,77 +107,62 @@ $execute = mysqli_query($connection, $select_query);
         </tr>
     </thead>
     <tbody>
-        <?php
-        while($fetch = mysqli_fetch_array($execute)){
-        ?>
+        <?php while ($fetch = mysqli_fetch_array($execute)) { ?>
         <tr>
-            <td><?php echo $fetch['student_application_id']?></td>
+            <td><?php echo $fetch['student_application_id']; ?></td>
             <td class="table-user">
                 <img src="./images/avatar.jpg" alt="table-user" class="me-2 rounded-circle" />
-                <?php echo $fetch['concern_person']?>
+                <?php echo $fetch['concern_person']; ?>
             </td>
-            <td><?php echo $fetch['subject_title']?></td>
+            <td><?php echo $fetch['subject_title']; ?></td>
+
+            <td>
+                <?php echo !empty($fetch['student_application_othersubject']) ? $fetch['student_application_othersubject'] : "---"; ?>
+            </td>
+
             <td>
                 <?php 
-                $student_application_message = $fetch['student_application_message'];
-                $short_student_application_message = substr($student_application_message, 0, 10);
-                echo $short_student_application_message.(strlen($student_application_message) > 10 ? "..." : "")    
+                $message = $fetch['student_application_message'];
+                echo substr($message, 0, 10) . (strlen($message) > 10 ? "..." : ""); 
                 ?>
             </td>
-            <td>TND<?php echo $fetch['student_application_tokenid']?></td>
-            <td><?php echo $fetch['student_application_date']?></td>
+            <td>TND<?php echo $fetch['student_application_tokenid']; ?></td>
+            <td><?php echo $fetch['student_application_date']; ?></td>
+            
             <td class="text-center">
-                <?php
-                if($fetch['student_application_status'] == "Pending"){
+                <?php 
+                $status = $fetch['student_application_status'];
+                $status_classes = [
+                    "Pending" => "bg-warning-subtle text-warning",
+                    "Process" => "bg-info-subtle text-info",
+                    "Solved" => "bg-success-subtle text-success",
+                    "Rejected" => "bg-danger-subtle text-danger"
+                ];
                 ?>
-                    <span class="fw-bold badge bg-warning-subtle text-warning">
-                        <i class="ri-time-line text-warning"></i><?php echo $fetch['student_application_status']?>
-                    </span>
-                <?php
-                } else if($fetch['student_application_status'] == "Process"){
-                ?>
-                    <span class="fw-bold badge bg-info-subtle text-info">
-                        <i class="ri-time-line text-info"></i><?php echo $fetch['student_application_status']?>
-                    </span>
-                <?php
-                } else if($fetch['student_application_status'] == "Solved"){
-                ?>
-                    <span class="fw-bold badge bg-success-subtle text-success">
-                        <i class="ri-time-line text-success"></i><?php echo $fetch['student_application_status']?>
-                    </span>
-                <?php
-                } else if($fetch['student_application_status'] == "Rejected"){
-                ?>
-                <span class="fw-bold badge bg-danger-subtle text-danger">
-                        <i class="ri-time-line text-danger"></i><?php echo $fetch['student_application_status']?>
-                    </span>
-                    <?php
-                }
-                    ?>
+                <span class="fw-bold badge <?php echo $status_classes[$status] ?? 'bg-secondary'; ?>">
+                    <i class="ri-time-line <?php echo $status_classes[$status] ?? 'text-secondary'; ?>"></i>
+                    <?php echo $status; ?>
+                </span>
             </td>
+
             <td class="text-center">
-                <a href="?delete=<?php echo $fetch['student_application_id']?>" class="text-sm fs-18 px-1">
+                <a href="?delete=<?php echo $fetch['student_application_id']; ?>" class="text-sm fs-18 px-1">
                     <i class="ri-delete-bin-2-line text-red-500"></i>
                 </a>
-                <?php
-                if($fetch['student_application_status'] !== "Solved" AND $fetch['student_application_status'] !== "Process" AND $fetch['student_application_status'] !== "Rejected"){
-                ?>
-                <a href="./student_application_form.php?update=<?php echo $fetch['student_application_id']?>" class="text-reset fs-18 px-1" title="Edit">
+                <?php if (!in_array($status, ["Solved", "Process", "Rejected"])) { ?>
+                <a href="./student_application_form.php?update=<?php echo $fetch['student_application_id']; ?>" class="text-reset fs-18 px-1" title="Edit">
                     <i class="fas text-sm fa-pen text-blue-500"></i>
                 </a>
-                <?php
-                }
-                ?>
-
-                    <a href="view_application.php?viewapplication=<?php echo $fetch['student_application_id']?>"><i class="ri-eye-line fs-18 text-yellow-500"></i></a>
-                </form>
+                <?php } ?>
+                <a href="view_application.php?viewapplication=<?php echo $fetch['student_application_id']; ?>">
+                    <i class="ri-eye-line fs-18 text-yellow-500"></i>
+                </a>
             </td>
         </tr>
-        <?php
-        }
-        ?>
+        <?php } ?>
     </tbody>
 </table>
+
 
 <?php
 // Get the total number of records

@@ -14,12 +14,12 @@ if(!isset($_SESSION['student_user_email'])){
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_student_application'])) {
-
     $updateId = $_GET['update'];
     $student_concern_person_id = mysqli_real_escape_string($connection, $_POST['student_concern_person_id']);
     $student_application_date = mysqli_real_escape_string($connection, $_POST['student_application_date']);
     $student_application_subject_id = mysqli_real_escape_string($connection, $_POST['student_application_subject_id']);
     $student_application_message = mysqli_real_escape_string($connection, $_POST['student_application_message']);
+    $student_application_othersubject = mysqli_real_escape_string($connection, $_POST['student_application_othersubject']);
     $student_id = mysqli_real_escape_string($connection, $_POST['student_id']);
     $student_name = mysqli_real_escape_string($connection, $_POST['student_name']);
     $student_batch_code = mysqli_real_escape_string($connection, $_POST['student_batch_code']);
@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_student_applic
     student_current_semester_id = '$student_current_semester_id', 
     student_email = '$student_email', 
     student_number = '$student_number',
-    student_user_id = '$student_user_id'
+    student_user_id = '$student_user_id',
+    student_application_othersubject = '$student_application_othersubject'
 WHERE student_application_id = '$updateId'";
 
 
@@ -150,6 +151,9 @@ WHERE student_application_id = '$updateId'";
     ?>
 </select>
 
+<?php
+if (isset($_GET['update']) && $fetch['student_application_othersubject'] == NULL){
+    ?>
 <!-- Hidden Input Field -->
 <div id="otherSubjectContainer" class="mt-3 hidden">
     <label class="form-label" for="otherSubject">Please Specify</label>
@@ -180,6 +184,24 @@ WHERE student_application_id = '$updateId'";
         }
     }
 </script>
+<?php
+}
+?>
+
+<?php
+if (isset($_GET['update']) && $fetch['student_application_othersubject']) {
+?>
+
+    <label class="form-label mt-2" for="otherSubject">Please Specify</label>
+    <input 
+        type="text" 
+        name="student_application_othersubject" 
+        id="otherSubjectOnUpdate" 
+        class="form-control" 
+        placeholder="Write your issue here" value="<?php echo $fetch['student_application_othersubject']; ?>">
+<?php
+}
+?>
 
 
     </div>

@@ -47,13 +47,13 @@
 }
 
 .card {
-    height: 580px; /* Reduced height for cards */
-  }
+  height: auto; /* Allow the card height to adjust dynamically */
+}
 
-  .card img {
-    object-fit: fill; /* Ensures the image stays at full height without distorting */
-    height: 450px; /* Adjust height to keep the aspect ratio */
-  }
+.card img {
+  object-fit: cover; /* Ensure images maintain aspect ratio */
+}
+
 
   </style>
 </head>
@@ -67,14 +67,14 @@
   <span class="font-bold text-lg sm:text-xl text-center sm:text-left fade-on-scroll">
     Project Department - Aptech SFC
   </span>
-  <a href="./student_application_form.php" class="bg-white text-[#1A2942] px-4 py-2 text-sm font-medium rounded-lg shadow-md hover:bg-gray-200 transition duration-300 fade-on-scroll mt-4 sm:mt-0">
+  <a href="./student_application_form.php" target="_blank" class="bg-white text-[#1A2942] px-4 py-2 text-sm font-medium rounded-lg shadow-md hover:bg-gray-200 transition duration-300 fade-on-scroll mt-4 sm:mt-0">
     Write Application
   </a>
 </header>
 
 
   <!-- Slider -->
-  <section class="slider mt-6 fade-on-scroll">
+  <section class="slider fade-on-scroll">
   <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
                         <div class="carousel-cell" style="background-image: url('./images/slider1.jpg')"></div>
                         <div class="carousel-cell" style="background-image: url('./images/slider2.jpg')"></div>
@@ -82,31 +82,42 @@
                     </div>
   </section>
 
-  <!-- Card Section -->
-<section class="card-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-10 px-6 py-6 fade-on-scroll">
+ <!-- Card Section -->
+<section class="card-container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 px-6 py-6 fade-on-scroll">
   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300">
-    <div class="aspect-w-16 aspect-h-9">
-      <img src="./images/workshop-calender.jpeg" class="w-full h-full object-cover rounded-md mb-4" alt="Workshop Schedule">
+    <div class="w-full h-64">
+      <img src="./images/workshop-calender.jpeg" class="w-full h-full object-cover rounded-md" alt="Workshop Schedule">
     </div>
-    <h3 class="text-xl font-semibold text-[#1A2942]">Workshop Schedule</h3>
+    <h3 class="text-xl font-semibold text-[#1A2942] mt-4">Workshop Schedule</h3>
     <p class="text-gray-600 mt-2">Check out the upcoming workshops to enhance your skills.</p>
   </div>
+
   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300">
-    <div class="aspect-w-16 aspect-h-9">
-      <img src="./images/project-month.jpeg" class="w-full h-full object-cover rounded-md mb-4" alt="Project of the Month">
+    <div class="w-full h-64">
+      <img src="./images/project-month.jpeg" class="w-full h-full object-cover rounded-md" alt="Project of the Month">
     </div>
-    <h3 class="text-xl font-semibold text-[#1A2942]">Project of the Month</h3>
+    <h3 class="text-xl font-semibold text-[#1A2942] mt-4">Project of the Month</h3>
     <p class="text-gray-600 mt-2">Discover the most innovative project created this month.</p>
   </div>
+
   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300">
-    <h3 class="text-xl font-semibold text-[#1A2942]">Presentation Date</h3>
-    <p class="text-gray-600 mt-2">Don't miss the next presentation. Check the schedule here.</p>
+    <div class="w-full h-64">
+      <img src="./images/convocation.jpg" class="w-full h-full object-cover rounded-md" alt="Convocation">
+    </div>
+    <h3 class="text-xl font-semibold text-[#1A2942] mt-4">Convocation</h3>
+    <p class="text-gray-600 mt-2">Convocation is a ceremonial event held by educational institutions to celebrate students' achievements.</p>
   </div>
+
   <div class="card bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300">
-    <h3 class="text-xl font-semibold text-[#1A2942]">Rules for Presentation</h3>
-    <p class="text-gray-600 mt-2">Learn about the guidelines to ace your presentation.</p>
+    <div class="w-full h-64">
+      <img src="./images/technology-camp.jpg" class="w-full h-full object-cover rounded-md" alt="Technology Camp">
+    </div>
+    <h3 class="text-xl font-semibold text-[#1A2942] mt-4">Technology Camp</h3>
+    <p class="text-gray-600 mt-2">A technology camp provides hands-on learning in various fields of technology.</p>
   </div>
 </section>
+
+
 
 
 
@@ -124,18 +135,29 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <div class="bg-[#1A2942] text-white text-center py-8 px-6">
-    <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
-    <p class="mb-2 text-gray-300 fade-in">Reach us at <u class="text-blue-400 underline">sfcprojectdepartment@gmail.com</u></p>
-    <p class="mb-2 text-gray-300 fade-in">📍: 30-A, Progressive Center, Suite # 202-203, Main Shahra-e-Faisal, Karachi</p>
-    <p class="text-gray-300 fade-in">📞 +92 3082709968</p>
-  </div>
+ <!-- Contact Section -->
+<div class="bg-[#1A2942] text-white text-center py-12 px-6">
+  <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+  <p class="mb-3 text-gray-300 fade-in">
+    📧 <a href="mailto:sfcprojectdepartment@gmail.com" class="text-blue-400 underline hover:text-blue-300 transition">
+      sfcprojectdepartment@gmail.com
+    </a>
+  </p>
+  <p class="mb-3 text-gray-300 fade-in">
+    📍 30-A, Progressive Center, Suite # 202-203, Main Shahra-e-Faisal, Karachi
+  </p>
+  <p class="text-gray-300 fade-in">
+    📞 <a href="tel:+923082709968" class="hover:text-gray-400 transition">+92 308 2709968</a>
+  </p>
+</div>
 
-  <!-- Footer -->
-  <footer class="bg-black text-white text-center py-4">
-    <p class="text-sm fade-in">&copy; 2025 TND Dept. Designed by Asad Khan</p>
-  </footer>
+<!-- Footer -->
+<footer class="bg-black text-white text-center py-5">
+  <p class="text-sm fade-in">
+    &copy; 2025 <span class="font-semibold">TND Dept.</span> | Designed by <span class="font-semibold">Asad Khan</span>
+  </p>
+</footer>
+
 
   <!-- JavaScript -->
   <script src="https://unpkg.com/flickity@2/dist/flickity.min.js"></script> <!-- Add Flickity JS -->
