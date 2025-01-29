@@ -3,13 +3,13 @@ require_once("./base/header.php");
 
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "administrator"){
     echo "<script>
-       location.assign('home.php');
+       location.assign('home');
     </script>";
 }
 
 if(!isset($_SESSION['student_user_email'])){
     echo "<script>
-        location.assign('login.php');
+        location.assign('login');
     </script>";
 }
 
@@ -87,13 +87,22 @@ $offset = ($page - 1) * $records_per_page;
 // Modify your query to limit the records based on the offset and records per page
 $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Pending' LIMIT $offset, $records_per_page";
 $execute = mysqli_query($connection, $select_query);
+
+$count_records = mysqli_num_rows($execute);
+if($count_records > 0){
 ?>
 
-<table class="table table-bordered table-centered mb-0">
+<input type="text" id="searchPending" placeholder="Search by Name or Token ID" 
+    class="border border-gray-300 focus:border-[#1A2942] focus:ring-1 focus:ring-[#1A2942] p-2 mb-2 w-full focus:outline-none">
+<?php
+}
+?>
+
+<table class="table table-bordered table-centered mb-0" id="data-table"> 
     <thead>
         <tr>
             <th>#</th>
-            <th>Std Name</th>
+            <th>Std ID</th>
             <th>Application Token ID</th>
             <th>Application Message</th>
             <th>Date Generated</th>
@@ -109,7 +118,7 @@ $execute = mysqli_query($connection, $select_query);
         <tr>
             <td><?php echo $fetch['student_application_id']?></td>
             <td class="table-user">
-                <?php echo $fetch['student_name']?>
+                <?php echo $fetch['student_id']?>
             </td>
             <td><?php echo $fetch['student_application_tokenid']?></td>
             <td>
@@ -121,7 +130,7 @@ $execute = mysqli_query($connection, $select_query);
             </td>
             <td><?php echo $fetch['student_application_date']?></td>
             <td class="text-center">
-                <a href="./view_application.php?viewapplication=<?php echo $fetch['student_application_id']?>" class="text-reset p-1 rounded fs-16 px-1">
+                <a href="./view_application?viewapplication=<?php echo $fetch['student_application_id']?>" class="text-reset p-1 rounded fs-16 px-1">
                     <i class="ri-eye-line text-yellow-500 shadow-xl"></i>
                 </a>
             </td>
@@ -170,6 +179,25 @@ echo '</div>';
 
     </div> <!-- content -->
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+    $("#searchPending").on("keyup", function () {
+        var query = $(this).val();
+        $.ajax({
+            url: "search", // The PHP script that will process the search
+            method: "POST",
+            data: { searchPending: query },
+            success: function (data) {
+                $("#data-table tbody").html(data); // Update table content dynamically
+            }
+        });
+    });
+});
+
+    </script>
 
 <?php
     require_once("./base/footer.php");

@@ -67,7 +67,7 @@
   <span class="font-bold text-lg sm:text-xl text-center sm:text-left fade-on-scroll">
     Project Department - Aptech SFC
   </span>
-  <a href="./student_application_form.php" target="_blank" class="bg-white text-[#1A2942] px-4 py-2 text-sm font-medium rounded-lg shadow-md hover:bg-gray-200 transition duration-300 fade-on-scroll mt-4 sm:mt-0">
+  <a href="./student_application_form" target="_blank" class="bg-white text-[#1A2942] px-4 py-2 text-sm font-medium rounded-lg shadow-md hover:bg-gray-200 transition duration-300 fade-on-scroll mt-4 sm:mt-0">
     Write Application
   </a>
 </header>
@@ -75,12 +75,12 @@
 
   <!-- Slider -->
   <section class="slider fade-on-scroll">
-  <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-                        <div class="carousel-cell" style="background-image: url('./images/slider1.jpg')"></div>
-                        <div class="carousel-cell" style="background-image: url('./images/slider2.jpg')"></div>
-                        <div class="carousel-cell" style="background-image: url('./images/slider3.jpg')"></div>
-                    </div>
-  </section>
+  <div class="main-carousel" data-flickity='{ "cellAlign": "center", "contain": true, "autoPlay": 3000, "pageDots": true }'>
+    <div class="carousel-cell bg-cover bg-center h-96 sm:h-80 md:h-72 lg:h-96 xl:h-112" style="background-image: url('./images/slider1.jpg');"></div>
+    <div class="carousel-cell bg-cover bg-center h-96 sm:h-80 md:h-72 lg:h-96 xl:h-112" style="background-image: url('./images/slider2.jpg');"></div>
+    <div class="carousel-cell bg-cover bg-center h-96 sm:h-80 md:h-72 lg:h-96 xl:h-112" style="background-image: url('./images/slider3.jpg');"></div>
+  </div>
+</section>
 
  <!-- Card Section -->
 <section class="card-container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 px-6 py-6 fade-on-scroll">

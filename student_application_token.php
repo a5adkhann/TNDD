@@ -3,13 +3,13 @@ require_once("./base/header.php");
 
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "student"){
     echo "<script>
-       location.assign('home.php');
+       location.assign('home');
     </script>";
 }
 
 if(!isset($_SESSION['student_user_email'])){
     echo "<script>
-        location.assign('login.php');
+        location.assign('login');
     </script>";
 }
 

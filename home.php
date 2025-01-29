@@ -3,7 +3,7 @@ require_once("./base/header.php");
 
 if(!isset($_SESSION['student_user_email'])){
     echo "<script>
-       location.assign('login.php');
+       location.assign('login');
     </script>";
 }
 ?>
@@ -34,24 +34,23 @@ if(!isset($_SESSION['student_user_email'])){
 <div class="content-page">
     <div class="content">
         <?php
-        if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == "administrator"){
-        ?>
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "administrator") {
+?>
         <!-- Start Content-->
         <div class="container-fluid">
-
             <div class="row py-3">
                 <?php
-    // Fetch the total number of requests
-    $select_total_query = "SELECT COUNT(*) AS total FROM `student_applications`";
-    $total_result = mysqli_query($connection, $select_total_query);
-    $total_row = mysqli_fetch_assoc($total_result);
-    $total_requests = $total_row['total'];
+        // Fetch the total number of requests
+        $select_total_query = "SELECT COUNT(*) AS total FROM `student_applications`";
+        $total_result = mysqli_query($connection, $select_total_query);
+        $total_row = mysqli_fetch_assoc($total_result);
+        $total_requests = $total_row['total'];
 
-    // Helper function to calculate percentage
-    function calculate_percentage($count, $total) {
-        return $total > 0 ? round(($count / $total) * 100, 2) : 0;
-    }
-    ?>
+        // Helper function to calculate percentage
+        function calculate_percentage($count, $total) {
+            return $total > 0 ? round(($count / $total) * 100, 2) : 0;
+        }
+        ?>
 
                 <!-- Pending Requests -->
                 <div class="col-xxl-3 col-sm-6">
@@ -63,12 +62,12 @@ if(!isset($_SESSION['student_user_email'])){
                             <h6 class="text-uppercase mt-0" title="Customers">Pending Requests</h6>
                             <h2 class="my-2">
                                 <?php
-                    $pending_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Pending'";
-                    $pending_result = mysqli_query($connection, $pending_query);
-                    $pending_row = mysqli_fetch_assoc($pending_result);
-                    $pending_count = $pending_row['count'];
-                    echo $pending_count;
-                    ?>
+                        $pending_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Pending'";
+                        $pending_result = mysqli_query($connection, $pending_query);
+                        $pending_row = mysqli_fetch_assoc($pending_result);
+                        $pending_count = $pending_row['count'];
+                        echo $pending_count;
+                        ?>
                             </h2>
                             <p class="mb-0">
                                 <span class="badge bg-white bg-opacity-10 me-1">
@@ -90,12 +89,12 @@ if(!isset($_SESSION['student_user_email'])){
                             <h6 class="text-uppercase mt-0" title="Customers">Process Requests</h6>
                             <h2 class="my-2">
                                 <?php
-                    $process_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Process'";
-                    $process_result = mysqli_query($connection, $process_query);
-                    $process_row = mysqli_fetch_assoc($process_result);
-                    $process_count = $process_row['count'];
-                    echo $process_count;
-                    ?>
+                        $process_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Process'";
+                        $process_result = mysqli_query($connection, $process_query);
+                        $process_row = mysqli_fetch_assoc($process_result);
+                        $process_count = $process_row['count'];
+                        echo $process_count;
+                        ?>
                             </h2>
                             <p class="mb-0">
                                 <span class="badge bg-white bg-opacity-10 me-1">
@@ -117,12 +116,12 @@ if(!isset($_SESSION['student_user_email'])){
                             <h6 class="text-uppercase mt-0" title="Customers">Solved Requests</h6>
                             <h2 class="my-2">
                                 <?php
-                    $solved_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Solved'";
-                    $solved_result = mysqli_query($connection, $solved_query);
-                    $solved_row = mysqli_fetch_assoc($solved_result);
-                    $solved_count = $solved_row['count'];
-                    echo $solved_count;
-                    ?>
+                        $solved_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Solved'";
+                        $solved_result = mysqli_query($connection, $solved_query);
+                        $solved_row = mysqli_fetch_assoc($solved_result);
+                        $solved_count = $solved_row['count'];
+                        echo $solved_count;
+                        ?>
                             </h2>
                             <p class="mb-0">
                                 <span class="badge bg-white bg-opacity-25 me-1">
@@ -154,7 +153,6 @@ if(!isset($_SESSION['student_user_email'])){
                 </div>
             </div>
 
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -175,31 +173,31 @@ if(!isset($_SESSION['student_user_email'])){
                             <script>
                             // Fetching PHP data dynamically and inserting it into JavaScript
                             const pendingRequests = <?php
-                    $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Pending'";
-                    $execute = mysqli_query($connection, $select_query);
-                    $data = mysqli_fetch_assoc($execute);
-                    echo $data['count'];
+                        $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Pending'";
+                        $execute = mysqli_query($connection, $select_query);
+                        $data = mysqli_fetch_assoc($execute);
+                        echo $data['count'];
                     ?>;
 
                             const processRequests = <?php
-                    $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Process'";
-                    $execute = mysqli_query($connection, $select_query);
-                    $data = mysqli_fetch_assoc($execute);
-                    echo $data['count'];
+                        $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Process'";
+                        $execute = mysqli_query($connection, $select_query);
+                        $data = mysqli_fetch_assoc($execute);
+                        echo $data['count'];
                     ?>;
 
                             const solvedRequests = <?php
-                    $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Solved'";
-                    $execute = mysqli_query($connection, $select_query);
-                    $data = mysqli_fetch_assoc($execute);
-                    echo $data['count'];
+                        $select_query = "SELECT COUNT(*) AS count FROM `student_applications` WHERE `student_application_status` = 'Solved'";
+                        $execute = mysqli_query($connection, $select_query);
+                        $data = mysqli_fetch_assoc($execute);
+                        echo $data['count'];
                     ?>;
 
                             const totalRequests = <?php
-                    $select_query = "SELECT COUNT(*) AS count FROM `student_applications`";
-                    $execute = mysqli_query($connection, $select_query);
-                    $data = mysqli_fetch_assoc($execute);
-                    echo $data['count'];
+                        $select_query = "SELECT COUNT(*) AS count FROM `student_applications`";
+                        $execute = mysqli_query($connection, $select_query);
+                        $data = mysqli_fetch_assoc($execute);
+                        echo $data['count'];
                     ?>;
 
                             const yearlyData = {
@@ -245,11 +243,9 @@ if(!isset($_SESSION['student_user_email'])){
                 </div>
             </div>
 
-
             <div class="row">
-
                 <div class="col-xl-12">
-                    <!-- Todo-->
+                    <!-- Projects Table-->
                     <div class="card">
                         <div class="card-body p-0">
                             <div class="p-3">
@@ -293,101 +289,48 @@ if(!isset($_SESSION['student_user_email'])){
 
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
-                    </div> <!-- end card-->
-                </div> <!-- end col-->
-            </div>
-            <!-- end row -->
-
-        </div>
-        <!-- container -->
-        <?php
-                      } else{
-                    ?>
-
-        <!-- Start Content-->
-        <div class="container-fluid">
-
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-12 flex flex-col sm:flex-row justify-between items-center sm:space-x-4">
-                    <!-- Left Side -->
-                    <div class="page-title-box mb-4 sm:mb-0">
-                        <h4 class="page-title text-xl text-[#1A2942] font-bold sm:text-2xl lg:text-3xl"
-                            style="font-family: 'Lexend Giga', serif;">
-                            Welcome <?php echo $_SESSION['student_user_name']; ?>
-                        </h4>
-                    </div>
-                    <!-- Right Side -->
-                    <div class="page-title-box">
-                        <h4 class="page-title text-xl text-[#1A2942] font-bold sm:text-2xl lg:text-3xl"
-                            style="font-family: 'Lexend Giga', serif;">
-                            TND Support System
-                        </h4>
                     </div>
                 </div>
             </div>
+        </div>
+        <?php
+} else if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "student") {
+?>
+        <!-- Student Section -->
+        <div class="container-fluid">
 
-
-
-            <!-- start content -->
             <div class="row">
                 <div class="col-12">
+                    <div class="flex flex-wrap flex-col lg:flex-row-reverse justify-between py-4">
+                        <h2 class="page-title w-full lg:w-auto">TND Support System</h2>
+                        <h2 class="page-title w-full lg:w-auto">Welcome
+                            <?php echo $_SESSION['student_user_name']?></h2>
+                    </div>
+                </div>
 
-                    <!-- About Section -->
-                    <section class="px-6 sm:px-10 lg:px-20 py-4 fade-on-scroll">
-                        <div class="text-area">
-                            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1A2942] mb-4">Aptech TND
-                                Department</h1>
-                            <p class="text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed">
-                                The Training and Development (TND) Department at Aptech plays a pivotal role in
-                                nurturing talent and fostering innovation. As the backbone of Aptech's educational
-                                success, the TND Department is committed to designing, developing, and delivering
-                                top-quality technical courses that align with global industry standards.
-                            </p>
-                        </div>
-                    </section>
+            </div>
 
-                    <!-- Card Section -->
-                    <section class="card-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 py-6">
-                        <div
-                            class="card h-[600px] rounded-lg shadow-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300">
-                            <div class="aspect-w-16 aspect-h-9">
-                                <img src="./images/workshop-calender.jpeg"
-                                    class="w-full h-[450px] object-fill rounded-md mb-4" alt="Workshop Schedule">
-                            </div>
-                            <h3 class="text-xl font-semibold text-[#1A2942]">Workshop Schedule</h3>
-                            <p class="text-gray-600 mt-2">Check out the upcoming workshops to enhance your skills.</p>
-                        </div>
+            <div class="row py-3">
+                <div class="col-lg-12">
+                    <div class="text-area">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#1A2942] mb-4">Aptech TND
+                            Department</h1>
+                        <p class="text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed">
+                            The Training and Development (TND) Department at Aptech plays a pivotal role in
+                            nurturing talent and fostering innovation. As the backbone of Aptech's educational
+                            success, the TND Department is committed to designing, developing, and delivering
+                            top-quality technical courses that align with global industry standards.
+                        </p>
+                    </div>
+                </div>
 
-                        <div
-                            class="card h-[600px] rounded-lg shadow-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300">
-                            <div class="aspect-w-16 aspect-h-9">
-                                <img src="./images/project-month.jpeg"
-                                    class="w-full h-[450px] object-fill rounded-md mb-4" alt="Project of the Month">
-                            </div>
-                            <h3 class="text-xl font-semibold text-[#1A2942]">Project of the Month</h3>
-                            <p class="text-gray-600 mt-2">Discover the most innovative project created this month.</p>
-                        </div>
-
-                        <div
-                            class="card h-[600px] rounded-lg shadow-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300">
-                            <h3 class="text-xl font-semibold text-[#1A2942]">Presentation Date</h3>
-                            <p class="text-gray-600 mt-2">Don't miss the next presentation. Check the schedule here.</p>
-                        </div>
-
-                        <div
-                            class="card h-[600px] rounded-lg shadow-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300">
-                            <h3 class="text-xl font-semibold text-[#1A2942]">Rules for Presentation</h3>
-                            <p class="text-gray-600 mt-2">Learn about the guidelines to ace your presentation.</p>
-                        </div>
-
-                    </section>
-
-                    <!-- Contact Section -->
+                <!-- Workshop Schedule -->
+                <div class="col-lg-12">
                     <div class="text-gray-600 text-center py-4 px-6">
-                        <h2 class="text-xl sm:text-2xl font-bold mb-4">Contact Us</h2>
+                        <h2 class="text-xl text-[#1A2942] sm:text-2xl font-bold mb-4">Contact Us</h2>
                         <p class="mb-2">Reach us at <u
                                 class="text-blue-400 underline">sfcprojectdepartment@gmail.com</u></p>
                         <p class="mb-2">📍: 30-A, Progressive Center, Suite # 202-203, Main Shahra-e-Faisal,
@@ -396,13 +339,12 @@ if(!isset($_SESSION['student_user_email'])){
                     </div>
                 </div>
             </div>
-            <!-- end page title -->
-
-        </div> <!-- container -->
-
+        </div>
         <?php
-                      }
-                    ?>
+}
+?>
+
+
 
     </div>
     <!-- content -->
@@ -429,7 +371,3 @@ require_once("./base/footer.php");
 ?>
 </div>
 </div>
-
-<?php
-require_once("./base/footer.php");
-?>

@@ -3,14 +3,14 @@ require_once("./base/header.php");
 
 if (!isset($_SESSION['student_user_email'])) {
     echo "<script>
-        location.assign('login.php');
+        location.assign('login');
     </script>";
     exit();
 }
 
 if (!isset($_GET['viewapplication'])) {
     echo "<script>
-        location.assign('home.php');
+        location.assign('home');
     </script>";
     exit();
 }
@@ -25,7 +25,7 @@ if (isset($_GET['update'])) {
 
     if ($stmt->execute()) {
         echo "<script>
-        location.assign('pending_requests.php');
+        location.assign('pending_requests');
         </script>";
     }
     $stmt->close();
@@ -40,7 +40,7 @@ if (isset($_GET['markSolve'])) {
 
     if ($stmt->execute()) {
         echo "<script>
-        location.assign('process_requests.php');
+        location.assign('process_requests');
         </script>";
     }
     $stmt->close();
@@ -55,7 +55,7 @@ if (isset($_GET['remove'])) {
 
     if ($stmt->execute()) {
         echo "<script>
-            location.assign('pending_requests.php');
+            location.assign('pending_requests');
         </script>";
     }
     $stmt->close();

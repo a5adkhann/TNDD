@@ -3,13 +3,13 @@ require_once("./base/header.php");
 
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "student"){
     echo "<script>
-       location.assign('home.php');
+       location.assign('home');
     </script>";
 }
 
 if(!isset($_SESSION['student_user_email'])){
     echo "<script>
-        location.assign('login.php');
+        location.assign('login');
     </script>";
 }
 
@@ -48,7 +48,7 @@ WHERE student_application_id = '$updateId'";
     // Execute the query
     if (mysqli_query($connection, $update_query)) {
         echo "<script>
-            location.assign('my_requests.php');
+            location.assign('my_requests');
         </script>";
         exit; 
     } else {
@@ -103,7 +103,7 @@ WHERE student_application_id = '$updateId'";
                         <?php
                         } else {
                         ?>
-    <form class="needs-validation" novalidate method="POST" action="process.php">
+    <form class="needs-validation" novalidate method="POST" action="process">
 <?php
 }
 ?>

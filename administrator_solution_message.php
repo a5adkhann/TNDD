@@ -3,13 +3,13 @@ require_once("./base/header.php");
 
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "administrator"){
     echo "<script>
-       location.assign('index.php');
+       location.assign('index');
     </script>";
 }
 
 if(!isset($_SESSION['student_user_email'])){
     echo "<script>
-        location.assign('login.php');
+        location.assign('login');
     </script>";
 }
 
@@ -22,7 +22,7 @@ if (isset($_GET['markSolve'])) {
 
         if (mysqli_query($connection, $update_query)) {
             echo "<script>
-            location.assign('process_requests.php');
+            location.assign('process_requests');
             </script>";
         } else {
             echo "Error updating record: " . mysqli_error($connection);

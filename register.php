@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['registration_success'] = true;
 
         // Redirect to the same page to show the message
-        header('Location: login.php');
+        header('Location: login');
         exit();
     } else {
         echo "Error: " . mysqli_error($connection);
@@ -38,127 +38,89 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>TND Support System - Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-    body {
-        background-color: #1A2942;
-        font-family: "Poppins", serif;
-    }
-
-    .register-form {
-        color: black;
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 20px;
-        border-radius: 8px;
-        background-color: #FFF;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .register-form button {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        background-color: #D3F2F4;
-    }
-
-    .register-form button:hover {
-        background-color: #1A2942;
-        color: #FFF;
-    }
-
-    .register-form .form-check-label {
-        font-size: 14px;
-    }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            background-color: #1A2942;
+            font-family: "Poppins", serif;
+        }
     </style>
 </head>
 
-<body>
+<body class="bg-[#1A2942] flex items-center justify-center min-h-screen py-10">
 
-    <div class="register-form container p-5 my-5 rounded shadow">
-        <h3 class="text-center mb-4">TND Support System | Register</h3>
-        <form action="register.php" method="POST" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-6">
-                    <div class="mb-3">
-                        <label for="student_user_name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="student_user_name" name="student_user_name" required
-                            placeholder="Enter your name">
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="mb-3">
-                        <label for="student_user_email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="student_user_email" name="student_user_email"
-                            required placeholder="Enter your email">
-                    </div>
-                </div>
+    <div class="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
+        <h3 class="text-center text-2xl font-semibold text-[#1A2942] mb-6">TND Support System | Register</h3>
+        <form action="register" method="POST" enctype="multipart/form-data" class="space-y-6">
+            
+            <div class="grid grid-cols-2 gap-5">
+            <div>
+                <label for="student_user_name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" id="student_user_name" name="student_user_name" required placeholder="Enter your name">
             </div>
 
-            <div class="mb-3">
-                <label for="student_user_password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="student_user_password" name="student_user_password"
-                    required placeholder="Enter your password">
+            <div>
+                <label for="student_user_email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" id="student_user_email" name="student_user_email" required placeholder="Enter your email">
+            </div>
             </div>
 
-            <div class="mb-3">
-                <label for="student_user_batchcode" class="form-label">Batch Code</label>
-                <input type="text" class="form-control" id="student_user_batchcode" name="student_user_batchcode"
-                    required placeholder="Enter your batch code">
+            <div class="grid grid-cols-2 gap-5">
+            <div>
+                <label for="student_user_password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" id="student_user_password" name="student_user_password" required placeholder="Enter your password">
+            </div>
+            <div>
+                <label for="student_user_batchcode" class="block text-sm font-medium text-gray-700">Batch Code</label>
+                <input type="text" class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" id="student_user_batchcode" name="student_user_batchcode" required placeholder="Enter your batch code">
+            </div>
             </div>
 
-            <div class="mb-3">
-                <label for="student_current_semester_id" class="form-label">Current Semester</label>
-                <select class="form-select" name="student_current_semester_id" required>
+            <div>
+                <label for="student_current_semester_id" class="block text-sm font-medium text-gray-700">Current Semester</label>
+                <select class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" name="student_current_semester_id" required>
                     <option value="---">---</option>
                     <?php
-            // Fetch semesters from the database
-            $select_query = "SELECT * FROM `all_semesters`";
-            $execute = mysqli_query($connection, $select_query);
-            while ($fetch = mysqli_fetch_array($execute)) {
-            ?>
+                    // Fetch semesters from the database
+                    $select_query = "SELECT * FROM `all_semesters`";
+                    $execute = mysqli_query($connection, $select_query);
+                    while ($fetch = mysqli_fetch_array($execute)) {
+                    ?>
                     <option value="<?php echo $fetch['semester_id']?>"><?php echo $fetch['semester_name']?></option>
                     <?php
-            }
-            ?>
+                    }
+                    ?>
                 </select>
             </div>
 
-            <div class="mb-3">
-                <label for="student_user_image" class="form-label">Upload Image</label>
-                <input type="file" class="form-control" name="student_user_image" id="student_user_image" required>
+            <div>
+                <label for="student_user_image" class="block text-sm font-medium text-gray-700">Upload Image</label>
+                <input type="file" class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" name="student_user_image" id="student_user_image" required>
             </div>
 
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                <label class="form-check-label" for="rememberMe">Remember me</label>
+            <div class="flex items-center">
+                <input type="checkbox" class="h-4 w-4 text-[#1A2942] border-gray-300 rounded" id="rememberMe" name="rememberMe">
+                <label for="rememberMe" class="ml-2 text-sm text-gray-600">Remember me</label>
             </div>
 
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn">Register</button>
+            <div>
+                <button type="submit" name="register" class="w-full py-3 px-4 bg-[#D3F2F4] text-[#1A2942] font-medium rounded-md hover:bg-[#1A2942] hover:text-white transition duration-300">Register</button>
             </div>
 
-            <div class="text-center mt-3">
-                <small>Have an account? <a href="./login.php">Log In</a></small>
+            <div class="text-center">
+                <small class="text-sm text-gray-600">Already have an account? <a href="./login" class="text-[#1A2942] font-bold hover:underline">Log In</a></small>
             </div>
         </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
 </body>
 
 </html>

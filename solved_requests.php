@@ -3,13 +3,13 @@ require_once("./base/header.php");
 
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "administrator"){
     echo "<script>
-       location.assign('home.php');
+       location.assign('home');
     </script>";
 }
 
 if(!isset($_SESSION['student_user_email'])){
     echo "<script>
-        location.assign('login.php');
+        location.assign('login');
     </script>";
 }
 
@@ -23,14 +23,14 @@ if (isset($_GET['markSolve'])) {
 
     if ($stmt->execute()){
         echo "<script>
-        location.assign('process_requests.php');
+        location.assign('process_requests');
         </script>";
     } 
     $stmt->close();
 }
 
 if (isset($_GET['clearAll'])) {
-    $delete_query = "DELETE FROM `student_applications` WHERE `student_application_status` = 'Solved'";
+    $delete_query = "DELETE FROM `student_applications` WHERE `student_application_status` IN ('Solved', 'Rejected')";
     $stmt = $connection->prepare($delete_query); 
 
     if ($stmt->execute()) {
@@ -57,7 +57,7 @@ if (isset($_GET['clearAll'])) {
                     <div class="page-title-right">
                             <a class="border-b-2" href="javascript:void(0)" onclick="window.history.back()">Back</a>
                         </div>
-                        <h4 class="page-title">Process Requests</h4>
+                        <h4 class="page-title">Solved Requests</h4>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,17 @@ if (isset($_GET['clearAll'])) {
                         <div class="card-body">
                             <div class="table-responsive-sm">
                                 <div class="clear-all-btn-div mb-3 flex justify-end">
+                                    <?php
+                                    $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Solved'";
+                                    $execute = mysqli_query($connection, $select_query);
+                                    $count_records = mysqli_num_rows($execute);
+                                    if($count_records > 0){
+                                    ?>
                                     <a class="bg-red-600 px-2 py-1 text-white rounded" href="?clearAll">Clear All</a>
+                                    <?php
+                                    }
+                                    ?>
+
                                 </div>
                                 <?php
 // Number of records per page
@@ -84,13 +94,23 @@ $offset = ($page - 1) * $records_per_page;
 // Modify your query to limit the records based on the offset and records per page
 $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Solved' LIMIT $offset, $records_per_page";
 $execute = mysqli_query($connection, $select_query);
+
+$count_records = mysqli_num_rows($execute);
+if($count_records > 0){
 ?>
 
-<table class="table table-bordered table-centered mb-0">
+<input type="text" id="searchSolved" placeholder="Search by Name or Token ID" 
+    class="border border-gray-300 focus:border-[#1A2942] focus:ring-1 focus:ring-[#1A2942] p-2 mb-2 w-full focus:outline-none">
+<?php
+}
+?>
+
+
+<table class="table table-bordered table-centered mb-0" id="data-table">
     <thead>
         <tr>
-            <th>Index</th>
-            <th>Name</th>
+            <th>#</th>
+            <th>Std ID</th>
             <th>Application Token ID</th>
             <th>Application Message</th>
             <th>Date Generated</th>
@@ -104,7 +124,7 @@ $execute = mysqli_query($connection, $select_query);
         <tr>
             <td><?php echo $indexNo++?></td>
             <td class="table-user">
-                <?php echo $fetch['student_name']?>
+                <?php echo $fetch['student_id']?>
             </td>
             <td><?php echo $fetch['student_application_tokenid']?></td>
             <td>
@@ -156,6 +176,24 @@ echo '</div>';
 
     </div> <!-- content -->
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+        $(document).ready(function () {
+    $("#searchSolved").on("keyup", function () {
+        var query = $(this).val();
+        $.ajax({
+            url: "search", // The PHP script that will process the search
+            method: "POST",
+            data: { searchSolved: query },
+            success: function (data) {
+                $("#data-table tbody").html(data); // Update table content dynamically
+            }
+        });
+    });
+});
+    </script>
 
 <?php
     require_once("./base/footer.php");

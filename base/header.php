@@ -178,7 +178,7 @@ require_once("./db/db_connection.php");
                         <!-- Topbar Brand Logo -->
                         <div class="logo-topbar">
                             <!-- Logo light -->
-                            <a href="home.php" class="logo-light">
+                            <a href="home" class="logo-light">
                             <span class="logo-lg hidden md:flex items-center justify-center">
                     <span class="text-lg font-bold flex items-center justify-center tracking-wide text-[#EAF1F3] md:text-xl lg:text-2xl xl:text-3xl" style="font-family: 'Lexend Giga', serif;">
                         <img class="invert w-6 md:w-4 lg:w-4 xl:w-6" src="./images/logo1.png" alt=""> 
@@ -191,7 +191,7 @@ require_once("./db/db_connection.php");
                             </a>
 
                             <!-- Logo Dark -->
-                            <a href="home.php" class="logo-dark">
+                            <a href="home" class="logo-dark">
                             <span class="logo-lg hidden md:block">
                                 <h1 class="font-bold tracking-wide text-blue-600 md:text-4xl lg:text-5xl" style="font-family: 'Lexend Giga', serif;">
                                     TND Dept.
@@ -216,16 +216,6 @@ require_once("./db/db_connection.php");
                                 <span></span>
                             </div>
                         </button>
-
-                        <!-- Topbar Search Form -->
-                        <div class="app-search d-none d-lg-block">
-                            <form>
-                                <div class="input-group">
-                                    <input type="search" class="form-control" placeholder="Search...">
-                                    <span class="ri-search-line search-icon text-muted"></span>
-                                </div>
-                            </form>
-                        </div>
                     </div>
 
                     <ul class="topbar-menu d-flex align-items-center gap-3">
@@ -267,13 +257,13 @@ require_once("./db/db_connection.php");
                                 </div>
 
                                 <!-- item-->
-                                <a href="./profile.php" class="dropdown-item">
+                                <a href="./profile" class="dropdown-item">
                                     <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
                                     <span>My Account</span>
                                 </a>
 
                                 <!-- item-->
-                                <a href="./logout.php" class="dropdown-item">
+                                <a href="./logout" class="dropdown-item">
                                     <i class="text-red-500 ri-logout-box-line fs-18 align-middle me-1"></i>
                                     <span class="text-red-500">Logout</span>
                                 </a>
@@ -289,7 +279,7 @@ require_once("./db/db_connection.php");
             <div class="leftside-menu pt-10">
 
                 <!-- Brand Logo Light -->
-                <a href="home.php" class="logo logo-light">
+                <a href="home" class="logo logo-light">
                 <span class="logo-lg hidden md:flex items-center justify-center">
                     <span class="text-lg font-bold flex items-center justify-center tracking-wide text-[#EAF1F3] md:text-xl lg:text-2xl xl:text-3xl" style="font-family: 'Lexend Giga', serif;">
                         <img class="invert w-6 md:w-4 lg:w-4 xl:w-6" src="./images/logo1.png" alt=""> 
@@ -305,7 +295,7 @@ require_once("./db/db_connection.php");
                 </a>
 
                 <!-- Brand Logo Dark -->
-                <a href="home.php" class="logo logo-dark">
+                <a href="home" class="logo logo-dark">
                 <span class="logo-lg hidden md:flex items-center justify-center">
                     <span class="text-lg font-bold flex items-center justify-center tracking-wide text-[#EAF1F3] md:text-xl lg:text-2xl xl:text-3xl" style="font-family: 'Lexend Giga', serif;">
                         <img class="invert w-6 md:w-4 lg:w-4 xl:w-6" src="./images/logo1.png" alt=""> 
@@ -329,14 +319,14 @@ require_once("./db/db_connection.php");
                     ?>
 
                             <li class="side-nav-item">
-                            <a href="./home.php" class="side-nav-link">
+                            <a href="./home" class="side-nav-link">
                             <i class="ri-home-line"></i>
 
                                 <span> Home </span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="./my_requests.php" class="side-nav-link">
+                            <a href="./my_requests" class="side-nav-link">
                                 <i class="ri-dashboard-3-line"></i>
                                 <?php
                             $select_query = "SELECT * FROM `student_applications` WHERE `student_user_id` = $_SESSION[student_user_id]";
@@ -349,7 +339,7 @@ require_once("./db/db_connection.php");
                         </li>
 
                         <li class="side-nav-item">
-                            <a href="./student_application_form.php" class="side-nav-link">
+                            <a href="./student_application_form" class="side-nav-link">
                                 <i class="ri-survey-line"></i>
                                 <span> Initiate Application </span>
                             </a>
@@ -360,14 +350,14 @@ require_once("./db/db_connection.php");
 
 
                         <li class="side-nav-item">
-                            <a href="./home.php" class="side-nav-link">
+                            <a href="./home" class="side-nav-link">
                             <i class="ri-dashboard-2-line"></i>
                                 <span> Dashboard </span>
                             </a>
                         </li>
 
                         <li class="side-nav-item">
-                            <a href="./pending_requests.php" class="side-nav-link">
+                            <a href="./pending_requests" class="side-nav-link">
                             <i class="ri-time-line"></i>
 
                                 <?php
@@ -398,7 +388,7 @@ require_once("./db/db_connection.php");
                         </li>
 
                         <li class="side-nav-item">
-                            <a href="./process_requests.php" class="side-nav-link">
+                            <a href="./process_requests" class="side-nav-link">
                                 <i class="ri-survey-line"></i>
 
                                 <?php
@@ -429,8 +419,9 @@ require_once("./db/db_connection.php");
                         </li>
 
                         <li class="side-nav-item">
-                            <a href="./solved_requests.php" class="side-nav-link">
-                            <i class="ri-check-line"></i>
+                            <a href="./solved_requests" class="side-nav-link">
+                            <i class="ri-checkbox-circle-line"></i>
+
                                 <span> Solved Requests </span>
                             </a>
                         </li>
@@ -440,7 +431,7 @@ require_once("./db/db_connection.php");
                     ?>
 
                         <li class="side-nav-item">
-                            <a href="./profile.php" class="side-nav-link">
+                            <a href="./profile" class="side-nav-link">
                                 <i class="ri-user-line"></i> <!-- Icon for Student Profile -->
                                 <span> My Profile </span>
                             </a>

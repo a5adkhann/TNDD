@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_application']
     // Execute the query
     if (mysqli_query($connection, $insert_query)) {
         unset($_SESSION['token_id']); // Clear the token from session
-        header("Location: student_application_token.php");
+        header("Location: student_application_token");
         exit;
     } else {
         echo "Error: " . mysqli_error($connection); // Debug error if the query fails
@@ -87,11 +87,11 @@ if(isset($_POST['login'])){
         $_SESSION['student_user_batchcode'] = $display['student_user_batchcode'];
         $_SESSION['student_user_image'] = $display['student_user_image'];
         $_SESSION['user_role'] = $display['user_role'];
-        header("location: home.php");
+        header("location: home");
     }
     else {
         echo "<script>alert('Invalid Credentials');
-        location.assign('login.php');
+        location.assign('login');
         </script>";
     }
 }

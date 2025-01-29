@@ -3,13 +3,13 @@ require_once("./base/header.php");
 
 if(isset($_SESSION['user_role']) && $_SESSION['user_role'] !== "student"){
     echo "
-      <script>location.assign('home.php');</script>
+      <script>location.assign('home');</script>
     ";
 }
 
 if(!isset($_SESSION['student_user_email'])){
     echo "<script>
-        location.assign('login.php');
+        location.assign('login');
     </script>";
 }
 
@@ -150,11 +150,11 @@ $execute = mysqli_query($connection, $select_query);
                     <i class="ri-delete-bin-2-line text-red-500"></i>
                 </a>
                 <?php if (!in_array($status, ["Solved", "Process", "Rejected"])) { ?>
-                <a href="./student_application_form.php?update=<?php echo $fetch['student_application_id']; ?>" class="text-reset fs-18 px-1" title="Edit">
+                <a href="./student_application_form?update=<?php echo $fetch['student_application_id']; ?>" class="text-reset fs-18 px-1" title="Edit">
                     <i class="fas text-sm fa-pen text-blue-500"></i>
                 </a>
                 <?php } ?>
-                <a href="view_application.php?viewapplication=<?php echo $fetch['student_application_id']; ?>">
+                <a href="view_application?viewapplication=<?php echo $fetch['student_application_id']; ?>">
                     <i class="ri-eye-line fs-18 text-yellow-500"></i>
                 </a>
             </td>

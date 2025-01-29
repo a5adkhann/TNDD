@@ -3,7 +3,7 @@ require_once("./base/header.php");
 
 if(!isset($_SESSION['student_user_email'])){
     echo "<script>
-       location.assign('login.php');
+       location.assign('login');
     </script>";
 }
 ?>
@@ -17,8 +17,7 @@ if(!isset($_SESSION['student_user_email'])){
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="profile-bg-picture"
-                                style="background-image:url('./images/aptech-logo.png')">
+                            <div class="profile-bg-picture">
                                 <span class="picture-bg-overlay"></span>
                                 <!-- overlay -->
                             </div>

@@ -4,70 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>TND Support System - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
         body {
             background-color: #1A2942;
             font-family: "Poppins", serif;
         }
-        .login-form {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: white;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-            color: black;
-        }
-        .login-form button {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #D3F2F4;
-        }
-        .login-form button:hover {
-            background-color: #1A2942;
-            color: #FFF;
-        }
-        .login-form .form-check-label {
-            font-size: 14px;
-        }
     </style>
 </head>
 
-<body>
+<body class="bg-[#1A2942] flex items-center justify-center min-h-screen">
 
-    <div class="login-form container card p-5 my-5 rounded shadow">
-        <h3 class="text-center mb-4">TND Support System | Login</h3>
-        <form action="process.php" method="POST">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+    <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+        <h3 class="text-center text-2xl font-semibold text-[#1A2942] mb-6">TND Support System | Login</h3>
+        <form action="process" method="POST" class="space-y-6">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" id="email" name="email" required placeholder="Enter your email">
             </div>
 
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" id="password" name="password" required placeholder="Enter your password">
             </div>
 
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                <label class="form-check-label" for="rememberMe">Remember me</label>
+            <div class="flex items-center">
+                <input type="checkbox" class="h-4 w-4 text-[#1A2942] border-gray-300 rounded" id="rememberMe" name="rememberMe">
+                <label for="rememberMe" class="ml-2 text-sm text-gray-600">Remember me</label>
             </div>
 
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn" name="login">Log In</button>
+            <div>
+                <button type="submit" name="login" class="w-full py-3 px-4 bg-[#D3F2F4] text-[#1A2942] font-medium rounded-md hover:bg-[#1A2942] hover:text-white transition duration-300">Log In</button>
             </div>
 
-            <div class="text-center mt-3">
-                <small>Don't have an account? <a href="./register.php">Register</a></small>
+            <div class="text-center">
+                <small class="text-sm text-gray-600">Don't have an account? <a href="./register" class="text-[#1A2942] font-bold hover:underline">Register</a></small>
             </div>
         </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>
