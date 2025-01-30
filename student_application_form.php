@@ -13,49 +13,43 @@ if(!isset($_SESSION['student_user_email'])){
     </script>";
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_student_application'])) {
+if (isset($_POST['update_student_application'])) {
     $updateId = $_GET['update'];
-    $student_concern_person_id = mysqli_real_escape_string($connection, $_POST['student_concern_person_id']);
-    $student_application_date = mysqli_real_escape_string($connection, $_POST['student_application_date']);
-    $student_application_subject_id = mysqli_real_escape_string($connection, $_POST['student_application_subject_id']);
-    $student_application_message = mysqli_real_escape_string($connection, $_POST['student_application_message']);
-    $student_application_othersubject = mysqli_real_escape_string($connection, $_POST['student_application_othersubject']);
-    $student_id = mysqli_real_escape_string($connection, $_POST['student_id']);
-    $student_name = mysqli_real_escape_string($connection, $_POST['student_name']);
-    $student_batch_code = mysqli_real_escape_string($connection, $_POST['student_batch_code']);
-    $student_current_semester_id = mysqli_real_escape_string($connection, $_POST['student_current_semester_id']);
-    $student_email = mysqli_real_escape_string($connection, $_POST['student_email']);
-    $student_number = mysqli_real_escape_string($connection, $_POST['student_number']);
-    $student_user_id = mysqli_real_escape_string($connection, $_SESSION['student_user_id']);
+    $student_concern_person_id = $_POST['student_concern_person_id'];
+    $student_application_date = $_POST['student_application_date'];
+    $student_application_subject_id = $_POST['student_application_subject_id'];
+    $student_application_message = $_POST['student_application_message'];
+    $student_application_othersubject = $_POST['student_application_othersubject'];
+    $student_id = $_POST['student_id'];
+    $student_name = $_POST['student_name'];
+    $student_batch_code = $_POST['student_batch_code'];
+    $student_current_semester_id = $_POST['student_current_semester_id'];
+    $student_email = $_POST['student_email'];
+    $student_number = $_POST['student_number'];
+    $student_user_id = $_SESSION['student_user_id'];
 
+    $query = "UPDATE student_applications SET 
+        student_concern_person_id = '$student_concern_person_id', 
+        student_application_date = '$student_application_date', 
+        student_application_subject_id = '$student_application_subject_id', 
+        student_application_message = '$student_application_message', 
+        student_id = '$student_id', 
+        student_name = '$student_name', 
+        student_batch_code = '$student_batch_code', 
+        student_current_semester_id = '$student_current_semester_id', 
+        student_email = '$student_email', 
+        student_number = '$student_number',
+        student_user_id = '$student_user_id',
+        student_application_othersubject = '$student_application_othersubject'
+    WHERE student_application_id = '$updateId'";
 
-    $update_query = "UPDATE student_applications SET 
-    student_concern_person_id = '$student_concern_person_id', 
-    student_application_date = '$student_application_date', 
-    student_application_subject_id = '$student_application_subject_id', 
-    student_application_message = '$student_application_message', 
-    student_id = '$student_id', 
-    student_name = '$student_name', 
-    student_batch_code = '$student_batch_code', 
-    student_current_semester_id = '$student_current_semester_id', 
-    student_email = '$student_email', 
-    student_number = '$student_number',
-    student_user_id = '$student_user_id',
-    student_application_othersubject = '$student_application_othersubject'
-WHERE student_application_id = '$updateId'";
-
-
-    // Execute the query
-    if (mysqli_query($connection, $update_query)) {
-        echo "<script>
-            location.assign('my_requests');
-        </script>";
-        exit; 
+    if (mysqli_query($connection, $query)) {
+        echo "<script>location.assign('my_requests');</script>";
+        exit;
     } else {
         echo "Error: " . mysqli_error($connection);
     }
 
-    // Close the connection
     mysqli_close($connection);
 }
 
@@ -73,7 +67,7 @@ WHERE student_application_id = '$updateId'";
                     <div class="page-title-right">
                             <a class="border-b-2" href="javascript:void(0)" onclick="window.history.back()">Back</a>
                         </div>
-                        <h4 class="page-title text-uppercase">Student Application Form</h4>
+                        <h4 class="page-title">Student Application Form</h4>
                     </div>
                 </div>
             </div>
@@ -86,15 +80,13 @@ WHERE student_application_id = '$updateId'";
 
                         <?php
                         if (isset($_GET['update'])) {
-                            $updateId = $_GET['update'];
-                            $select_query = "SELECT * FROM `student_applications` WHERE `student_application_id` = ?";
-                            $stmt = $connection->prepare($select_query);
-                            $stmt->bind_param("i", $updateId);
-                            $stmt->execute();
-                            $result = $stmt->get_result();
-                            $fetch = $result->fetch_assoc();
+                            $updateId = $_GET['update']; 
+                            $select_query = "SELECT * FROM `student_applications` WHERE `student_application_id` = $updateId";
+                            $result = mysqli_query($connection, $select_query);
+                            $fetch = mysqli_fetch_assoc($result);
                         }
                         ?>
+
 
                         <?php
                         if (isset($_GET['update'])) {
@@ -151,9 +143,7 @@ WHERE student_application_id = '$updateId'";
     ?>
 </select>
 
-<?php
-if (isset($_GET['update']) && $fetch['student_application_othersubject'] == NULL){
-    ?>
+
 <!-- Hidden Input Field -->
 <div id="otherSubjectContainer" class="mt-3 hidden">
     <label class="form-label" for="otherSubject">Please Specify</label>
@@ -184,25 +174,6 @@ if (isset($_GET['update']) && $fetch['student_application_othersubject'] == NULL
         }
     }
 </script>
-<?php
-}
-?>
-
-<?php
-if (isset($_GET['update']) && $fetch['student_application_othersubject']) {
-?>
-
-    <label class="form-label mt-2" for="otherSubject">Please Specify</label>
-    <input 
-        type="text" 
-        name="student_application_othersubject" 
-        id="otherSubjectOnUpdate" 
-        class="form-control" 
-        placeholder="Write your issue here" value="<?php echo $fetch['student_application_othersubject']; ?>">
-<?php
-}
-?>
-
 
     </div>
 

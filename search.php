@@ -65,9 +65,8 @@ if(isset($_POST['searchProcess'])) {
                     </a>
                 </td>
                 <td class='space-x-1 flex gap-1 justify-center'>
-                    <a href='?update={$fetch['student_application_id']}' class='shadow-lg bg-green-500 p-1 text-white rounded'>Approve</a>
-                    <a href='?reject={$fetch['student_application_id']}' class='shadow-lg bg-red-500 p-1 text-white rounded'>Reject</a>
-                </td>
+                <a href='./administrator_solution_message?messageId={$fetch['student_application_id']}'>Add Remarks</a>
+            </td>
             </tr>";
         }
     } else {

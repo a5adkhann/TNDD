@@ -135,28 +135,58 @@
     </div>
   </section>
 
- <!-- Contact Section -->
-<div class="bg-[#1A2942] text-white text-center py-12 px-6">
-  <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
-  <p class="mb-3 text-gray-300 fade-in">
-    📧 <a href="mailto:sfcprojectdepartment@gmail.com" class="text-blue-400 underline hover:text-blue-300 transition">
-      sfcprojectdepartment@gmail.com
-    </a>
-  </p>
-  <p class="mb-3 text-gray-300 fade-in">
-    📍 30-A, Progressive Center, Suite # 202-203, Main Shahra-e-Faisal, Karachi
-  </p>
-  <p class="text-gray-300 fade-in">
-    📞 <a href="tel:+923082709968" class="hover:text-gray-400 transition">+92 308 2709968</a>
-  </p>
-</div>
+<!-- Contact Section -->
+<section class="bg-[#1A2942] text-white py-16 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl font-extrabold mb-4">Get in Touch</h2>
+    <p class="text-gray-300 mb-8">
+      Have questions or need assistance? Feel free to reach out to us.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-300">
+      <!-- Email -->
+      <div class="flex flex-col items-center">
+        <i class="ri-mail-line text-3xl text-blue-400 mb-2"></i>
+        <p>Email</p>
+        <a href="mailto:sfcprojectdepartment@gmail.com"
+          class="text-blue-400 hover:text-blue-300 transition">
+          sfcprojectdepartment@gmail.com
+        </a>
+      </div>
+
+      <!-- Location -->
+      <div class="flex flex-col items-center">
+        <i class="ri-map-pin-line text-3xl text-green-400 mb-2"></i>
+        <p>Location</p>
+        <p class="text-center">
+          30-A, Progressive Center, Suite # 202-203, <br> Main Shahra-e-Faisal, Karachi
+        </p>
+      </div>
+
+      <!-- Phone -->
+      <div class="flex flex-col items-center">
+        <i class="ri-phone-line text-3xl text-yellow-400 mb-2"></i>
+        <p>Phone</p>
+        <a href="tel:+923082709968" class="hover:text-gray-400 transition">
+          +92 308 2709968
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Footer -->
-<footer class="bg-black text-white text-center py-5">
-  <p class="text-sm fade-in">
-    &copy; 2025 <span class="font-semibold">TND Dept.</span> | Designed by <span class="font-semibold">Asad Khan</span>
-  </p>
+<footer class="bg-black text-white py-6">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+    <p class="text-sm">
+      &copy; 2025 <span class="font-semibold">TND Dept.</span> | All rights reserved.
+    </p>
+    <p class="text-sm">
+      Designed by <span class="font-semibold">Asad Khan</span>
+    </p>
+  </div>
 </footer>
+
 
 
   <!-- JavaScript -->

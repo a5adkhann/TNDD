@@ -1,41 +1,31 @@
 <?php
 require_once("./db/db_connection.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Get form data
-    $name = mysqli_real_escape_string($connection, $_POST['student_user_name']);
-    $email = mysqli_real_escape_string($connection, $_POST['student_user_email']);
-    $password = mysqli_real_escape_string($connection, $_POST['student_user_password']);
-    $batch_code = mysqli_real_escape_string($connection, $_POST['student_user_batchcode']);
-    $semester_id = mysqli_real_escape_string($connection, $_POST['student_current_semester_id']);
-    
-    // Handle image upload
-    $image = $_FILES['student_user_image']['name'];
-    $image_temp = $_FILES['student_user_image']['tmp_name'];
-    $image_folder = "uploads/" . $image;
-    
-    // Check if image is uploaded
-    if (!empty($image)) {
-        move_uploaded_file($image_temp, $image_folder); // Move the image to the uploads folder
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $name = $_POST['student_user_name'];
+    $email = $_POST['student_user_email'];
+    $password = $_POST['student_user_password']; 
+    $batch_code = $_POST['student_user_batchcode'];
+    $semester_id = $_POST['student_current_semester_id'];
+
+    $image_folder = "";
+    if (!empty($_FILES['student_user_image']['name'])) {
+        $image_folder = "uploads/" . $_FILES['student_user_image']['name'];
+        move_uploaded_file($_FILES['student_user_image']['tmp_name'], $image_folder);
     }
-    
-    // Insert data into the student_users table
-    $insert_query = "INSERT INTO student_users (student_user_name, student_user_email, student_user_password, student_user_batchcode, student_user_current_semester_id, student_user_image) 
-                     VALUES ('$name', '$email', '$password', '$batch_code', '$semester_id', '$image_folder')";
 
-    // After successful registration
-    if (mysqli_query($connection, $insert_query)) {
-        // Set a session variable to indicate success
-        $_SESSION['registration_success'] = true;
+    $query = "INSERT INTO student_users (student_user_name, student_user_email, student_user_password, student_user_batchcode, student_user_current_semester_id, student_user_image) 
+              VALUES ('$name', '$email', '$password', '$batch_code', '$semester_id', '$image_folder')";
 
-        // Redirect to the same page to show the message
+    if (mysqli_query($connection, $query)) {
         header('Location: login');
         exit();
     } else {
         echo "Error: " . mysqli_error($connection);
     }
 }
+
 ?>
 
 <!DOCTYPE html>

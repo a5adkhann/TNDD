@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2025 at 11:08 PM
+-- Generation Time: Jan 30, 2025 at 09:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -131,8 +131,9 @@ CREATE TABLE `student_users` (
 --
 
 INSERT INTO `student_users` (`student_user_id`, `student_user_name`, `student_user_email`, `student_user_password`, `student_user_batchcode`, `student_user_current_semester_id`, `student_user_image`, `user_role`) VALUES
-(3, 'Umair Warsi', 'umair@gmail.com', '111', '--------', 1, 'uploads/shirtResolve.png', 'administrator'),
-(6, 'Asad Khan', 'asadklm30@gmail.com', '111', 'PR2-202408E', 5, 'uploads/asad.jpg', 'student');
+(9, 'Asad Khan', 'asad@gmail.com', '111', 'PR2-202408E', 5, 'uploads/asad.jpg', 'student'),
+(10, 'Umair Warsi', 'umair@gmail.com', '111', 'PR2-202408E', 1, 'uploads/Artwork.jpg', 'administrator'),
+(11, 'Yasir', 'yasir@gmail.com', '111', 'PR2-202408E', 2, 'uploads/pDetail.jpg', 'student');
 
 -- --------------------------------------------------------
 
@@ -232,7 +233,7 @@ ALTER TABLE `student_applications`
 -- AUTO_INCREMENT for table `student_users`
 --
 ALTER TABLE `student_users`
-  MODIFY `student_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `student_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tnd_projects`

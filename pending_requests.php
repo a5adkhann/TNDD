@@ -14,9 +14,8 @@ if(!isset($_SESSION['student_user_email'])){
 }
 
 if (isset($_GET['update'])) {
-    $updateId = intval($_GET['update']); // Sanitize input to prevent SQL injection
+    $updateId = $_GET['update']; 
 
-    // Update query
     $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Process' WHERE `student_application_id` = $updateId";
 
     if (mysqli_query($connection, $update_query)) {
@@ -33,7 +32,7 @@ if (isset($_GET['update'])) {
 
 
 if (isset($_GET['reject'])) {
-    $rejectId = intval($_GET['reject']); // Sanitize input to prevent SQL injection
+    $rejectId = $_GET['reject']; 
     $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Rejected' WHERE `student_application_id` = $rejectId";
     
     if (mysqli_query($connection, $update_query)) {
@@ -75,24 +74,20 @@ if (isset($_GET['reject'])) {
                         <div class="card-body">
                             <div class="table-responsive-sm">
                             <?php
-// Number of records per page
-$records_per_page = 10;
+                                $records_per_page = 10;
 
-// Get the current page from the URL, default to 1 if not set
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-// Calculate the offset for the SQL query
-$offset = ($page - 1) * $records_per_page;
+                                $offset = ($page - 1) * $records_per_page;
 
-// Modify your query to limit the records based on the offset and records per page
-$select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Pending' LIMIT $offset, $records_per_page";
-$execute = mysqli_query($connection, $select_query);
+                                $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Pending' LIMIT $offset, $records_per_page";
+                                $execute = mysqli_query($connection, $select_query);
 
-$count_records = mysqli_num_rows($execute);
-if($count_records > 0){
-?>
+                                $count_records = mysqli_num_rows($execute);
+                                if($count_records > 0){
+                                ?>
 
-<input type="text" id="searchPending" placeholder="Search by Name or Token ID" 
+<input type="text" id="searchPending" placeholder="Search by Student ID or Token ID" 
     class="border border-gray-300 focus:border-[#1A2942] focus:ring-1 focus:ring-[#1A2942] p-2 mb-2 w-full focus:outline-none">
 <?php
 }
@@ -146,15 +141,12 @@ if($count_records > 0){
 </table>
 
 <?php
-// Get the total number of records
 $total_query = "SELECT COUNT(*) FROM `student_applications` WHERE `student_application_status` = 'Pending'";
 $total_result = mysqli_query($connection, $total_query);
 $total_records = mysqli_fetch_array($total_result)[0];
 
-// Calculate the total number of pages
 $total_pages = ceil($total_records / $records_per_page);
 
-// Pagination links
 echo '<div class="pagination">';
 if ($page > 1) {
     echo '<a href="?page=' . ($page - 1) . '">&laquo; Previous</a>';

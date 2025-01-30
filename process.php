@@ -5,25 +5,22 @@ function generateTokenID() {
     return 'TND' . strtoupper(bin2hex(random_bytes(4)));
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_application'])) {
+if (isset($_POST['student_application'])) {
     $student_concern_person_id = $_POST['student_concern_person_id'];
     $student_application_date = $_POST['student_application_date'];
-
-    $student_application_subject_id = isset($_POST['student_application_subject_id']) ? $_POST['student_application_subject_id'] : NULL;
-    $student_application_othersubject = !empty($_POST['student_application_othersubject']) ? mysqli_real_escape_string($connection, $_POST['student_application_othersubject']) : NULL;
-    $student_application_message = mysqli_real_escape_string($connection, $_POST['student_application_message']);
-    $student_id = mysqli_real_escape_string($connection, $_POST['student_id']);
-    $student_name = mysqli_real_escape_string($connection, $_POST['student_name']);
-    $student_batch_code = mysqli_real_escape_string($connection, $_POST['student_batch_code']);
-    $student_current_semester_id = mysqli_real_escape_string($connection, $_POST['student_current_semester_id']);
-    $student_email = mysqli_real_escape_string($connection, $_POST['student_email']);
-    $student_number = mysqli_real_escape_string($connection, $_POST['student_number']);
+    $student_application_subject_id = $_POST['student_application_subject_id'] ?? NULL;
+    $student_application_othersubject = $_POST['student_application_othersubject'] ?? NULL;
+    $student_application_message = $_POST['student_application_message'];
+    $student_id = $_POST['student_id'];
+    $student_name = $_POST['student_name'];
+    $student_batch_code = $_POST['student_batch_code'];
+    $student_current_semester_id = $_POST['student_current_semester_id'];
+    $student_email = $_POST['student_email'];
+    $student_number = $_POST['student_number'];
     $student_user_id = $_SESSION['student_user_id'];
 
-    // Generate a unique token
     $token_id = generateTokenID();
 
-    // SQL Query to handle both subject ID and "Others" field
     $insert_query = "INSERT INTO student_applications (
                         student_concern_person_id, 
                         student_application_date, 
@@ -54,19 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['student_application']
                         '$token_id'
                     )";
 
-    // Execute the query
     if (mysqli_query($connection, $insert_query)) {
         unset($_SESSION['token_id']); // Clear the token from session
         header("Location: student_application_token");
         exit;
     } else {
-        echo "Error: " . mysqli_error($connection); // Debug error if the query fails
+        echo "Error: " . mysqli_error($connection);
     }
 
     mysqli_close($connection);
 } else {
     echo "Invalid request method.";
 }
+
 
 
 

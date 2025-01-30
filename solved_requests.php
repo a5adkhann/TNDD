@@ -14,35 +14,26 @@ if(!isset($_SESSION['student_user_email'])){
 }
 
 if (isset($_GET['markSolve'])) {
-    $updateId = intval($_GET['markSolve']); // Sanitize input to prevent SQL injection
+    $updateId = $_GET['markSolve'];
+    $update_query = "UPDATE student_applications SET student_application_status = 'Solved' WHERE student_application_id = $updateId";
 
-    // Update query
-    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Solved' WHERE `student_application_id` = ?";
-    $stmt = $connection->prepare($update_query); 
-    $stmt->bind_param('i', $updateId); 
-
-    if ($stmt->execute()){
-        echo "<script>
-        location.assign('process_requests');
-        </script>";
-    } 
-    $stmt->close();
+    if (mysqli_query($connection, $update_query)) {
+        echo "<script>location.assign('process_requests');</script>";
+    }
 }
 
-if (isset($_GET['clearAll'])) {
-    $delete_query = "DELETE FROM `student_applications` WHERE `student_application_status` IN ('Solved', 'Rejected')";
-    $stmt = $connection->prepare($delete_query); 
 
-    if ($stmt->execute()) {
+if (isset($_GET['clearAll'])) {
+    $delete_query = "DELETE FROM student_applications WHERE student_application_status IN ('Solved', 'Rejected')";
+    if (mysqli_query($connection, $delete_query)) {
         echo "<script>
-        // Remove the 'delete' query parameter from the URL
         const url = new URL(window.location.href);
         url.searchParams.delete('clearAll');
         history.replaceState(null, '', url);
         </script>";
     }
-    $stmt->close();
 }
+
 ?>
 <div class="content-page">
     <div class="content">
@@ -82,16 +73,12 @@ if (isset($_GET['clearAll'])) {
 
                                 </div>
                                 <?php
-// Number of records per page
 $records_per_page = 10;
 
-// Get the current page from the URL, default to 1 if not set
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-// Calculate the offset for the SQL query
 $offset = ($page - 1) * $records_per_page;
 
-// Modify your query to limit the records based on the offset and records per page
 $select_query = "SELECT * FROM `student_applications` WHERE `student_application_status` = 'Solved' LIMIT $offset, $records_per_page";
 $execute = mysqli_query($connection, $select_query);
 
@@ -99,7 +86,7 @@ $count_records = mysqli_num_rows($execute);
 if($count_records > 0){
 ?>
 
-<input type="text" id="searchSolved" placeholder="Search by Name or Token ID" 
+<input type="text" id="searchSolved" placeholder="Search by Student ID or Token ID" 
     class="border border-gray-300 focus:border-[#1A2942] focus:ring-1 focus:ring-[#1A2942] p-2 mb-2 w-full focus:outline-none">
 <?php
 }
@@ -118,7 +105,7 @@ if($count_records > 0){
     </thead>
     <tbody>
         <?php
-        $indexNo = 1 + $offset; // Start index based on the offset
+        $indexNo = 1 + $offset; 
         while($fetch = mysqli_fetch_array($execute)){
         ?>
         <tr>
@@ -143,15 +130,12 @@ if($count_records > 0){
 </table>
 
 <?php
-// Get the total number of records
 $total_query = "SELECT COUNT(*) FROM `student_applications` WHERE `student_application_status` = 'Solved'";
 $total_result = mysqli_query($connection, $total_query);
 $total_records = mysqli_fetch_array($total_result)[0];
 
-// Calculate the total number of pages
 $total_pages = ceil($total_records / $records_per_page);
 
-// Pagination links
 echo '<div class="pagination">';
 if ($page > 1) {
     echo '<a href="?page=' . ($page - 1) . '">&laquo; Previous</a>';

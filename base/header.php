@@ -1,4 +1,9 @@
 <?php
+// Get the current script name
+$currentFile = basename($_SERVER['SCRIPT_NAME'], ".php");
+
+// Convert file name to a proper title (replace '-' and '_' with spaces and capitalize words)
+$pageTitle = ucwords(str_replace(['-', '_'], ' ', $currentFile)) . " - TND Support System";
 
 require_once("./db/db_connection.php");
 
@@ -9,13 +14,13 @@ require_once("./db/db_connection.php");
 
 <head>
     <meta charset="utf-8" />
-    <title>TND Support System</title>
+    <title><?php echo $pageTitle; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
     <meta content="Techzaa" name="author" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="./images/logo1.png">
 
     <!-- Daterangepicker css -->
     <link rel="stylesheet" href="./css/daterangepicker.css">
@@ -242,7 +247,7 @@ require_once("./db/db_connection.php");
                             <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#"
                                 role="button" aria-haspopup="false" aria-expanded="false">
                                 <span class="account-user-avatar">
-                                    <img src="./<?php echo $_SESSION['student_user_image']?>" alt="user-image"
+                                    <img src="./<?php echo $_SESSION['student_user_image']?>"
                                         width="32" class="rounded-circle">
                                 </span>
                                 <span class="d-lg-block d-none">
@@ -290,7 +295,7 @@ require_once("./db/db_connection.php");
                 </span>
 
                     <span class="logo-sm">
-                        <img src="./images/logo-sm.png" alt="small logo">
+                        <img class="invert" src="./images/logo1.png" alt="small logo">
                     </span>
                 </a>
 
@@ -303,7 +308,7 @@ require_once("./db/db_connection.php");
                     </span>
                 </span>
                     <span class="logo-sm">
-                        <img src="./images/logo-sm.png" alt="small logo">
+                        <img class="invert" src="./images/logo1.png" alt="small logo">
                     </span>
                 </a>
 

@@ -33,26 +33,22 @@ if(!isset($_SESSION['student_user_email'])){
                                     <i class="fa fa-check-circle me-3"></i>
                                     <span id="token-display" style="font-size: 1.5rem;">
                                         <?php 
-    // Query to fetch the most recent token ID
-    $select_query = "SELECT `student_application_tokenid` FROM `student_applications` ORDER BY `student_application_id` DESC LIMIT 1";
-    
-    // Execute the query
-    $execute = mysqli_query($connection, $select_query);
-    
-    if ($execute) {
-        $fetch = mysqli_fetch_array($execute);
-        
-        // Check if a token was fetched
-        if (!empty($fetch['student_application_tokenid'])) {
-            // Display the fetched token ID
-            echo "<span>" . htmlspecialchars($fetch['student_application_tokenid'], ENT_QUOTES, 'UTF-8') . "</span>";
-        } else {
-            echo "<span>No token found</span>";
-        }
-    } else {
-        echo "Error: " . mysqli_error($connection);
-    }
-    ?>
+                                            $select_query = "SELECT `student_application_tokenid` FROM `student_applications` ORDER BY `student_application_id` DESC LIMIT 1";
+                                            
+                                            $execute = mysqli_query($connection, $select_query);
+                                            
+                                            if ($execute) {
+                                                $fetch = mysqli_fetch_array($execute);
+                                                
+                                                if (!empty($fetch['student_application_tokenid'])) {
+                                                    echo "<span>" . htmlspecialchars($fetch['student_application_tokenid'], ENT_QUOTES, 'UTF-8') . "</span>";
+                                                } else {
+                                                    echo "<span>No token found</span>";
+                                                }
+                                            } else {
+                                                echo "Error: " . mysqli_error($connection);
+                                            }
+                                            ?>
                                     </span>
 
                                 </div>

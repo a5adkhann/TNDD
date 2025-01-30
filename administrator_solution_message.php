@@ -56,6 +56,16 @@ if (isset($_POST['savemessage'])) {
         <!-- Start Content-->
         <div class="container-fluid">
 
+        <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <a class="border-b-2" href="javascript:void(0)" onclick="window.history.back()">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         <form method="POST" class="py-10">
     <?php
     // Get the existing solution message from the database (if any)

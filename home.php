@@ -40,7 +40,6 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "administrator") 
         <div class="container-fluid">
             <div class="row py-3">
                 <?php
-        // Fetch the total number of requests
         $select_total_query = "SELECT COUNT(*) AS total FROM `student_applications`";
         $total_result = mysqli_query($connection, $select_total_query);
         $total_row = mysqli_fetch_assoc($total_result);
@@ -329,7 +328,7 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "administrator") 
 
                 <!-- Workshop Schedule -->
                 <div class="col-lg-12">
-                    <div class="text-gray-600 text-center py-4 px-6">
+                    <div class="text-center py-4 px-6">
                         <h2 class="text-xl text-[#1A2942] sm:text-2xl font-bold mb-4">Contact Us</h2>
                         <p class="mb-2">Reach us at <u
                                 class="text-blue-400 underline">sfcprojectdepartment@gmail.com</u></p>

@@ -15,51 +15,25 @@ if (!isset($_GET['viewapplication'])) {
     exit();
 }
 
-// Handle application updates
+
 if (isset($_GET['update'])) {
-    $updateId = intval($_GET['update']);
-
-    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Process' WHERE `student_application_id` = ?";
-    $stmt = $connection->prepare($update_query);
-    $stmt->bind_param('i', $updateId);
-
-    if ($stmt->execute()) {
-        echo "<script>
-        location.assign('pending_requests');
-        </script>";
-    }
-    $stmt->close();
+    $updateId = $_GET['update'];
+    mysqli_query($connection, "UPDATE student_applications SET student_application_status = 'Process' WHERE student_application_id = '$updateId'");
+    echo "<script>location.assign('pending_requests');</script>";
 }
 
 if (isset($_GET['markSolve'])) {
-    $updateId = intval($_GET['markSolve']);
-
-    $update_query = "UPDATE `student_applications` SET `student_application_status` = 'Solved' WHERE `student_application_id` = ?";
-    $stmt = $connection->prepare($update_query);
-    $stmt->bind_param('i', $updateId);
-
-    if ($stmt->execute()) {
-        echo "<script>
-        location.assign('process_requests');
-        </script>";
-    }
-    $stmt->close();
+    $updateId = $_GET['markSolve'];
+    mysqli_query($connection, "UPDATE student_applications SET student_application_status = 'Solved' WHERE student_application_id = '$updateId'");
+    echo "<script>location.assign('process_requests');</script>";
 }
 
-if (isset($_GET['remove'])) {
-    $deleteId = intval($_GET['remove']);
-
-    $delete_query = "DELETE FROM `student_applications` WHERE `student_application_id` = ?";
-    $stmt = $connection->prepare($delete_query);
-    $stmt->bind_param('i', $deleteId);
-
-    if ($stmt->execute()) {
-        echo "<script>
-            location.assign('pending_requests');
-        </script>";
-    }
-    $stmt->close();
+if (isset($_GET['reject'])) {
+    $updateId = $_GET['reject'];
+    mysqli_query($connection, "UPDATE student_applications SET student_application_status = 'Rejected' WHERE student_application_id = '$updateId'");
+    echo "<script>location.assign('pending_requests');</script>";
 }
+
 
 ?>
 
@@ -176,7 +150,7 @@ if (isset($_GET['viewapplication'])) {
                             </div>
 
                             <?php
-                                if($fetch['student_application_status'] == "Solved" || $fetch['student_application_status'] == "Process"){
+                                if($fetch['student_application_status'] == "Solved" || $fetch['student_application_status'] == "Process" && $_SESSION['user_role'] == "student"){
                                 ?>
                             <div class="row text-center">
                                 <div class="col-md-12 mb-3">
@@ -192,7 +166,7 @@ if (isset($_GET['viewapplication'])) {
                                     <h6><strong>Remarks:</strong>
                                         <?php 
                                         if($fetch['student_application_solutionmessage'] !== NULL){ echo $fetch['student_application_solutionmessage']; } 
-                                        else { echo "No Remarks yet"; } 
+                                        else { echo "No Remarks"; } 
                                         ?></h6>
                                 </div>
                             </div>
@@ -207,13 +181,12 @@ if (isset($_GET['viewapplication'])) {
                                     ?>
                             <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&update=<?php echo $fetch['student_application_id']; ?>"
                                 class="bg-green-500 px-2 py-1 text-white rounded">Approve</a>
-                            <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&remove=<?php echo $fetch['student_application_id']; ?>"
+                            <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&reject=<?php echo $fetch['student_application_id']; ?>"
                                 class="bg-red-500 px-2 py-1 text-white rounded">Reject</a>
                             <?php
                                 } elseif ($fetch['student_application_status'] == "Process") {
                                     ?>
-                            <a href="?viewapplication=<?php echo $fetch['student_application_id'] ?>&markSolve=<?php echo $fetch['student_application_id']; ?>"
-                                class="bg-green-500 px-2 py-1 text-white rounded">Mark as Solved</a>
+                            <a href="./administrator_solution_message?messageId=<?php echo $fetch['student_application_id']?>">Add Remarks</a>
                             <?php
                                 }
                             }
