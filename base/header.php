@@ -180,34 +180,6 @@ require_once("./db/db_connection.php");
                 <div class="topbar container-fluid">
                     <div class="d-flex align-items-center gap-1">
 
-                        <!-- Topbar Brand Logo -->
-                        <div class="logo-topbar">
-                            <!-- Logo light -->
-                            <a href="home" class="logo-light">
-                            <span class="logo-lg hidden md:flex items-center justify-center">
-                    <span class="text-lg font-bold flex items-center justify-center tracking-wide text-[#EAF1F3] md:text-xl lg:text-2xl xl:text-3xl" style="font-family: 'Lexend Giga', serif;">
-                        <img class="invert w-6 md:w-4 lg:w-4 xl:w-6" src="./images/logo1.png" alt=""> 
-                        <span class="ml-2">TND</span>
-                    </span>
-                </span>
-                                <span class="logo-sm">
-                                    <img src="./images/logo-sm.png" alt="small logo">
-                                </span>
-                            </a>
-
-                            <!-- Logo Dark -->
-                            <a href="home" class="logo-dark">
-                            <span class="logo-lg hidden md:block">
-                                <h1 class="font-bold tracking-wide text-blue-600 md:text-4xl lg:text-5xl" style="font-family: 'Lexend Giga', serif;">
-                                    TND Dept.
-                                </h1>
-                            </span>
-                                <span class="logo-sm">
-                                    <img src="./images/logo-sm.png" alt="small logo">
-                                </span>
-                            </a>
-                        </div>
-
                         <!-- Sidebar Menu Toggle Button -->
                         <button class="button-toggle-menu">
                             <i class="ri-menu-line"></i>
@@ -224,20 +196,8 @@ require_once("./db/db_connection.php");
                     </div>
 
                     <ul class="topbar-menu d-flex align-items-center gap-3">
-                        <li class="dropdown d-lg-none">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="ri-search-line fs-22"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
-                                <form class="p-3">
-                                    <input type="search" class="form-control" placeholder="Search ..."
-                                        aria-label="Recipient's username">
-                                </form>
-                            </div>
-                        </li>
 
-                        <li class="d-none d-sm-inline-block">
+                        <li class="d-sm-inline-block">
                             <div class="nav-link" id="light-dark-mode">
                                 <i class="ri-moon-line fs-22"></i>
                             </div>

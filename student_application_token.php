@@ -56,7 +56,7 @@ if(!isset($_SESSION['student_user_email'])){
 
                             <!-- Success message -->
                             <div id="success-message" class="text-center mt-4" style="display:none;">
-                                <p class="text-success font-weight-bold">Your Token ID has been successfully generated!
+                                <p class="text-success font-weight-bold">Your Token ID has been successfully generated, capture screenshot.
                                 </p>
                             </div>
 

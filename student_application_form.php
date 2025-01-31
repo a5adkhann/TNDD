@@ -13,6 +13,69 @@ if(!isset($_SESSION['student_user_email'])){
     </script>";
 }
 
+
+function generateTokenID() {
+    return 'TND' . strtoupper(bin2hex(random_bytes(4)));
+}
+
+if (isset($_POST['student_application'])) {
+    $student_concern_person_id = $_POST['student_concern_person_id'];
+    $student_application_date = $_POST['student_application_date'];
+    $student_application_subject_id = $_POST['student_application_subject_id'] ?? NULL;
+    $student_application_othersubject = $_POST['student_application_othersubject'] ?? NULL;
+    $student_application_message = $_POST['student_application_message'];
+    $student_id = $_POST['student_id'];
+    $student_name = $_POST['student_name'];
+    $student_batch_code = $_POST['student_batch_code'];
+    $student_current_semester_id = $_POST['student_current_semester_id'];
+    $student_email = $_POST['student_email'];
+    $student_number = $_POST['student_number'];
+    $student_user_id = $_SESSION['student_user_id'];
+
+    $token_id = generateTokenID();
+
+    $insert_query = "INSERT INTO student_applications (
+                        student_concern_person_id, 
+                        student_application_date, 
+                        student_application_subject_id, 
+                        student_application_othersubject,
+                        student_application_message, 
+                        student_id, 
+                        student_name, 
+                        student_batch_code, 
+                        student_current_semester_id, 
+                        student_email, 
+                        student_number,
+                        student_user_id,
+                        student_application_tokenid
+                    ) VALUES (
+                        '$student_concern_person_id', 
+                        '$student_application_date', 
+                        ". ($student_application_subject_id ? "'$student_application_subject_id'" : "NULL") .", 
+                        ". ($student_application_othersubject ? "'$student_application_othersubject'" : "NULL") .", 
+                        '$student_application_message', 
+                        '$student_id', 
+                        '$student_name', 
+                        '$student_batch_code', 
+                        '$student_current_semester_id', 
+                        '$student_email', 
+                        '$student_number',
+                        '$student_user_id',
+                        '$token_id'
+                    )";
+
+    if (mysqli_query($connection, $insert_query)) {
+        unset($_SESSION['token_id']); 
+        echo "<script>location.assign('student_application_token')</script>";
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($connection);
+    }
+
+    mysqli_close($connection);
+}
+
+
 if (isset($_POST['update_student_application'])) {
     $updateId = $_GET['update'];
     $student_concern_person_id = $_POST['student_concern_person_id'];
@@ -87,20 +150,7 @@ if (isset($_POST['update_student_application'])) {
                         }
                         ?>
 
-
-                        <?php
-                        if (isset($_GET['update'])) {
-                        ?>
-                            <form class="needs-validation" novalidate method="POST">
-                        <?php
-                        } else {
-                        ?>
-    <form class="needs-validation" novalidate method="POST" action="process">
-<?php
-}
-?>
-
-
+<form class="needs-validation" novalidate method="POST">
 <div class="row mb-3">
         <div class="col-6">
             <div class="mb-3">
@@ -110,9 +160,9 @@ if (isset($_POST['update_student_application'])) {
                     <?php
                     $select_query = "SELECT * FROM `concern_person`";
                     $execute = mysqli_query($connection, $select_query);
-                    while ($row = mysqli_fetch_array($execute)) {
-                        $selected = ($row['concern_person_id'] == $fetch['student_concern_person_id']) ? 'selected' : '';
-                        echo "<option value='{$row['concern_person_id']}' $selected>{$row['concern_person_designation']}</option>";
+                    while ($display = mysqli_fetch_array($execute)) {
+                        $selected = ($display['concern_person_id'] == $fetch['student_concern_person_id']) ? 'selected' : '';
+                        echo "<option value='{$display['concern_person_id']}' $selected>{$display['concern_person_designation']}</option>";
                     }
                     ?>
                 </select>

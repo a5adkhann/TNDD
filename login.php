@@ -1,3 +1,33 @@
+<?php
+require_once("./db/db_connection.php");
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $select_query = "SELECT * FROM `student_users` WHERE `student_user_email` = '$email' AND `student_user_password` = '$password'";
+    $execute = mysqli_query($connection, $select_query);
+
+    $count_records = mysqli_num_rows($execute);
+    if($count_records > 0){
+        $display = mysqli_fetch_array($execute);
+        $_SESSION['student_user_id'] = $display['student_user_id'];
+        $_SESSION['student_user_email'] = $display['student_user_email'];
+        $_SESSION['student_user_password'] = $display['student_user_password'];
+        $_SESSION['student_user_name'] = $display['student_user_name'];
+        $_SESSION['student_user_batchcode'] = $display['student_user_batchcode'];
+        $_SESSION['student_user_image'] = $display['student_user_image'];
+        $_SESSION['user_role'] = $display['user_role'];
+        header("location: home");
+    }
+    else {
+        echo "<script>alert('Invalid Credentials');
+        location.assign('login');
+        </script>";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +49,7 @@
 
     <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
         <h3 class="text-center text-2xl font-semibold text-[#1A2942] mb-6">TND Support System | Login</h3>
-        <form action="process" method="POST" class="space-y-6">
+        <form method="POST" class="space-y-6">
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
                 <input type="email" class="mt-2 block w-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#1A2942]" id="email" name="email" required placeholder="Enter your email">
